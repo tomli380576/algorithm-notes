@@ -4,8 +4,10 @@ output: .retype
 branding:
   title: Tommy's Algorithm Notes
   label: Docs
+  logo: assets/cat.svg
 links:
 - text: Old notion link
   link: https://zhongning-tommy-li.notion.site/CS-Notes-Entry-Page-bb5793ada5dd44109455e9f442e28d45?pvs=4
 footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."
+favicon: assets/cat.svg

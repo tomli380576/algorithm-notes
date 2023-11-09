@@ -103,7 +103,7 @@ The 2nd and 3rd `while` loops are safe because at most 1 of them will run, and t
 
 We can also see that this is a linear scan, so the runtime is $O(n)$.
 
-#### Implementation Details
+### Implementation Detail
 
 In actual implementation, don’t actually slice the main array into $L$ and $R$ because passing arrays on the stack is expensive.
 
@@ -113,8 +113,9 @@ At the end, instead of returning output, replace all elements in the parameter a
 
 This requires the main array to be passed as a reference so it may be different depending on the language.
 
-## Python: Merge Sort
+## Code
 
++++ Pseudocode
 ```c
 //pseudocode
 function MergeSort(A[1 … n]):
@@ -124,6 +125,10 @@ function MergeSort(A[1 … n]):
 		MergeSort(A[mid + 1 … n])
 		Merge(A, mid)
 ```
++++ Python
 
-[!badge variant="dark" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/merge-sort.py) This implementation is not sorting directly inside the array. So it’s more expensive memory wise.
+!!!danger **For reference only**.
 
+[!button variant="dark" icon="mark-github" text="Github" size="xl"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/merge-sort.py#L27-L66)
+!!!
++++
