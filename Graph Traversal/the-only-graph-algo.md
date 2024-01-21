@@ -17,12 +17,10 @@ To keep track of which vertices we have seen, we use 2 $\texttt{STATUS}$ values:
 - $\texttt{VISITED}$: Processed exactly once.
 !!!
 
-### Pseudocode
-
 Let **T** be the generic typename. We will make up an imaginary data structure called a **`Bag<T>`**. It has 3 methods:
 
 1. `put(elem: T)` puts an element in the bag.
-2. `getFirst() -> T` returns whatever is the “first” thing in the bag and removes it.
+2. `popFirst() -> T` returns whatever is the "first" thing in the bag and removes it.
 3. `isEmpty() -> bool` returns whether the bag is empty or not.
 
 Then the pseudocode for whatever first search is:
@@ -36,7 +34,7 @@ function WhateverFirstSearch(G: Graph, start: Vertex):
 	bag.put(start)
 
 	while bag is not empty:
-		u = bag.getFirst()
+		u = bag.popFirst()
 		if u is NEW:
 			process(u) 
 			mark u as VISITED
@@ -48,27 +46,20 @@ Here `process(u)` is just a blackbox subroutine. We can do anything inside `proc
 
 ### Important Variants
 
-By changing the bag's behavior of `getFirst()`, we get the familiar search algorithms:
+By changing the bag's behavior of `popFirst()`, we get the familiar search algorithms:
 
-#### Bag is a Stack: Depth First Search
+Stack
+:	[Depth First Search](./dfs.md). DFS is usually implemented with recursion allowing cycle detection. 
 
-DFS is usually implemented with recursion allowing cycle detection. 
+Queue
+:	[Breadth First Search](./bfs.md)
 
-See [Recursive Depth First Search (122A)](BFS%20&%20DFS%20e6658526c6884bc2ac345aeb09e4ffc0/Recursive%20Depth%20First%20Search%20(122A)%20c0c4990a6357427eb4880aea9fec181a.md) 
+Priority Queue
+:	[Best First Search]()
 
-#### Bag is a Queue: Breadth First Search
+### :icon-code: Python
 
-See [Breadth First Search (122A)](BFS%20&%20DFS%20e6658526c6884bc2ac345aeb09e4ffc0/Breadth%20First%20Search%20(122A)%2093da5e914bde44dcb82fa021ef450a7f.md) 
-
-#### Bag is a Priority Queue: Best First Search (For weighted graphs)
-
-An example is [**❖** Handling Negative Edges: Full Dijkstra’s](Single%20Source%20Shortest%20Paths%20ccab559c3b5c4f018913429bf3b1091c/SSSP%20c9e75bc7de304c659a7da221c1837584/%E2%9D%96%20Handling%20Negative%20Edges%20Full%20Dijkstra%E2%80%99s%205065ff19c39f4f4595295d79e648bfa2.md) 
-
-### Python. Whatever First Search
-
-The `WhateverFirstSearch_Connected` function implements this.
-
-[!button variant="dark" size="l" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py)
+The `WhateverFirstSearch_Connected` function implements this. [!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py)
 
 !!!danger Assumption
 This version of Whatever First Search assumes that the `start` can actually reach every other vertex in the graph. This works if we know the graph is connected.
@@ -96,7 +87,7 @@ function WhateverFirst_Visit(G, start):
 	bag.put(start)
 
 	while bag is not empty:
-		u = bag.getFirst()
+		u = bag.popFirst()
 		if u is not VISITED:
 			process(u)
 			mark u as VISITED
@@ -104,13 +95,12 @@ function WhateverFirst_Visit(G, start):
 				bag.put(v)
 ```
 
-Changing the bag's behavior on `getFirst()` will result in the same [variants](#important-variants), but now they can handle disconnected graphs.
+Changing the bag's behavior on `popFirst()` will result in the same [variants](#important-variants), but now they can handle disconnected graphs.
 
-### Python. WFS–All
+### :icon-code: Python
 
-The `WhateverFirstSearch_All` function implements this.
-
-[!button variant="dark" size="l" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py)
+The `WhateverFirstSearch_All` function implements this. 
+[!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py)
 
 ---
 

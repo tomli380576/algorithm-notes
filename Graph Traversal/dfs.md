@@ -136,7 +136,7 @@ function WFS_Visit(G, start):
 	stack.put(start)
 
 	while stack is not empty:
-		u = stack.getFirst()
+		u = stack.popFirst()
 		if u is not VISITED:
 			process u
 			mark u as VISITED
