@@ -3,44 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.752821007365">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759138033030">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>Recursive Depth First Search (122A)</title>
-    <meta name="title" content="Recursive Depth First Search (122A)">
-    <meta name="description" content="Similar to whatever first search, we assign each vertex a \\purple{\\texttt{STATUS}}.">
+    <title>The Only Graph Traversal Algorithm</title>
+    <meta name="title" content="The Only Graph Traversal Algorithm">
+    <meta name="description" content="Question. How to visit every vertex exactly once in a graph?">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/graph-traversal/recursive-depth-first-search-(122a)-c0c4990a6357427eb4880aea9fec181a/">
+    <link rel="canonical" href="/graph-traversal/the-only-graph-algo/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/graph-traversal/recursive-depth-first-search-(122a)-c0c4990a6357427eb4880aea9fec181a/">
-    <meta property="og:title" content="Recursive Depth First Search (122A)">
-    <meta property="og:description" content="Similar to whatever first search, we assign each vertex a \\purple{\\texttt{STATUS}}.">
+    <meta property="og:url" content="/graph-traversal/the-only-graph-algo/">
+    <meta property="og:title" content="The Only Graph Traversal Algorithm">
+    <meta property="og:description" content="Question. How to visit every vertex exactly once in a graph?">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/graph-traversal/recursive-depth-first-search-(122a)-c0c4990a6357427eb4880aea9fec181a/">
-    <meta property="twitter:title" content="Recursive Depth First Search (122A)">
-    <meta property="twitter:description" content="Similar to whatever first search, we assign each vertex a \\purple{\\texttt{STATUS}}.">
+    <meta property="twitter:url" content="/graph-traversal/the-only-graph-algo/">
+    <meta property="twitter:title" content="The Only Graph Traversal Algorithm">
+    <meta property="twitter:description" content="Question. How to visit every vertex exactly once in a graph?">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.752821007365" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759138033030" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.752821007365" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759138033030" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.752821007365" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.752821007365" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759138033030" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759138033030" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
-    <link href="/assets/palette.css" rel="stylesheet" />
+    <style>
+      img {
+        max-width: 500px !important;
+      }
+      .tab-content,
+      .doc-alert {
+        & p,
+        ol,
+        ul:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+      }
+      .with-shadow {
+        box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -61,7 +81,7 @@
                                 <img class="max-h-10 hidden dark:inline-block" src="../../assets/cat.svg">
                             </span>
                             <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Tommy&#x27;s Algorithm Notes</span>
-                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Docs</span>
+                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Notes</span>
                     </div>
         
                     <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
@@ -173,264 +193,155 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="recursive-depth-first-search-122a" class="break-words">
+<doc-anchor-target id="the-only-graph-traversal-algorithm" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#recursive-depth-first-search-122a">#</doc-anchor-trigger>
-        <span>Recursive Depth First Search (122A)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-only-graph-traversal-algorithm">#</doc-anchor-trigger>
+        <span>The Only Graph Traversal Algorithm</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="1-vertex-status">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#1-vertex-status">#</doc-anchor-trigger>
-        <span>1. Vertex Status</span>
-    </h1>
-</doc-anchor-target>
-<p>Similar to whatever first search, we assign each vertex a <span class="math">\purple{\texttt{STATUS}}</span>.</p>
-<ul>
-<li><span class="math">\texttt{NEW}</span>: literally never seen before, all vertices start with this status</li>
-<li><span class="math">\texttt{ACTIVE}</span>: seen before, but the adjacent vertices are not done processing yet</li>
-<li><span class="math">\texttt{FINISHED}</span>: the vertex is seen and all its children are done processing</li>
-</ul>
-<doc-anchor-target id="2-pseudocode">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#2-pseudocode">#</doc-anchor-trigger>
-        <span>2. Pseudocode</span>
-    </h1>
-</doc-anchor-target>
-<doc-anchor-target id="barebones-version">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#barebones-version">#</doc-anchor-trigger>
-        <span>Barebones Version</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">// main routine
-function DFS_Search(G):
-	for each vertex v in G:
-		mark v as NEW
-	for each vertex v in G:
-		if v is NEW:
-			DFS_Visit(v)
-
-function DFS_Visit(u):
-	mark u as ACTIVE
-	// process when u is ACTIVE
-	Preprocess(u) 
-	
-	for each adjacent vertex v:
-		if v is NEW: 
-			DFS_Visit(v) 
-
-	mark u as FINISHED
-	// process when u is FINISHED
-	Postprocess(u)
-</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="with-clock-122a">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#with-clock-122a">#</doc-anchor-trigger>
-        <span>With Clock (122A)</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">// globals
-time = 0 
-DISCOVER_TIME = {}
-FINISH_TIME = {}
-
-// main routine
-function DFS_Search(G):
-	for each vertex v in G:
-		mark v as NEW
-	for each vertex v in G:
-		if v is NEW:
-			DFS_Visit(v)
-
-function DFS_Visit(u):
-	mark u as ACTIVE
-	time++
-	DISCOVER_TIME[u] = time
-	Preprocess(u)
-	
-	for each adjacent vertex v:
-		if v is NEW: 
-			DFS_Visit(v) 
-
-	mark u as FINISHED
-	time++
-	FINISH_TIME[u] = time
-	Postprocess(u)</code></pre>
-</doc-codeblock></div>
-<ul>
-<li><p>Long Version</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-tsx"><code v-pre class="language-tsx">// pseudocode
-
-// Global Variables
-// shorthand syntax, it means STATUS can only be 1 of the following
-type STATUS = 'undiscovered' | 'discovered' | 'finished'
-
-// When actually implementing this use an vertex id to replace 'Vertex'
-// technically Vertex objects are not hashable so it won't work as a key
-VISIT_STATUS: Map&lt;Vertex, STATUS&gt; = [...]
-DISCOVER_TIME: Map&lt;Vertex, int&gt; = [...]
-FINISH_TIME: Map&lt;Vertex, int&gt; = [...]
-
-// time is global var
-let time = 0 
-
-// main routine
-function DFS_Search(G: Graph) returns void:
-		// initialize all vertices as not discovred
-		for v in G.Vertices: 
-			VISIT_STATUS[v] = 'undiscovered';
-		for v in G.Vertices:
-			if VISIT_STATUS[v] == 'undiscovered':
-				DFS_Visit(v)
-
-// helper
-function DFS_Visit(u: Vertex) returns void:
-		// 1st opportunity to process vertex u
-		VISIT_STATUS[u] = 'discovered'
-		time++
-		DISCOVER_TIME[u] = time
-
-		// check all of u's adjacent nodes
-		for adjacent_vertex in u.adjacent_vertexes: 
-			// if never visited
-			if VISIT_STATUS[adjacent_vertex] == 'undiscovered': 
-				// the 'stack' is the literal call stack
-				DFS_Visit(adjacent_vertex) 
-
-		// now all children of u are finished
-		// 2nd opportunity to process vertex u
-		VISIT_STATUS[u] = 'finished'
-		time++
-		FINISH_TIME[u] = time;</code></pre>
-</doc-codeblock></div>
-</li>
-</ul>
-<doc-anchor-target id="comparison-with-stack-based-whatever-first-search">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#comparison-with-stack-based-whatever-first-search">#</doc-anchor-trigger>
-        <span>Comparison with stack based Whatever First Search</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function WFS_Depth(G):
-	for each vertex v in G:
-		mark v as NEW
-	for each vertex v in G:
-		if v is NEW:
-			WFS_Visit(G, v)
-			
-function WFS_Visit(G, start):
-	stack = Stack()
-	stack.put(start)
-
-	while stack is not empty:
-		u = stack.getFirst()
-		if u is not VISITED:
-			process u
-			mark u as VISITED
-			for each adjacent vertex v:
-				stack.put(v)</code></pre>
-</doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function DFS_Search(G):
-	for each vertex v in G:
-		mark v as NEW
-	for each vertex v in G:
-		if v is NEW:
-			DFS_Visit(v)
-
-function DFS_Visit(u):
-	mark u as ACTIVE
-	Preprocess(u)
-	
-	for each adjacent vertex v:
-		if v is NEW: 
-			DFS_Visit(v) 
-
-	mark u as FINISHED
-	Postprocess(u)
-</code></pre>
-</doc-codeblock></div>
-<p>The recursive version replaces <code v-pre>stack.put(v)</code> with the recursive call <code v-pre>DFS_Visit(v)</code>.</p>
-<p><code v-pre>while stack is not empty</code> is the same as coming back to the initial call (empty call stack).</p>
-<p>Every time <code v-pre>DFS_Visit(v)</code> is called in the main routine, a new call stack is initialized. WFS does this by calling the stack constructor.</p>
-<doc-anchor-target id="3-runtime-analysis">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#3-runtime-analysis">#</doc-anchor-trigger>
-        <span>3. Runtime Analysis</span>
-    </h1>
-</doc-anchor-target>
-<p>We call the <code v-pre>DFS_Visit(v)</code> function <span class="math">V</span> times in the main routine</p>
-<p>The total number of recursive calls inside <code v-pre>DFS_Visit(v)</code> is <span class="math">E</span> times because we will traverse each edge exactly once. So <span class="math">E</span> times for the entire graph.</p>
-<p>The total runtime is <span class="math">O(V+E)</span></p>
-<doc-anchor-target id="4-python-basic-dfs">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#4-python-basic-dfs">#</doc-anchor-trigger>
-        <span>4. Python: Basic DFS</span>
-    </h1>
-</doc-anchor-target>
-<p><figure class="content-center">
-    <img src="../graph20visualizations20e194fa603a6d4f42859959ad780a053c/screen_shot_2022-07-01_at_2.28.39_am.png" alt="example_unweighted_graphs.py DIRECTED_1">
-    <figcaption class="caption"><code v-pre>example_unweighted_graphs.py DIRECTED_1</code></figcaption>
-</figure>
-</p>
-<p><code v-pre>example_unweighted_graphs.py DIRECTED_1</code></p>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/basic-DFS.py">ECS122A-Algorithms-python-implementation/basic-DFS.py at main · tomli380576/ECS122A-Algorithms-python-implementation</a></p>
-<doc-anchor-target id="5-classifying-edges-and-cycle-detection">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#5-classifying-edges-and-cycle-detection">#</doc-anchor-trigger>
-        <span>5. Classifying Edges and Cycle Detection</span>
-    </h1>
-</doc-anchor-target>
-<p>There are 4 possible types of edges:</p>
-<div class="math"><pre>\begin{array}{||c:cccc||}
-\hline\\
-\text{Tree} &amp; &amp;\texttt{ACTIVE}&amp;\longrightarrow&amp; \texttt{NEW}\\\\
-\text{Back}&amp;&amp; \texttt{ACTIVE}&amp;\longrightarrow&amp; \texttt{ACTIVE}\\\\
-\text{Forward}&amp;&amp;\texttt{ACTIVE}&amp;\longrightarrow&amp; \texttt{FINISHED}\\\\
-\text{Cross} &amp;&amp;&amp; \text{Everything else}\\\\
-\hline
-
-\end{array}</pre></div>
-<p>More specifically:</p>
-<p><figure class="content-center">
-    <img src="recursive20depth20first20search20(122a)20c0c4990a6357427eb4880aea9fec181a/screen_shot_2022-06-20_at_6.18.34_pm.png" alt="Source: Prof Bai’s 122A slides. Gray = Active, White = New, Black = Finished">
-    <figcaption class="caption">Source: Prof Bai’s 122A slides. Gray = Active, White = New, Black = Finished</figcaption>
-</figure>
-</p>
-<p>Source: Prof Bai’s 122A slides. Gray = Active, White = New, Black = Finished</p>
-<doc-anchor-target id="51-edge-interpretations">
+<doc-anchor-target id="whatever-first-search">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#51-edge-interpretations">#</doc-anchor-trigger>
-        <span>5.1 Edge Interpretations</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whatever-first-search">#</doc-anchor-trigger>
+        <span>Whatever First Search</span>
     </h2>
 </doc-anchor-target>
+<blockquote>
+<p><strong>Question.</strong> How to visit every vertex exactly once in a graph?</p>
+</blockquote>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-300"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-300" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5><strong>Def.</strong> Vertex Status</h5>
+<p>To keep track of which vertices we have seen, we use 2 <span class="math">\texttt{STATUS}</span> values:</p>
 <ul>
-<li><p>At least one back edge is found <span class="math">\iff</span> the graph has a cycle</p>
-<p>So Directed Acyclic Graphs (Like a DP dependency graph) cannot have a back edge</p>
-</li>
-<li><p>Found at least 1 cross or forward edge <span class="math">\implies</span> the graph is directed</p>
-</li>
+<li><span class="math">\texttt{NEW}</span>: Never seen before.</li>
+<li><span class="math">\texttt{VISITED}</span>: Processed exactly once.</li>
 </ul>
-<p><a href="https://courses.csail.mit.edu/6.006/spring11/rec/rec13.pdf"></a></p>
-<doc-anchor-target id="6-python-dfs-with-edge-classification">
-    <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#6-python-dfs-with-edge-classification">#</doc-anchor-trigger>
-        <span>6. Python: DFS with edge classification</span>
-    </h1>
+        </div>
+    </div>
+</div>
+<p>Let <strong>T</strong> be the generic typename. We will make up an imaginary data structure called a <strong><code v-pre>Bag&lt;T&gt;</code></strong>. It has 3 methods:</p>
+<ol>
+<li><code v-pre>put(elem: T)</code> puts an element in the bag.</li>
+<li><code v-pre>popFirst() -&gt; T</code> returns whatever is the &quot;first&quot; thing in the bag and removes it.</li>
+<li><code v-pre>isEmpty() -&gt; bool</code> returns whether the bag is empty or not.</li>
+</ol>
+<p>Then the pseudocode for whatever first search is:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function WhateverFirstSearch(G: Graph, start: Vertex):
+	for each vertex v in G:
+		mark v as NEW
+
+	bag = Bag&lt;Vertex&gt;()
+	bag.put(start)
+
+	while bag is not empty:
+		u = bag.popFirst()
+		if u is NEW:
+			process(u) 
+			mark u as VISITED
+			for each adjacent vertex v of u:
+				bag.put(v)</code></pre>
+</doc-codeblock></div>
+<p>Here <code v-pre>process(u)</code> is just a blackbox subroutine. We can do anything inside <code v-pre>process(u)</code> as long as we don’t change the vertex status.</p>
+<doc-anchor-target id="important-variants">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#important-variants">#</doc-anchor-trigger>
+        <span>Important Variants</span>
+    </h3>
 </doc-anchor-target>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/DFS-cycle-detection.py">ECS122A-Algorithms-python-implementation/DFS-cycle-detection.py at main · tomli380576/ECS122A-Algorithms-python-implementation</a></p>
-<p>Right now it only finds back and tree edges correctly, still figuring out how to find forward and cross edges</p>
+<p>By changing the bag&#x27;s behavior of <code v-pre>popFirst()</code>, we get the familiar search algorithms:</p>
+<dl>
+<dt>Stack</dt>
+<dd><a href="../dfs/">Depth First Search</a>. DFS is usually implemented with recursion allowing cycle detection.</dd>
+<dt>Queue</dt>
+<dd><a href="../bfs/">Breadth First Search</a></dd>
+<dt>Priority Queue</dt>
+<dd><a href="">Best First Search</a></dd>
+</dl>
+<doc-anchor-target id="python">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#python">#</doc-anchor-trigger>
+        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> Python</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>WhateverFirstSearch_Connected</code> function implements this. <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-red-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-red-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M21.71 6.15L15.85.29c-.19-.18-.44-.29-.71-.29H6.86c-.27 0-.52.11-.71.29L.29 6.15c-.18.19-.29.44-.29.71v8.28c0 .27.11.52.29.71l5.86 5.86c.19.18.44.29.71.29h8.28c.27 0 .52-.11.71-.29l5.86-5.86a.99.99 0 00.29-.71V6.86c0-.27-.11-.52-.29-.71zM20 14.73L14.73 20H7.27L2 14.73V7.27L7.27 2h7.45L20 7.27v7.46z"></path>
+                    <path d="M11 12c.55 0 1-.45 1-1V7c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .55.45 1 1 1zM11.01 14c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Assumption</h5>
+<p>This version of Whatever First Search assumes that the <code v-pre>start</code> can actually reach every other vertex in the graph. This works if we know the graph is connected.</p>
+        </div>
+    </div>
+</div>
+<p>To handle <a href="https://mathworld.wolfram.com/DisconnectedGraph.html#:%7E:text=A%20graph%20is%20said%20to,has%20those%20nodes%20as%20endpoints.">disconnected graphs</a> we need to make the following modifications.</p>
+<doc-anchor-target id="whatever-first-searchall">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#whatever-first-searchall">#</doc-anchor-trigger>
+        <span>Whatever First Search–All</span>
+    </h2>
+</doc-anchor-target>
+<blockquote>
+<p>For each vertex in <span class="math">G</span>, if we’ve never visited this vertex before, visit everything that we can reach from this vertex.</p>
+</blockquote>
+<p>We will make a small wrapper.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function WhateverFirst_Wrapper(G):
+	for each vertex v in G:
+		mark v as NEW
+	for each vertex v in G:
+		if v is NEW:
+			WhateverFirst_visit(G, v)
+			
+function WhateverFirst_Visit(G, start):
+	bag = Bag&lt;Vertex&gt;()
+	bag.put(start)
+
+	while bag is not empty:
+		u = bag.popFirst()
+		if u is not VISITED:
+			process(u)
+			mark u as VISITED
+			for each adjacent vertex v:
+				bag.put(v)</code></pre>
+</doc-codeblock></div>
+<p>Changing the bag&#x27;s behavior on <code v-pre>popFirst()</code> will result in the same <doc-anchor-trigger to="#important-variants">variants</doc-anchor-trigger>, but now they can handle disconnected graphs.</p>
+<doc-anchor-target id="python">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#python">#</doc-anchor-trigger>
+        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> Python</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>WhateverFirstSearch_All</code> function implements this.
+<a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
 <hr>
-<p>Go back:</p>
-<p><a href="../bfs2020dfs20e6658526c6884bc2ac345aeb09e4ffc0.md"><span class="math">\star</span> Basics of DFS &amp; BFS</a></p>
 <p>Go to next:</p>
-<p><a href="breadth20first20search20(122a)2093da5e914bde44dcb82fa021ef450a7f.md">Breadth First Search (122A)</a></p>
+<p><a href="bfs2020dfs20e6658526c6884bc2ac345aeb09e4ffc0.md">BFS &amp; DFS</a></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -440,20 +351,20 @@ function DFS_Visit(u):
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../graph-traversal/breadth-first-search-(122a)-93da5e914bde44dcb82fa021ef450a7f/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/rod-cutting/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Breadth First Search (122​A)</span>
+                                                <span class="block mt-1">Rod Cutting (122​A)</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/max-subarray/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../graph-traversal/bfs/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Max Subarray (122​A)</span>
+                                                <span class="block mt-1">Breadth First Search (122​A)</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -468,7 +379,7 @@ function DFS_Visit(u):
                                     <ul class="flex flex-wrap items-center text-sm">
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>
@@ -497,6 +408,6 @@ function DFS_Visit(u):
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Recursive Depth First Search (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "The Only Graph Traversal Algorithm", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>

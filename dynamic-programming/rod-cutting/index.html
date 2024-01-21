@@ -9,24 +9,24 @@
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>Merge Sort (122A)</title>
-    <meta name="title" content="Merge Sort (122A)">
-    <meta name="description" content="Given A: Arrayint, the idea of merge sort is:">
+    <title>Rod Cutting (122A)</title>
+    <meta name="title" content="Rod Cutting (122A)">
+    <meta name="description" content="Question. Given a rod with length n and an array of prices of each length p_i, how can we cut the rod to make the most amount of money?">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/recursion-divide--conquer/merge-sort/">
+    <link rel="canonical" href="/dynamic-programming/rod-cutting/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/recursion-divide--conquer/merge-sort/">
-    <meta property="og:title" content="Merge Sort (122A)">
-    <meta property="og:description" content="Given A: Arrayint, the idea of merge sort is:">
+    <meta property="og:url" content="/dynamic-programming/rod-cutting/">
+    <meta property="og:title" content="Rod Cutting (122A)">
+    <meta property="og:description" content="Question. Given a rod with length n and an array of prices of each length p_i, how can we cut the rod to make the most amount of money?">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/recursion-divide--conquer/merge-sort/">
-    <meta property="twitter:title" content="Merge Sort (122A)">
-    <meta property="twitter:description" content="Given A: Arrayint, the idea of merge sort is:">
+    <meta property="twitter:url" content="/dynamic-programming/rod-cutting/">
+    <meta property="twitter:title" content="Rod Cutting (122A)">
+    <meta property="twitter:description" content="Question. Given a rod with length n and an array of prices of each length p_i, how can we cut the rod to make the most amount of money?">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -193,148 +193,367 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="merge-sort-122a" class="break-words">
+<doc-anchor-target id="rod-cutting-122a" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#merge-sort-122a">#</doc-anchor-trigger>
-        <span>Merge Sort (122A)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rod-cutting-122a">#</doc-anchor-trigger>
+        <span>Rod Cutting (122A)</span>
     </h1>
 </doc-anchor-target>
-<p>Given <code v-pre>A: Array&lt;int&gt;</code>, the idea of merge sort is:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function MergeSort(A[1 … n]):
-	sorted_left = sort left half      // Recursion Magic
-	sorted_right = sort right half    // Recursion Magic
-	merge(sorted_left, sorted_right)</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="dividing-the-problem">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#dividing-the-problem">#</doc-anchor-trigger>
-        <span>Dividing the Problem</span>
-    </h2>
-</doc-anchor-target>
-<p>We need to split the array in half. Let <code v-pre>low</code> and <code v-pre>high</code> denote the current starting and ending indices of the array (inclusive). Then we can find the middle index <code v-pre>mid</code> by:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">mid = floor((low + high) / 2)</code></pre>
-</doc-codeblock></div>
-<p>Note that this could cause integer overflow when <code v-pre>low</code> and <code v-pre>high</code> are large. A better way would be:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">mid = floor(low + ((high - low) / 2))</code></pre>
-</doc-codeblock></div>
-<p>And the recursive calls are:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">MergeSort(A[1 … mid])
-MergeSort(A[mid + 1 … high])</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="base-cases">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#base-cases">#</doc-anchor-trigger>
-        <span>Base Cases</span>
-    </h2>
-</doc-anchor-target>
-<p>This is where we actually do the comparison. We have 2 base cases:</p>
-<ol>
-<li>The array is empty or has 1 element, then we do nothing.
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">if A is empty:
-    return</code></pre>
-</doc-codeblock></div>
-</li>
-<li>The array has exactly 2 elements, then we directly compare.
+<blockquote>
+<p><strong>Question.</strong> Given a rod with length <span class="math">n</span> and an array of prices of each length <span class="math">p_i</span>, how can we cut the rod to make the most amount of money?</p>
+</blockquote>
+<p>We are given the following:</p>
 <ul>
-<li>This case could be implicitly handled by merging two 1–element arrays, so no need to explicitly implement this case.</li>
+<li><code v-pre>n: int</code>, length of the rod</li>
+<li><code v-pre>p: Array&lt;int&gt;</code>, array of prices for rod length from <code v-pre>i=1</code> to <code v-pre>i=n</code>
+<ul>
+<li>For example: <span class="math">p_1 = 1, p_2 = 3, p_3 = 5, \dots</span></li>
 </ul>
 </li>
-</ol>
-<doc-anchor-target id="merge-2-sorted-arrays">
+</ul>
+<p>We want to find:</p>
+<ul>
+<li><code v-pre>int</code>, the max revenue possible <span class="math">r</span> from rod of length <span class="math">n</span></li>
+<li><code v-pre>Array&lt;int&gt;</code>, cut strategy to make the max revenue. Element at index <span class="math">i</span> represents the amount to cut at step <span class="math">i</span>.</li>
+</ul>
+<p>Let&#x27;s call this function <code v-pre>CutRod(n, p)</code>. Since <code v-pre>p</code> is fixed, we will omit <code v-pre>p</code> from the call signature from now on.</p>
+<doc-anchor-target id="solve-the-backtracking-problem">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#merge-2-sorted-arrays">#</doc-anchor-trigger>
-        <span>Merge 2 sorted Arrays</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#solve-the-backtracking-problem">#</doc-anchor-trigger>
+        <span>Solve the Backtracking Problem</span>
     </h2>
 </doc-anchor-target>
-<p>Now that the recursion has sorted the left and right array for us, we need to merge them together. We can use the <strong>2 pointer</strong> approach here.</p>
-<p>Let <code v-pre>ptr_l</code> and <code v-pre>ptr_r</code> be the traversing pointers in the left &amp; right sorted arrays respectively.</p>
-<p>It’s probably easier to consider merging with 2 separate arrays first.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1 … n], R[1 … m]) -&gt; Array&lt;int&gt;:
-	ptr_l = 0  // traverses L array
-	ptr_r = 0  // traverses R array
-	output = []
-
-	while neither pointer has reached the end:
-		if L[ptr_l] should come before R[ptr_r]: // call the predicate here
-			push L[ptr_l] into output
-			ptr_l ++
-		else:
-			push R[ptr_r] into output
-			ptr_r ++
-
-	remaining_elements = L if ptr_l not at the end, R if ptr_r not at the end
-	push all of remaining_elements into output
-
-	return output</code></pre>
-</doc-codeblock></div>
-<p>Translate into expressions: (Assuming we are sorting in ascending order. Flip &lt; to &gt; if reversed.)</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1 … n], R[1 … m]) -&gt; Array&lt;int&gt;:
-	ptr_l = 0
-	ptr_r = 0
-	output = []
-
-	while ptr_l != n and ptr_r != m:
-		if L[ptr_l] &lt; R[ptr_r]:
-			push L[ptr_l] into output
-			ptr_l ++
-		else:
-			push R[ptr_r] into output
-			ptr_r ++
-
-	while ptr_l != n:
-		push L[ptr_l] into output
-		ptr_l ++
-
-	while ptr_r != m:
-		push R[ptr_r] into output
-		ptr_r ++
-
-	return output</code></pre>
-</doc-codeblock></div>
-<p>The 2nd and 3rd <code v-pre>while</code> loops are safe because at most 1 of them will run, and the loop that runs corresponds to the array that has all its remaining elements <span class="math">\geqslant</span> the last element in <code v-pre>output</code>.</p>
-<p>We can also see that this is a linear scan, so the runtime is <span class="math">O(n)</span>.</p>
-<doc-anchor-target id="implementation-detail">
+<doc-anchor-target id="base-cases">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#implementation-detail">#</doc-anchor-trigger>
-        <span>Implementation Detail</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#base-cases">#</doc-anchor-trigger>
+        <span>Base Cases</span>
     </h3>
 </doc-anchor-target>
-<p>In actual implementation, don’t actually slice the main array into <span class="math">L</span> and <span class="math">R</span> because passing arrays on the stack is expensive. Instead, pass in an extra parameter <code v-pre>mid</code> to indicate where the left half ends, then merge with the same 2 pointer approach.</p>
-<p>At the end, instead of returning output, replace all elements in the parameter array with <code v-pre>output</code>. This requires the main array to be passed as a reference so it may be different depending on the language.</p>
-<doc-anchor-target id="code">
+<p>Recall from basic recursion that the bases cases are the subproblems that we can immediately solve. We know how to solve:</p>
+<ol>
+<li><p><span class="math">n = 0</span>, we have no rod, so we make no money.</p>
+<div class="math"><pre> \text{CutRod}(0) = 0</pre></div>
+</li>
+<li><p><span class="math">n = 1</span>, we have the shortest rod that we can possibly sell, so the profit is exactly <span class="math">p_1</span></p>
+<div class="math"><pre> \text{CutRod}(1) = p_1</pre></div>
+</li>
+</ol>
+<doc-anchor-target id="recursive-cases">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#recursive-cases">#</doc-anchor-trigger>
+        <span>Recursive Cases</span>
+    </h3>
+</doc-anchor-target>
+<p>We first consider what a choice is and how to make a choice.</p>
+<ul>
+<li>A choice is the <strong>length</strong> we can cut from the current rod.</li>
+</ul>
+<p>So the set of choices is from <span class="math">1</span> to <span class="math">n</span> because they are all valid. To make a choice, we decrease the rod length by our chosen length and add that price to the current total price.</p>
+<p>We also want to take the best choice, so we need a max call:</p>
+<blockquote>
+<p>From the all the possible cuts, take the one that gives the <strong>maximum</strong> profit</p>
+</blockquote>
+<doc-anchor-target id="the-recurrence">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-recurrence">#</doc-anchor-trigger>
+        <span>The Recurrence</span>
+    </h3>
+</doc-anchor-target>
+<p>This problem falls under the <a href="">best solution</a> case because we want the maximum amount of money.</p>
+<div class="math"><pre>\text{CutRod}(n)  = \begin{cases}
+0&amp;\text{if } n = 0\\
+p_1 &amp; \text{if }n = 1\\
+\text{best out of all possible cuts} &amp; \text{otherwise}
+
+\end{cases}</pre></div>
+<p>Translate it into expressions:</p>
+<div class="math"><pre>\text{CutRod}(n)  = \begin{cases}
+0&amp;\text{if } n = 0\\
+p_1 &amp; \text{if }n = 1\\
+\displaystyle\max_{1\leqslant i\leqslant n}\Big\{
+\text{CutRod}(n-i) +p_i
+\Big\} &amp; \text{otherwise}
+
+\end{cases}</pre></div>
+<doc-tabs>
+<doc-tab v-cloak id="pseudocode">
+<template #title>Pseudocode</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">const prices = [ … ] // given, treat it as a frozen constant array
+
+function CutRod(rodLen: int) -&gt; int:
+	if rodLen == 0:
+		return 0
+	if rodLen == 1:
+		return prices[1]
+	
+	/**
+	 * initial value.
+	 * start at 0 because we can't have negative profit,
+	 * but -Inifinity will also work
+	*/
+	best = 0 
+	
+	// we can cut 1, 2, ..., rod_len. Can't cut more rod than we have
+	// in all the compatible cuts, which is the next optimal cut?
+	for cutLen = 1 to rodLen: 
+		// take the cut if it's better than the current decision
+		// then let the recursion take care of the rest by shrinking the input
+		cutProfit = CutRod(rodLen - cutLen) + prices[cutLen]
+		best = max(best, cutProfit)
+
+	return best</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="no-comment-version">
+<template #title>No Comment Version</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">const prices = [ … ]
+
+function CutRod(rodLen: int) -&gt; int:
+    if rodLen == 0:
+        return 0
+    if rodLen == 1:
+        return prices[1]
+    
+    best = 0
+    for cutLen = 1 to rodLen:
+        cutProfit = CutRod(rodLen - cutLen) + prices[cutLen]
+        best = max(best, cutProfit)
+
+    return best</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+</doc-tabs>
+<doc-anchor-target id="backtracking-implementation">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#backtracking-implementation">#</doc-anchor-trigger>
+        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> Backtracking Implementation</span>
+    </h3>
+</doc-anchor-target>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-rod-cutting.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Sanity Check</h5>
+<p>In short, the components of this <a href="https://www.notion.so/Recursive-Backtracking-Summary-03fc781b681940b290ae3733330dcfde?pvs=21">recursive backtracking problem</a> are:</p>
+<ol>
+<li><strong>Sequence of decisions</strong> - We need to make a sequence of cuts.</li>
+<li><strong>Make 1 decision at a time</strong> - We make 1 cut at every recursive call.
+<ul>
+<li>A choice here is the length to cut. All lengths from 1 to the remaining length is valid</li>
+<li>To make a choice, decrease the remaining length.</li>
+</ul>
+</li>
+<li><strong>Satisfy all the constraints</strong> -  We can’t cut more rod than we currently have.</li>
+</ol>
+        </div>
+    </div>
+</div>
+<p>Make sure you are comfortable with the brute force approach before moving to DP conversion.</p>
+<doc-anchor-target id="convert-to-dynamic-programming">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#code">#</doc-anchor-trigger>
-        <span>Code</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#convert-to-dynamic-programming">#</doc-anchor-trigger>
+        <span>Convert to Dynamic Programming</span>
     </h2>
+</doc-anchor-target>
+<doc-anchor-target id="data-structure">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#data-structure">#</doc-anchor-trigger>
+        <span>Data structure</span>
+    </h3>
+</doc-anchor-target>
+<p>Observe that every call requires only 1 argument <code v-pre>rodLen</code>, so we can use an 1D array to store our results. Let’s define:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">dpTable: Array&lt;int&gt;</code></pre>
+</doc-codeblock></div>
+<p>To get the result of a previous call, we can use <code v-pre>dpTable[rodLen]</code>.</p>
+<ul>
+<li>This <code v-pre>dpTable[rodLen]</code> corresponds to the brute force result <code v-pre>CutRod(rodLen)</code>.</li>
+<li>If you really wish to make this pretty, name the DP table <code v-pre>cutRod</code>.</li>
+</ul>
+<p>The final result should be in <code v-pre>dpTable[maxRodLen]</code> where <code v-pre>maxRodLen</code> is the initial parameter (represents the full rod length)</p>
+<doc-anchor-target id="order-of-evaluation">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#order-of-evaluation">#</doc-anchor-trigger>
+        <span>Order of evaluation</span>
+    </h3>
+</doc-anchor-target>
+<p>The function depends on other recursive calls in this way:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">// brute force version
+function CutRod(rodLen):
+	// ...
+	cutProfit = CutRod(rodLen - cutLen) + prices[cutLen];</code></pre>
+</doc-codeblock></div>
+<p>Equivalently from the recurrence:</p>
+<div class="math"><pre>\max_{i\in[1,\,n]}\Big\{
+\text{CutRod}(n\red{-i}) +p_i
+\Big\}</pre></div>
+<p>So we need to evaluate all of <span class="math">\{\text{CutRod}(n-i)\}_{1\leqslant i \leqslant n}</span> first before we can know the result of <code v-pre>CutRod(n)</code>. Since <span class="math">n-i &lt; n</span>, the first thing that goes into the table is <code v-pre>CutRod(0)</code> and we evaluate in ascending order.</p>
+<doc-anchor-target id="build-the-dp-table">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#build-the-dp-table">#</doc-anchor-trigger>
+        <span>Build the DP Table</span>
+    </h3>
 </doc-anchor-target>
 <doc-tabs>
 <doc-tab v-cloak id="pseudocode">
 <template #title>Pseudocode</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">//pseudocode
-function MergeSort(A[1 … n]):
-	if n &gt; 1:
-		mid = floor(n / 2)
-		MergeSort(A[1 … mid])
-		MergeSort(A[mid + 1 … n])
-		Merge(A, mid)</code></pre>
+<pre class="language-java"><code v-pre class="language-java">const prices = [ … ] // given
+
+function DpCutRod(maxRodLen: int) -&gt; int:
+	dpTable = Array(shape=(maxRodLen)) // preallocate the space
+	
+	// pretend 0 is valid here
+	dpTable[0] = 0          // corresponds to CutRod(0)
+	dpTable[1] = prices[1]  // corresponds to CutRod(1)
+	
+	// ↓ the for loop that simulates recursive calls
+	for rodLen = 2 to maxRodLen:
+		best = 0
+		// ↓ the exact same for loop from backtracking, but now using dpTable
+		for cutLen = 1 to rodLen:
+			profit = dpTable[rodLen - cutLen] + prices[cutLen]
+			best = max(best, profit)
+		// recursive call location, store the result of CutRod(rodLen)
+		dpTable[rodLen] = best
+	
+	// initial call location
+	return dpTable[maxRodLen] // Corresponds to CutRod(maxRodLen)</code></pre>
 </doc-codeblock></div>
 </doc-tab>
-<doc-tab v-cloak id="python">
-<template #title>Python</template>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/merge-sort.py#L27-L66" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+<doc-tab v-cloak id="no-comment-version">
+<template #title>No Comment Version</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">const prices = [ … ]
+
+function DpCutRod(maxRodLen: int) -&gt; int:
+    dpTable = Array(shape=(maxRodLen))
+    
+    dpTable[0] = 0
+    dpTable[1] = prices[1]
+    
+    for rodLen = 2 to maxRodLen:
+        best = 0
+        for cutLen = 1 to rodLen:
+            profit = dpTable[rodLen - cutLen] + prices[cutLen]
+            best = max(best, profit)
+        dpTable[rodLen] = best
+    
+    return dpTable[maxRodLen]</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+</doc-tabs>
+<doc-anchor-target id="reconstructing-the-solution">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#reconstructing-the-solution">#</doc-anchor-trigger>
+        <span>Reconstructing the Solution</span>
+    </h3>
+</doc-anchor-target>
+<p>The pseudocode above only finds the optimal profit, but it doesn&#x27;t tell us how to actually cut the rod. We can record the cut by adding the following</p>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-c" data-line="12-14,3"><code v-pre class="language-c">function DpCutRod(maxRodLen: int) -&gt; int, Array&lt;int&gt;:
+    dpTable = Array(shape=(maxRodLen))
+    cuts = Array(shape=(maxRodLen))
+    
+    dpTable[0] = 0
+    dpTable[1] = prices[1]
+    
+    for rodLen = 2 to maxRodLen:
+        best = 0
+        for cutLen = 1 to rodLen:
+            profit = dpTable[rodLen - cutLen] + prices[cutLen]
+            if profit &gt; best:
+                best = profit
+                cuts[rodLen] = cutLen
+
+        dpTable[rodLen] = best
+    
+    return dpTable[maxRodLen], elements of cuts that are not null
+</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="dp-implementation">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dp-implementation">#</doc-anchor-trigger>
+        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> DP Implementation</span>
+    </h3>
+</doc-anchor-target>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/DP-rod-cutting.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
     <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
     <span>Github</span>
 </a></p>
-</doc-tab>
-</doc-tabs>
+<doc-anchor-target id="runtime-analysis">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#runtime-analysis">#</doc-anchor-trigger>
+        <span>Runtime Analysis</span>
+    </h2>
+</doc-anchor-target>
+<p>We can see that this is the classic nested for loop:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">for rodLen = 2 to maxRodLen:
+	for cutLen = 1 to rodLen:
+		// some O(1) work</code></pre>
+</doc-codeblock></div>
+<p>So the runtime is <span class="math">O(n^2)</span> and memory is <span class="math">O(n)</span> from 1D Array.</p>
+<doc-anchor-target id="proof-optimal-substructure">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#proof-optimal-substructure">#</doc-anchor-trigger>
+        <span>Proof. Optimal Substructure</span>
+    </h2>
+</doc-anchor-target>
+<ol>
+<li><p>State the given:</p>
+<ul>
+<li>Given <span class="math">\text{OPT}(n)</span> for rod of length <span class="math">n</span> with first cut <span class="math">i</span></li>
+<li><span class="math">\text{OPT}(n)=p_i + a</span>, where <span class="math">a</span> is the amount of money made on rod of length <span class="math">n-i</span></li>
+</ul>
+</li>
+<li><p>Prove: <span class="math">a</span> is the optimal solution for rod of length <span class="math">n-i</span>, or <span class="math">a = \text{OPT}(n-i)</span></p>
+</li>
+<li><p>Assume <span class="math">a</span> is not optimal for rod of length <span class="math">n-i</span></p>
+<p>Let <span class="math">rev(t)</span> denote the revenue from strategy <span class="math">t</span></p>
+<p>Then there exists another strategy <span class="math">b</span> such that <span class="math">rev(b)&gt;rev(a)</span></p>
+</li>
+</ol>
+<div class="math"><pre>\begin{aligned}
+\underbrace{{rev}(b) + p_i}_\text{revenue of entire rod} &amp;&gt; \underbrace{{rev}(a) + p_i}_\text{given assumption}
+\\
+{rev}(\text{strategy of length $n$})&amp;&gt;\text{OPT}(n)
+\end{aligned}</pre></div>
+<p>We already assumed OPT is the best solution, then a better one cannot exist.</p>
+<p>Contradiction with given. Therefore <span class="math">a</span> is optimal for <span class="math">n-i</span>.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-green-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-green-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M21 9.09c-.55 0-1 .45-1 1v.92c0 4.96-4.04 8.99-9 8.99-4.97 0-9-4.04-9-9s4.04-9 9-9c1.27 0 2.5.26 3.66.78.51.22 1.1 0 1.32-.51.23-.5 0-1.1-.51-1.32C14.06.32 12.56 0 11.01 0H11C4.94 0 0 4.93 0 10.99 0 17.06 4.93 22 10.99 22H11c6.06 0 11-4.93 11-10.99v-.92c0-.56-.45-1-1-1z"></path>
+                    <path d="M8.71 9.31a.996.996 0 10-1.41 1.41l3 3c.19.19.44.29.71.29.27 0 .52-.11.71-.29l10-10.01a.996.996 0 10-1.41-1.41L11 11.6 8.71 9.31z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Hint</h5>
+<p>The key point is that the <em>optimal solution to the subproblem is unique</em>.</p>
+        </div>
+    </div>
+</div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -344,20 +563,20 @@ function MergeSort(A[1 … n]):
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/max-sub-array/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/dp-intro/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Max Subarray (122​A)</span>
+                                                <span class="block mt-1">Dp intro</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/quick-select/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../graph-traversal/the-only-graph-algo/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Quick Select (122​B) (WIP)</span>
+                                                <span class="block mt-1">The Only Graph Traversal Algorithm</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -401,6 +620,6 @@ function MergeSort(A[1 … n]):
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Merge Sort (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Rod Cutting (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>

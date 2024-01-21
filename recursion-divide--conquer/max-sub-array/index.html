@@ -3,46 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.752821007365">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759138033030">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>Tower of Hanoi (36B)</title>
-    <meta name="title" content="Tower of Hanoi (36B)">
-    <meta name="description" content="Question. Given 3 pegs and n disks, how can we move all the disks from \\tt{src} to \\tt{dest} such that larger disks cannot stack on top of smaller...">
+    <title>Max Subarray (122A)</title>
+    <meta name="title" content="Max Subarray (122A)">
+    <meta name="description" content="Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/recursion-divide--conquer/tower-of-hanoi/">
+    <link rel="canonical" href="/recursion-divide--conquer/max-sub-array/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/recursion-divide--conquer/tower-of-hanoi/">
-    <meta property="og:title" content="Tower of Hanoi (36B)">
-    <meta property="og:description" content="Question. Given 3 pegs and n disks, how can we move all the disks from \\tt{src} to \\tt{dest} such that larger disks cannot stack on top of smaller...">
-    <meta property="og:image" content="/assets/screen_shot_2022-06-22_at_3.55.26_pm.png">
+    <meta property="og:url" content="/recursion-divide--conquer/max-sub-array/">
+    <meta property="og:title" content="Max Subarray (122A)">
+    <meta property="og:description" content="Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/recursion-divide--conquer/tower-of-hanoi/">
-    <meta property="twitter:title" content="Tower of Hanoi (36B)">
-    <meta property="twitter:description" content="Question. Given 3 pegs and n disks, how can we move all the disks from \\tt{src} to \\tt{dest} such that larger disks cannot stack on top of smaller...">
-    <meta property="twitter:image" content="/assets/screen_shot_2022-06-22_at_3.55.26_pm.png">
+    <meta property="twitter:url" content="/recursion-divide--conquer/max-sub-array/">
+    <meta property="twitter:title" content="Max Subarray (122A)">
+    <meta property="twitter:description" content="Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.752821007365" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759138033030" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.752821007365" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759138033030" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.752821007365" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.752821007365" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759138033030" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759138033030" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
-    <link href="/assets/palette.css" rel="stylesheet" />
+    <style>
+      img {
+        max-width: 500px !important;
+      }
+      .tab-content,
+      .doc-alert {
+        & p,
+        ol,
+        ul:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+      }
+      .with-shadow {
+        box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -63,7 +81,7 @@
                                 <img class="max-h-10 hidden dark:inline-block" src="../../assets/cat.svg">
                             </span>
                             <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Tommy&#x27;s Algorithm Notes</span>
-                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Docs</span>
+                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Notes</span>
                     </div>
         
                     <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
@@ -175,10 +193,10 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="tower-of-hanoi-36b" class="break-words">
+<doc-anchor-target id="max-subarray-122a" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#tower-of-hanoi-36b">#</doc-anchor-trigger>
-        <span>Tower of Hanoi (36B)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#max-subarray-122a">#</doc-anchor-trigger>
+        <span>Max Subarray (122A)</span>
     </h1>
 </doc-anchor-target>
 <doc-anchor-target id="problem-statement">
@@ -188,39 +206,148 @@
     </h2>
 </doc-anchor-target>
 <blockquote>
-<p><strong>Question.</strong> Given 3 pegs and <span class="math">n</span> disks, how can we move all the disks from <span class="math">\tt{src}</span> to <span class="math">\tt{dest}</span> such that larger disks cannot stack on top of smaller disks?</p>
+<p><strong>Question.</strong> Given a 1-dimensional array, find a <strong>contiguous</strong> sub-array with the largest sum</p>
 </blockquote>
 <dl>
-<dt><span class="math">n:\texttt{\blue {int}}</span></dt>
-<dd>number of disks. This implies we have disk from radius 1 to <span class="math">n</span></dd>
-<dt><span class="math">\texttt{src, dest, temp: \gray{\blue{Array}&lt;\blue{int}&gt;}}</span></dt>
-<dd>3 pegs that we can puts disks on.
-<span class="math">\tt{src}</span> initially has the disks <span class="math">[1\dots n]</span> on it.
-<span class="math">\texttt{dest, temp}</span> will be empty initially.</dd>
+<dt><span class="math">A[1\dots n]:   \texttt{\gray{\blue{Array}&lt;\blue{number}&gt;}}</span></dt>
+<dd>the array we select from</dd>
 </dl>
-<doc-anchor-target id="reducing-the-problem">
+<doc-anchor-target id="dividing-the-problem">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#reducing-the-problem">#</doc-anchor-trigger>
-        <span>Reducing the problem</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#dividing-the-problem">#</doc-anchor-trigger>
+        <span>Dividing the problem</span>
     </h2>
 </doc-anchor-target>
-<p><figure class="content-center">
-    <img src="../../assets/screen_shot_2022-06-22_at_3.55.26_pm.png" alt="Source: Erickson Text" class="image-m">
-    <figcaption class="caption">Source: Erickson Text</figcaption>
-</figure>
-</p>
-<p>We can observe that:</p>
-<ul>
-<li>The largest disk has to go on the <span class="math">\tt{dest}</span> peg first before everything else.</li>
-</ul>
-<p>To do so, we need to move everything else to the <span class="math">\tt{temp}</span> peg first. Now <span class="math">\tt{src}</span> only has the largest disk and <span class="math">\tt{dest}</span> is empty ⇒ so we can directly move.</p>
-<p>Let’s consider a simple case with only 2 disks.</p>
-<p><figure class="content-center">
-    <img src="../../assets/screen_shot_2022-06-22_at_4.03.43_pm.png" alt="" class="image-m">
-    <figcaption class="caption"></figcaption>
-</figure>
-</p>
-<p>We do this 4-step process for any number of disks, except that 2 is the <span class="math">n</span>-th disk and disk <span class="math">1\sim n</span> is in the position of 1.</p>
+<p>The maximum subarray can show up in 3 places:</p>
+<ol>
+<li>The left half of <span class="math">A</span></li>
+<li>The right half of <span class="math">A</span></li>
+<li>The middle section of <span class="math">A</span></li>
+</ol>
+<p>The left half and right half does not overlap. Overlap is handled by the middle section.</p>
+<doc-anchor-target id="base-cases">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#base-cases">#</doc-anchor-trigger>
+        <span>Base Cases</span>
+    </h2>
+</doc-anchor-target>
+<p>There are 2 base cases:</p>
+<ol>
+<li><span class="math">A</span> is empty, so we return 0 for the sum of nothing.</li>
+<li><span class="math">A</span> has exactly 1 element, so we return that element <span class="math">A[1]</span></li>
+</ol>
+<doc-anchor-target id="recursive-cases">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#recursive-cases">#</doc-anchor-trigger>
+        <span>Recursive Cases</span>
+    </h2>
+</doc-anchor-target>
+<p>To avoid passing the main array around on the stack, we can use the <strong>2 pointer</strong> approach with <code v-pre>low</code> and <code v-pre>high</code> pointers. The recursive calls will look like:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">funuction MaxSubarray():
+    mid = floor((low + high) / 2)
+    leftSum = MaxSubarray(low, mid)
+    rightSum = MaxSubarray(mid + 1, high)
+    middleSum = MaxMiddleSum(low, mid, high)</code></pre>
+</doc-codeblock></div>
+<p>where the 2 recursive calls correspond to the left and right half of <span class="math">A</span>.</p>
+<doc-anchor-target id="the-max-middle-sum">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#the-max-middle-sum">#</doc-anchor-trigger>
+        <span>The Max Middle Sum</span>
+    </h3>
+</doc-anchor-target>
+<p>The name is kinda misleading, but we want to consider this:</p>
+<blockquote>
+<p><strong>Question.</strong> What contiguous subarray, that might contain the middle element, gives us the maximum sum?</p>
+</blockquote>
+<p>So we check both ways. <strong>Take the element if it keeps the array contiguous AND increases the sum.</strong></p>
+<ol>
+<li><p>Check from <code v-pre>mid - 1</code> to <code v-pre>low</code></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">// Inside MaxMiddleSum
+
+// Increases only when currLeftSum is better
+bestLeftSum = -Infinity
+// Always increases bc the subarray need to be contiguous
+currLeftSum = 0  
+
+// for loop must go this direction
+// because the max middle sum could conatin both left and right
+for i = mid - 1 to low:
+	currLeftSum += A[i]
+	if currLeftSum &gt; bestLeftSum:
+		bestLeftSum = currLeftSum</code></pre>
+</doc-codeblock></div>
+<doc-panel id="ex-left-half">
+    <template #title><strong>Ex.</strong> Left Half</template>
+<div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white border-r">
+        <span>Selecting...</span>
+    </div>
+    <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white">
+        <span>Done selecting, <code v-pre>sum = 4</code></span>
+    </div>
+    <div class="px-5 py-3 docs-columns-content border-r border-gray-200 dark:border-dark-650">
+<p><img src="../assets/screen_shot_2022-07-16_at_6.06.16_pm.png" alt="" /></p>
+    </div>
+    <div class="px-5 py-3 docs-columns-content">
+<p><img src="../assets/screen_shot_2022-07-16_at_6.06.53_pm.png" alt="" /></p>
+    </div>
+</div>
+</doc-panel>
+</li>
+<li><p>Then check from <code v-pre>mid</code> to <code v-pre>high</code></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">// Inside MaxMiddleSum
+bestRightSum = -Infinity
+currRightSum = 0
+
+for i = mid to high:
+	currRightSum += A[i]
+	if currRightSum &gt; bestRightSum:
+		bestRightSum = currRightSum</code></pre>
+</doc-codeblock></div>
+<doc-panel id="ex-right-half">
+    <template #title><strong>Ex.</strong> Right Half</template>
+<div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white border-r">
+        <span>Selecting...</span>
+    </div>
+    <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white">
+        <span>Done selecting, <code v-pre>sum = 3</code></span>
+    </div>
+    <div class="px-5 py-3 docs-columns-content border-r border-gray-200 dark:border-dark-650">
+<p><img src="../assets/screen_shot_2022-07-16_at_6.07.45_pm.png" alt="" /></p>
+    </div>
+    <div class="px-5 py-3 docs-columns-content">
+<p><img src="../assets/screen_shot_2022-07-16_at_6.08.19_pm.png" alt="" /></p>
+    </div>
+</div>
+</doc-panel>
+</li>
+<li><p>The best middle sum could also involve both the left and right half, for example if all elements are positive.</p>
+<p>So we take the <code v-pre>max(...)</code> of all:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">// Inside MaxMiddleSum
+return max(bestLeftSum + bestRightSum, 
+           bestLeftSum,
+           bestRightSum)</code></pre>
+</doc-codeblock></div>
+</li>
+</ol>
+<doc-anchor-target id="combining-the-results">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#combining-the-results">#</doc-anchor-trigger>
+        <span>Combining the Results</span>
+    </h2>
+</doc-anchor-target>
+<p>Now we know what’s max in left, right, and middle, we just take the max</p>
+<p>We <strong>don’t</strong> try to combine left and right here because that won’t be contiguous anymore.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">// Inside MaxSubarray
+return max(leftSum, rightRum, middleSum)</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="pseudocode">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#pseudocode">#</doc-anchor-trigger>
@@ -228,24 +355,55 @@
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function SolveHanoi(n, src, dest, temp):
-	// do nothing if there's no disk
-	if n &gt; 0:
-		// move disks 1…n-1 to temp
-		SolveHanoi(n - 1, src, temp, dest)
-		put disk n on dest
-		// move disks 1…n-1 from temp to dest
-		SolveHanoi(n - 1, temp, dest, src)</code></pre>
+<pre class="language-c"><code v-pre class="language-c">function MaxSubarray(A[low … high]) -&gt; number:
+	if A is empty:
+		return 0 
+
+	if low == high:
+		return A[1]
+
+	mid = floor((low + high) / 2)
+	leftSum = MaxSubarray(A[low … mid])
+	rightSum = MaxSubarray(A[mid + 1 … high])
+	middleSum = MaxMiddleSum(A[low … high], mid)
+
+	return max(leftSum, rightSum, middleSum)</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="python-tower-of-hanoi">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function MaxMiddleSum(A[low … high], mid) -&gt; number:
+	bestLeftSum = -Infinity
+	currLeftSum = 0
+	
+	for i = mid - 1 to low:
+		currLeftSum += A[i]
+		if currLeftSum &gt; bestLeftSum:
+			bestLeftSum = currSum
+	
+	bestRightSum = -Infinity
+	currRightSum = 0
+	
+	for i = mid to high:
+		currRightSum += A[i]
+		if currRightSum &gt; bestRightSum:
+			bestRightSum = currRightSum
+
+	return max(
+		bestLeftSum + bestRightSum, 
+        bestLeftSum,
+        bestRightSum
+	)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="python-max-subarray">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#python-tower-of-hanoi">#</doc-anchor-trigger>
-        <span>Python: Tower of Hanoi</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#python-max-subarray">#</doc-anchor-trigger>
+        <span>Python: Max Subarray</span>
     </h2>
 </doc-anchor-target>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/tower_of_hanoi.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/max-subarray.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-6 px-2 text-xs rounded-md">
     <span>Github</span>
 </a></p>
+<hr>
+<p>Go faster: <a href="../../greedy20algorithms20c2bfc59e13f64ad7ab28774c4f85f3e1/greedy20c7450611247145229db85b2778825c94/e29d9620max20subarray20kadanee28099s20algorithm20(wip)20a2ef88ef947940deaf19259a9d10e82a.md"><strong>❖</strong> Max Subarray: Kadane’s Algorithm (WIP)</a></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -255,16 +413,23 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/randomized-quick-select/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../graph-traversal/dfs/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Randomized Quick Select (122​B) (WIP)</span>
+                                                <span class="block mt-1">Recursive Depth First Search (122​A)</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/merge-sort/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
+                                                <span class="block mt-1">Merge Sort (122​A)</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
                                     </div>
                                 </nav>
                             </footer>
@@ -276,7 +441,7 @@
                                     <ul class="flex flex-wrap items-center text-sm">
                                     </ul>
                                 </div>
-                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. All rights reserved.</p></div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. All rights reserved.</p></div>
                             </footer>
                         </div>
                     </div>
@@ -305,6 +470,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Tower of Hanoi (36B)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Max Subarray (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>
