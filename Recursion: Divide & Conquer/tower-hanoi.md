@@ -4,17 +4,17 @@
 
 > **Question.** Given 3 pegs and $n$ disks, how can we move all the disks from $\tt{src}$ to $\tt{dest}$ such that larger disks cannot stack on top of smaller disks?
 
-$n:\texttt{\blue {int}}$
+`n: int`
 :	number of disks. This implies we have disk from radius 1 to $n$
 
-$\texttt{src, dest, temp: \gray{\blue{Array}<\blue{int}>}}$
+`src, dest, temp: Array<int>`
 :	3 pegs that we can puts disks on.
-  $\tt{src}$ initially has the disks $[1\dots n]$ on it.
-  $\texttt{dest, temp}$ will be empty initially.
+  `src` initially has the disks $[1\dots n]$ on it.
+  `dest, temp` will be empty initially.
 
 ## Reducing the problem
 
-![Source: Erickson Text](/assets/Screen_Shot_2022-06-22_at_3.55.26_PM.png){class="image-m"}
+![Source: Erickson Text](/assets/hanoi-idea.png){class="image-m"}
 
 We can observe that:
 
@@ -24,7 +24,7 @@ To do so, we need to move everything else to the $\tt{temp}$ peg first. Now $\tt
 
 Let’s consider a simple case with only 2 disks.
 
-![](/assets/Screen_Shot_2022-06-22_at_4.03.43_PM.png){class="image-m"}
+![](/assets/simple-hanoi.png)
 
 We do this 4-step process for any number of disks, except that 2 is the $n$-th disk and disk $1\sim n$ is in the position of 1.
 
@@ -41,6 +41,6 @@ function SolveHanoi(n, src, dest, temp):
 		SolveHanoi(n - 1, temp, dest, src)
 ```
 
-## Python: Tower of Hanoi
+### :icon-code: Python: Tower of Hanoi
 
-[!badge variant="dark" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/tower_of_hanoi.py)
+[!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/tower_of_hanoi.py)

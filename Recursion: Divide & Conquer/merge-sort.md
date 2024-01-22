@@ -26,8 +26,8 @@ mid = floor(low + ((high - low) / 2))
 And the recursive calls are:
 
 ```c
-MergeSort(A[1 … mid])
-MergeSort(A[mid + 1 … high])
+MergeSort(A[1 ... mid])
+MergeSort(A[mid + 1 ... high])
 ```
 
 ## Base Cases

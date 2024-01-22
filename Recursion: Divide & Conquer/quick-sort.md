@@ -52,7 +52,7 @@ function Partition(A[1 … n], pivotValue) -> pair of Arrays:
 	return left, right
 ```
 
-(Change $<$ to other comparators depending on the sorting order)
+(Change $ < $ to other predicates depending on the sorting order)
 
 This is also a linear scan, so the runtime is $O(n)$.
 

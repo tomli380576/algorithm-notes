@@ -280,14 +280,14 @@ So the runtime is $O(n^2)$ and memory is $O(n)$ from 1D Array.
     
     Let $rev(t)$ denote the revenue from strategy $t$
     
-    Then there exists another strategy $b$ such that $rev(b)>rev(a)$
+    Then there exists another strategy $b$ such that $rev(b) > rev(a)$
     
 
 $$
 \begin{aligned}
-\underbrace{{rev}(b) + p_i}_\text{revenue of entire rod} &> \underbrace{{rev}(a) + p_i}_\text{given assumption}
-\\
-{rev}(\text{strategy of length $n$})&>\text{OPT}(n)
+    \underbrace{{rev}(b) + p_i}_\text{revenue of entire rod} &> \underbrace{{rev}(a) + p_i}_\text{given assumption}
+    \\
+    {rev}(\text{strategy of length $n$}) &>\text{OPT}(n)
 \end{aligned}
 $$
 

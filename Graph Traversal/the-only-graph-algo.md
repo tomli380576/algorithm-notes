@@ -4,20 +4,19 @@ order: 3
 
 # The Only Graph Traversal Algorithm
 
+> **Question.** How to visit every vertex exactly once in a graph?
+
 ## Whatever First Search
 
-> **Question.** How to visit every vertex exactly once in a graph?
- 
+!!! **Def.** Vertex Status
 
-!!!info **Def.** Vertex Status
+To keep track of which vertices we have seen, we use 2 `STATUS` values:
 
-To keep track of which vertices we have seen, we use 2 $\texttt{STATUS}$ values:
-
-- $\texttt{NEW}$: Never seen before.
-- $\texttt{VISITED}$: Processed exactly once.
+- `NEW`: Never seen before.
+- `VISITED`: Processed exactly once.
 !!!
 
-Let **T** be the generic typename. We will make up an imaginary data structure called a **`Bag<T>`**. It has 3 methods:
+Let `<T>` be the generic typename. We will make up an imaginary data structure called a `Bag<T>`. It has 3 methods:
 
 1. `put(elem: T)` puts an element in the bag.
 2. `popFirst() -> T` returns whatever is the "first" thing in the bag and removes it.
@@ -74,15 +73,15 @@ To handle [disconnected graphs](https://mathworld.wolfram.com/DisconnectedGraph.
 
 We will make a small wrapper.
 
-```c
-function WhateverFirst_Wrapper(G):
+```c #1-6
+function WhateverFirst_Wrapper(G: Graph):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
 			WhateverFirst_visit(G, v)
 			
-function WhateverFirst_Visit(G, start):
+function WhateverFirst_Visit(G: Graph, start: Vertex):
 	bag = Bag<Vertex>()
 	bag.put(start)
 
@@ -101,9 +100,3 @@ Changing the bag's behavior on `popFirst()` will result in the same [variants](#
 
 The `WhateverFirstSearch_All` function implements this. 
 [!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py)
-
----
-
-Go to next:
-
-[BFS & DFS](BFS%20&%20DFS%20e6658526c6884bc2ac345aeb09e4ffc0.md)
