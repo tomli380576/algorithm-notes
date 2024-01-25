@@ -16,9 +16,9 @@ To keep track of which vertices we have seen, we use 2 `STATUS` values:
 - `VISITED`: Processed exactly once.
 !!!
 
-Let `<T>` be the generic typename. We will make up an imaginary data structure called a `Bag<T>`. It has 3 methods:
+Let `T` be the generic type name. We will make up an imaginary data structure called a `Bag<T>`. It has 3 methods:
 
-1. `put(elem: T)` puts an element in the bag.
+1. `put(element: T)` puts an element in the bag.
 2. `popFirst() -> T` returns whatever is the "first" thing in the bag and removes it.
 3. `isEmpty() -> bool` returns whether the bag is empty or not.
 
@@ -55,6 +55,16 @@ Queue
 
 Priority Queue
 :	[Best First Search]()
+
+!!!success Tip
+In python, we can easily swap between DFS and BFS by using `collections.deque`.
+- `<deque>.popleft()` gives us BFS
+- `<deque>.pop()` gives us DFS
+
+For priority queue we could use `heapq` on a regular list `[]`.
+- Use `heappush` and `heappop` to append and pop from the priority queue. See [here](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50).
+
+!!!
 
 ### :icon-code: Python
 
