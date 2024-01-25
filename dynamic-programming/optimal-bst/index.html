@@ -9,24 +9,24 @@
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>Quick Select (122B) (WIP)</title>
-    <meta name="title" content="Quick Select (122B) (WIP)">
-    <meta name="description" content="Type of Divide & Conquer: Pivot">
+    <title>Optimal Binary Search Tree</title>
+    <meta name="title" content="Optimal Binary Search Tree">
+    <meta name="description" content="Given a sorted list of search items A[1\\dots n] and a frequency list f[1\\dots n], where f_i is the number of times we will search for element ">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/recursion-divide--conquer/quick-select/">
+    <link rel="canonical" href="/dynamic-programming/optimal-bst/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/recursion-divide--conquer/quick-select/">
-    <meta property="og:title" content="Quick Select (122B) (WIP)">
-    <meta property="og:description" content="Type of Divide & Conquer: Pivot">
+    <meta property="og:url" content="/dynamic-programming/optimal-bst/">
+    <meta property="og:title" content="Optimal Binary Search Tree">
+    <meta property="og:description" content="Given a sorted list of search items A[1\\dots n] and a frequency list f[1\\dots n], where f_i is the number of times we will search for element ">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/recursion-divide--conquer/quick-select/">
-    <meta property="twitter:title" content="Quick Select (122B) (WIP)">
-    <meta property="twitter:description" content="Type of Divide & Conquer: Pivot">
+    <meta property="twitter:url" content="/dynamic-programming/optimal-bst/">
+    <meta property="twitter:title" content="Optimal Binary Search Tree">
+    <meta property="twitter:description" content="Given a sorted list of search items A[1\\dots n] and a frequency list f[1\\dots n], where f_i is the number of times we will search for element ">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -196,26 +196,13 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="quick-select-122b-wip" class="break-words">
+<doc-anchor-target id="optimal-binary-search-tree" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#quick-select-122b-wip">#</doc-anchor-trigger>
-        <span>Quick Select (122B) (WIP)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#optimal-binary-search-tree">#</doc-anchor-trigger>
+        <span>Optimal Binary Search Tree</span>
     </h1>
 </doc-anchor-target>
-<p>Type of Divide &amp; Conquer: Pivot</p>
-<aside>
-<img src="https://www.notion.so/icons/error_red.svg" alt="https://www.notion.so/icons/error_red.svg" width="40px" /> $\triangle$ Rewrite This
-<p>Required: <a href="quick20sort20(122a)209c51956cf9ad471dbcc4247845d421c8.md">Quick Sort</a></p>
-</aside>
-<p><code v-pre>@Params</code></p>
-<ul>
-<li><span class="math">A:\texttt{\gray{\blue{Array}&lt;\blue{number}&gt;}}</span>, the array we select from</li>
-<li><span class="math">k:\tt{\blue{int}}</span>, the k-th smallest number to look for; <span class="math">1\le k\le \text{len}(A)</span></li>
-</ul>
-<p><code v-pre>@Returns</code> The <span class="math">k</span>-th smallest element of <span class="math">A</span> in linear time.</p>
-<blockquote>
-<p><strong>Question.</strong> Given an unsorted list of numbers <span class="math">A</span> and an integer <span class="math">k</span>, how do we find the <span class="math">k</span>-th smallest element of <span class="math">A</span> in <span class="math">O(n)</span> time?</p>
-</blockquote>
+<p>Given a sorted list of search items <span class="math">A[1\dots n]</span> and a frequency list <span class="math">f[1\dots n]</span>, where <span class="math">f_i</span> is the number of times we will search for element <span class="math">A_i</span>.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -225,20 +212,20 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/merge-sort/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/dp-intro/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Merge Sort (122​A)</span>
+                                                <span class="block mt-1">Introduction</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../recursion-divide--conquer/quick-sort/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/rod-cutting/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Quick Sort (122​A)</span>
+                                                <span class="block mt-1">Rod Cutting (122​A)</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -282,6 +269,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Quick Select (122B) (WIP)", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Optimal Binary Search Tree", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>
