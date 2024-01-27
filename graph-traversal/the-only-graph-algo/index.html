@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759463413570">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759714805737">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,17 +31,17 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759463413570" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759714805737" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759463413570" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759463413570" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759463413570" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759714805737" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
       img {
         max-width: min(500px, 100%) !important;
       }
@@ -61,7 +61,7 @@
         box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.2);
       }
       code {
-        font-family: 'JetBrains Mono', monospace !important;
+        font-family: "JetBrains Mono", monospace !important;
       }
     </style>
 
@@ -229,7 +229,7 @@
 <p>To keep track of which vertices we have seen, we use 2 <code v-pre>STATUS</code> values:</p>
 <ul>
 <li><code v-pre>NEW</code>: Never seen before.</li>
-<li><code v-pre>VISITED</code>: Processed exactly once.</li>
+<li><code v-pre>SEEN</code>: Processed exactly once.</li>
 </ul>
         </div>
     </div>
@@ -253,7 +253,7 @@
 		u = bag.popFirst()
 		if u is NEW:
 			process(u) 
-			mark u as VISITED
+			mark u as SEEN
 			for each adjacent vertex v of u:
 				bag.put(v)</code></pre>
 </doc-codeblock></div>
@@ -264,14 +264,32 @@
         <span>Important Variants</span>
     </h3>
 </doc-anchor-target>
-<p>By changing the bag&#x27;s behavior of <code v-pre>popFirst()</code>, we get the familiar search algorithms:</p>
+<p>By changing the bag&#x27;s behavior of <code v-pre>popFirst()</code> and <code v-pre>put(element)</code>, we get the familiar search algorithms:</p>
 <dl>
 <dt>Stack</dt>
-<dd><a href="../dfs/">Depth First Search</a>. DFS is usually implemented with recursion allowing cycle detection.</dd>
+<dd>
+<p><a href="../dfs/"><strong>Depth First Search</strong></a>. DFS is usually implemented with recursion allowing cycle detection.</p>
+<ul>
+<li><code v-pre>put(element)</code> appends to the end</li>
+<li><code v-pre>popFirst()</code> pops from the end</li>
+</ul>
+</dd>
 <dt>Queue</dt>
-<dd><a href="../bfs/">Breadth First Search</a></dd>
+<dd>
+<p><a href="../bfs/"><strong>Breadth First Search</strong></a></p>
+<ul>
+<li><code v-pre>put(element)</code> appends to the end</li>
+<li><code v-pre>popFirst()</code> pops from the front</li>
+</ul>
+</dd>
 <dt>Priority Queue</dt>
-<dd><a href="">Best First Search</a></dd>
+<dd>
+<p><strong>Best First Search</strong></p>
+<ul>
+<li><code v-pre>put(element)</code> appends with a priority value in <span class="math">O(\log n)</span> time</li>
+<li><code v-pre>popFirst()</code> pops the element with highest priority in <span class="math">O(\log n)</span> time.</li>
+</ul>
+</dd>
 </dl>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-green-500"></div>
@@ -285,16 +303,34 @@
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-            <h5>Tip</h5>
+            <h5>Implementation Tip</h5>
 <p>In python, we can easily swap between DFS and BFS by using <code v-pre>collections.deque</code>.</p>
 <ul>
 <li><code v-pre>&lt;deque&gt;.popleft()</code> gives us BFS</li>
 <li><code v-pre>&lt;deque&gt;.pop()</code> gives us DFS</li>
 </ul>
+<hr>
 <p>For priority queue we could use <code v-pre>heapq</code> on a regular list <code v-pre>[]</code>.</p>
 <ul>
 <li>Use <code v-pre>heappush</code> and <code v-pre>heappop</code> to append and pop from the priority queue. See <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50">here</a>.</li>
 </ul>
+<hr>
+<p>We can represent <code v-pre>NEW</code> and <code v-pre>SEEN</code> with a set</p>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-c" data-line="5"><code v-pre class="language-c">function WhateverFirstSearch(G: Graph, start: Vertex):
+	bag = Bag&lt;Vertex&gt;()
+	bag.put(start)
+
+	seen_vertices = Set&lt;Vertex&gt;()
+
+	while bag is not empty:
+		u = bag.popFirst()
+		if not seen_vertices.has(u):
+			process(u) 
+			seen_vertices.add(u)
+			for each adjacent vertex v of u:
+				bag.put(v)</code></pre>
+</doc-codeblock></div>
         </div>
     </div>
 </div>
@@ -350,9 +386,9 @@ function WhateverFirst_Visit(G: Graph, start: Vertex):
 
 	while bag is not empty:
 		u = bag.popFirst()
-		if u is not VISITED:
+		if u is not SEEN:
 			process(u)
-			mark u as VISITED
+			mark u as SEEN
 			for each adjacent vertex v:
 				bag.put(v)</code></pre>
 </doc-codeblock></div>
