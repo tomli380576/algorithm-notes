@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759740464185">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759741030563">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Pseudocode Syntax Reference</title>
     <meta name="title" content="Pseudocode Syntax Reference">
-    <meta name="description" content="Math operators are the same as they are in formal mathematical writing.">
+    <meta name="description" content="Math operators are used the same as they are in formal mathematical writing.">
 
     <!-- Canonical -->
     <link rel="canonical" href="/pseudocode-syntax/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/pseudocode-syntax/">
     <meta property="og:title" content="Pseudocode Syntax Reference">
-    <meta property="og:description" content="Math operators are the same as they are in formal mathematical writing.">
+    <meta property="og:description" content="Math operators are used the same as they are in formal mathematical writing.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/pseudocode-syntax/">
     <meta property="twitter:title" content="Pseudocode Syntax Reference">
-    <meta property="twitter:description" content="Math operators are the same as they are in formal mathematical writing.">
+    <meta property="twitter:description" content="Math operators are used the same as they are in formal mathematical writing.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/cat.svg" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.759740464185" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.759741030563" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.759741030563" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.759740464185" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.759741030563" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.759741030563" defer></script>
     <link href="../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -209,14 +209,14 @@
         <span>Basics</span>
     </h2>
 </doc-anchor-target>
-<p>Math operators are the same as they are in formal mathematical writing.</p>
+<p>Math operators are used the same as they are in formal mathematical writing.</p>
 <p><code v-pre>-&gt;</code> <strong>indicates a return type</strong>. Only used for function declarations.</p>
 <ul>
 <li>If nothing is returned, this symbol is unused.</li>
 </ul>
 <p>Any kind of indexing, range, interval is <strong>inclusive</strong> unless explicitly stated.</p>
 <ul>
-<li>Example: <code v-pre>A[1...N]: List&lt;number&gt;</code> means</li>
+<li>Example: <code v-pre>A[1...N]: List&lt;number&gt;</code> means the list <code v-pre>A</code> has <code v-pre>N</code> elements and can be indexed by <code v-pre>1, 2, 3, ... N</code>.</li>
 </ul>
 <p>Angle brackets <code v-pre>&lt;T&gt;</code> indicate the use of type parameters. For example, <code v-pre>List&lt;Vertex&gt;</code> means elements of this list are vertices.</p>
 <doc-anchor-target id="examples">
