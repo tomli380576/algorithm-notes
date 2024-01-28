@@ -1,5 +1,6 @@
 ---
 order: 3
+icon: "../assets/bfs_dfs/WFS.svg"
 ---
 
 # The Only Graph Traversal Algorithm
@@ -37,7 +38,7 @@ function WhateverFirstSearch(G: Graph, start: Vertex):
 		if u is NEW:
 			process(u) 
 			mark u as SEEN
-			for each adjacent vertex v of u:
+			for each v adjacent to u:
 				bag.put(v)
 ```
 
@@ -63,14 +64,16 @@ Priority Queue
 - `popFirst()` pops the element with highest priority in $O(\log n)$ time. 
 
 !!!success Implementation Tip
-In python, we can easily swap between DFS and BFS by using `collections.deque`.
+In python, we can easily swap between DFS and BFS by using [`collections.deque`](https://docs.python.org/3/library/collections.html#collections.deque).
 - `<deque>.popleft()` gives us BFS
 - `<deque>.pop()` gives us DFS
+  
+C++ also has [`std::deque<T>`](https://cplusplus.com/reference/deque/deque/)
 
 ---
 
-For priority queue we could use `heapq` on a regular list `[]`.
-- Use `heappush` and `heappop` to append and pop from the priority queue. See [here](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50).
+For priority queue we could use [`heapq`](https://docs.python.org/3/library/heapq.html#module-heapq) on a regular list `[]`.
+- Use `heappush` and `heappop` to append and pop from the priority queue. See its use in [Dijkstra's Algorithm](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50).
 
 ---
 
@@ -88,7 +91,7 @@ function WhateverFirstSearch(G: Graph, start: Vertex):
 		if not seen_vertices.has(u):
 			process(u) 
 			seen_vertices.add(u)
-			for each adjacent vertex v of u:
+			for each v adjacent to u:
 				bag.put(v)
 ```
 !!!
@@ -127,7 +130,7 @@ function WhateverFirst_Visit(G: Graph, start: Vertex):
 		if u is not SEEN:
 			process(u)
 			mark u as SEEN
-			for each adjacent vertex v:
+			for each v adjacent to u:
 				bag.put(v)
 ```
 

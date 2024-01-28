@@ -1,5 +1,6 @@
 ---
 order: 2
+icon: "../assets/bfs_dfs/BFS.svg"
 ---
 
 # Breadth First Search (122A)

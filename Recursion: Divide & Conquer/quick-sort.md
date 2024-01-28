@@ -8,7 +8,7 @@
 The idea of quick sort is:
 
 ```c
-function QuickSort(A[1 … n]):
+function QuickSort(A[1...n]):
 	pivotValue = ChoosePivot()
 
 	partitionLeft = from A select value where value < pivot value
@@ -36,7 +36,7 @@ Unlike merge sort, after left & right partitions are sorted, the merging step is
 Similar to how we considered `merge()`, it’s easier to think about if we use extra space.
 
 ```c
-function Partition(A[1 … n], pivotValue) -> pair of Arrays:
+function Partition(A[1...n], pivotValue) -> pair of Arrays:
 	left = []
 	right = []
 
@@ -71,15 +71,15 @@ There are a lot of ways for choosing pivots:
 ## Pseudocode
 
 ```c
-function QuickSort(A[1 … n]) -> Array:
+function QuickSort(A[1...n]) -> Array:
 	if n > 1: 
 		pivot_value = ChoosePivot()
-		left, right = Partition(A[1 … n], pivot_value)
+		left, right = Partition(A[1...n], pivot_value)
 		return flatten([QuickSort(left), [pivot_value], QuickSort(right)])
 	else:
 		return A
 
-function Partition(A[1 … n], pivot_value) -> pair of Arrays:
+function Partition(A[1...n], pivot_value) -> pair of Arrays:
 	left = []
 	right = []
 

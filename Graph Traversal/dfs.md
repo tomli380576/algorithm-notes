@@ -1,5 +1,6 @@
 ---
 order: 1
+icon: "../assets/bfs_dfs/DFS.svg"
 ---
 
 # Recursive Depth First Search (122A)

@@ -1,15 +1,15 @@
-# Max Subarray (122A)
+# Max Sub-array (122A)
 
 ## Problem Statement
 
 > **Question.** Given a 1-dimensional array, find a **contiguous** sub-array with the largest sum
 
-$A[1\dots n]:   \texttt{\gray{\blue{Array}<\blue{number}>}}$
+`A[1...N]: List<number>`
 :   the array we select from
 
 ## Dividing the problem
 
-The maximum subarray can show up in 3 places:
+The maximum sub-array can show up in 3 places:
 
 1. The left half of $A$
 2. The right half of $A$
@@ -64,18 +64,17 @@ So we check both ways. **Take the element if it keeps the array contiguous AND i
     		bestLeftSum = currLeftSum
     ```
     
-    === **Ex.** Left Half
+    **Example.** Left Half
     
     ||| Selecting...
-    ![](../assets/Screen_Shot_2022-07-16_at_6.06.16_PM.png)
+    ![](../assets/recursoin/subarr-1.png)
 
     ||| Done selecting, `sum = 4`
     
-    ![](../assets/Screen_Shot_2022-07-16_at_6.06.53_PM.png)
+    ![](../assets/recursoin/subarr-2.png)
     
     |||
 
-    ===
     
 2. Then check from `mid` to `high`
     
@@ -90,17 +89,17 @@ So we check both ways. **Take the element if it keeps the array contiguous AND i
     		bestRightSum = currRightSum
     ```
     
-    === **Ex.** Right Half
+    **Example.** Right Half
     
     ||| Selecting...
-    ![](../assets/Screen_Shot_2022-07-16_at_6.07.45_PM.png)
+    ![](../assets/recursoin/subarr-r-1.png)
 
     ||| Done selecting, `sum = 3`
     
-    ![](../assets/Screen_Shot_2022-07-16_at_6.08.19_PM.png)
+    ![](../assets/recursoin/subarr-r-2.png)
     
     |||
-    ===
+    
     
 3. The best middle sum could also involve both the left and right half, for example if all elements are positive.
     
@@ -128,7 +127,7 @@ return max(leftSum, rightRum, middleSum)
 ## Pseudocode
 
 ```c
-function MaxSubarray(A[low … high]) -> number:
+function MaxSubarray(A[low...high]) -> number:
 	if A is empty:
 		return 0 
 
@@ -136,15 +135,15 @@ function MaxSubarray(A[low … high]) -> number:
 		return A[1]
 
 	mid = floor((low + high) / 2)
-	leftSum = MaxSubarray(A[low … mid])
-	rightSum = MaxSubarray(A[mid + 1 … high])
-	middleSum = MaxMiddleSum(A[low … high], mid)
+	leftSum = MaxSubarray(A[low...mid])
+	rightSum = MaxSubarray(A[mid + 1...high])
+	middleSum = MaxMiddleSum(A[low...high], mid)
 
 	return max(leftSum, rightSum, middleSum)
 ```
 
 ```c
-function MaxMiddleSum(A[low … high], mid) -> number:
+function MaxMiddleSum(A[low...high], mid) -> number:
 	bestLeftSum = -Infinity
 	currLeftSum = 0
 	
@@ -174,4 +173,4 @@ function MaxMiddleSum(A[low … high], mid) -> number:
 
 ---
 
-Go faster: [**❖** Max Subarray: Kadane’s Algorithm (WIP)](../../Greedy%20Algorithms%20c2bfc59e13f64ad7ab28774c4f85f3e1/Greedy%20c7450611247145229db85b2778825c94/%E2%9D%96%20Max%20Subarray%20Kadane%E2%80%99s%20Algorithm%20(WIP)%20a2ef88ef947940deaf19259a9d10e82a.md)
+Go faster: [**❖** Max Subarray: Kadane’s Algorithm (WIP)]()

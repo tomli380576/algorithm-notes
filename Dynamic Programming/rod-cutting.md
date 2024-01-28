@@ -5,13 +5,13 @@
 We are given the following:
 
 - `n: int`, length of the rod
-- `p: Array<int>`, array of prices for rod length from `i=1` to `i=n`
+- `p: List<int>`, array of prices for rod length from `i=1` to `i=n`
   - For example: $p_1 = 1, p_2 = 3, p_3 = 5, \dots$
     
 We want to find:
 
 - `int`, the max revenue possible $r$ from rod of length $n$
-- `Array<int>`, cut strategy to make the max revenue. Element at index $i$ represents the amount to cut at step $i$.
+- `List<int>`, cut strategy to make the max revenue. Element at index $i$ represents the amount to cut at step $i$.
 
 Let's call this function `CutRod(n, p)`. Since `p` is fixed, we will omit `p` from the call signature from now on. 
 
@@ -76,7 +76,7 @@ $$
 +++ Pseudocode
 
 ```java
-const prices = [ … ] // given, treat it as a frozen constant array
+const prices = [...] // given, treat it as a frozen constant array
 
 function CutRod(rodLen: int) -> int:
 	if rodLen == 0:
@@ -105,7 +105,7 @@ function CutRod(rodLen: int) -> int:
 +++ No Comment Version
     
 ```java
-const prices = [ … ]
+const prices = [...]
 
 function CutRod(rodLen: int) -> int:
     if rodLen == 0:
@@ -145,7 +145,7 @@ Make sure you are comfortable with the brute force approach before moving to DP 
 Observe that every call requires only 1 argument `rodLen`, so we can use an 1D array to store our results. Let’s define:
 
 ```java
-dpTable: Array<int>
+dpTable: List<int>
 ```
 
 To get the result of a previous call, we can use `dpTable[rodLen]`.
@@ -181,7 +181,7 @@ So we need to evaluate all of $\{\text{CutRod}(n-i)\}_{1\leqslant i \leqslant n}
 +++ Pseudocode
 
 ```java
-const prices = [ … ] // given
+const prices = [...] // given
 
 function DpCutRod(maxRodLen: int) -> int:
 	dpTable = Array(shape=(maxRodLen)) // preallocate the space
@@ -207,7 +207,7 @@ function DpCutRod(maxRodLen: int) -> int:
 +++ No Comment Version
     
 ```java
-const prices = [ … ]
+const prices = [...]
 
 function DpCutRod(maxRodLen: int) -> int:
     dpTable = Array(shape=(maxRodLen))
@@ -231,7 +231,7 @@ function DpCutRod(maxRodLen: int) -> int:
 The pseudocode above only finds the optimal profit, but it doesn't tell us how to actually cut the rod. We can record the cut by adding the following
 
 ```c #12-14,3
-function DpCutRod(maxRodLen: int) -> int, Array<int>:
+function DpCutRod(maxRodLen: int) -> int, List<int>:
     dpTable = Array(shape=(maxRodLen))
     cuts = Array(shape=(maxRodLen))
     

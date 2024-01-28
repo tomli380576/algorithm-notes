@@ -1,9 +1,9 @@
 # Merge Sort (122A)
 
-Given `A: Array<int>`, the idea of merge sort is:
+Given `A[1...n]: List<int>`, the idea of merge sort is:
 
 ```c
-function MergeSort(A[1 … n]):
+function MergeSort(A[1...n]):
 	sorted_left = sort left half      // Recursion Magic
 	sorted_right = sort right half    // Recursion Magic
 	merge(sorted_left, sorted_right)
@@ -51,7 +51,7 @@ Let `ptr_l` and `ptr_r` be the traversing pointers in the left & right sorted ar
 It’s probably easier to consider merging with 2 separate arrays first.
 
 ```c
-function Merge2SortedArrays(L[1 … n], R[1 … m]) -> Array<int>:
+function Merge2SortedArrays(L[1...n], R[1...m]) -> List<int>:
 	ptr_l = 0  // traverses L array
 	ptr_r = 0  // traverses R array
 	output = []
@@ -73,7 +73,7 @@ function Merge2SortedArrays(L[1 … n], R[1 … m]) -> Array<int>:
 Translate into expressions: (Assuming we are sorting in ascending order. Flip < to > if reversed.)
 
 ```c
-function Merge2SortedArrays(L[1 … n], R[1 … m]) -> Array<int>:
+function Merge2SortedArrays(L[1...n], R[1...m]) -> List<int>:
 	ptr_l = 0
 	ptr_r = 0
 	output = []
@@ -112,11 +112,11 @@ At the end, instead of returning output, replace all elements in the parameter a
 +++ Pseudocode
 ```c
 //pseudocode
-function MergeSort(A[1 … n]):
+function MergeSort(A[1...n]):
 	if n > 1:
 		mid = floor(n / 2)
-		MergeSort(A[1 … mid])
-		MergeSort(A[mid + 1 … n])
+		MergeSort(A[1...mid])
+		MergeSort(A[mid + 1...n])
 		Merge(A, mid)
 ```
 +++ Python

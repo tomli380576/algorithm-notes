@@ -2,19 +2,19 @@
 
 ## Problem Statement
 
-> **Question.** Given 3 pegs and $n$ disks, how can we move all the disks from $\tt{src}$ to $\tt{dest}$ such that larger disks cannot stack on top of smaller disks?
+> **Question.** Given 3 pegs and $n$ disks, how can we move all the disks from `src` to `dest` such that larger disks cannot stack on top of smaller disks?
 
 `n: int`
 :	number of disks. This implies we have disk from radius 1 to $n$
 
-`src, dest, temp: Array<int>`
+`src, dest, temp: List<int>`
 :	3 pegs that we can puts disks on.
   `src` initially has the disks $[1\dots n]$ on it.
   `dest, temp` will be empty initially.
 
 ## Reducing the problem
 
-![Source: Erickson Text](/assets/hanoi-idea.png){class="image-m"}
+![Source: Erickson Text](/assets/recursoin/hanoi-idea.png)
 
 We can observe that:
 
@@ -24,7 +24,7 @@ To do so, we need to move everything else to the $\tt{temp}$ peg first. Now $\tt
 
 Let’s consider a simple case with only 2 disks.
 
-![](/assets/simple-hanoi.png)
+![](/assets/recursoin/simple-hanoi.png)
 
 We do this 4-step process for any number of disks, except that 2 is the $n$-th disk and disk $1\sim n$ is in the position of 1.
 
