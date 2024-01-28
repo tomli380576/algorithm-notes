@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759714805737">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759740464185">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759714805737" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759740464185" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759714805737" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759740464185" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -212,7 +212,7 @@
 <p><code v-pre>@Params</code> <span class="math">A:\texttt{\gray{\blue{Array}&lt;\blue{number}&gt;}}</span>, the array to sort</p>
 <p>The idea of quick sort is:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function QuickSort(A[1 … n]):
+<pre class="language-c"><code v-pre class="language-c">function QuickSort(A[1...n]):
 	pivotValue = ChoosePivot()
 
 	partitionLeft = from A select value where value &lt; pivot value
@@ -242,7 +242,7 @@
 <p>Unlike merge sort, after left &amp; right partitions are sorted, the merging step is already done.</p>
 <p>Similar to how we considered <code v-pre>merge()</code>, it’s easier to think about if we use extra space.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Partition(A[1 … n], pivotValue) -&gt; pair of Arrays:
+<pre class="language-c"><code v-pre class="language-c">function Partition(A[1...n], pivotValue) -&gt; pair of Arrays:
 	left = []
 	right = []
 
@@ -280,15 +280,15 @@
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function QuickSort(A[1 … n]) -&gt; Array:
+<pre class="language-c"><code v-pre class="language-c">function QuickSort(A[1...n]) -&gt; Array:
 	if n &gt; 1: 
 		pivot_value = ChoosePivot()
-		left, right = Partition(A[1 … n], pivot_value)
+		left, right = Partition(A[1...n], pivot_value)
 		return flatten([QuickSort(left), [pivot_value], QuickSort(right)])
 	else:
 		return A
 
-function Partition(A[1 … n], pivot_value) -&gt; pair of Arrays:
+function Partition(A[1...n], pivot_value) -&gt; pair of Arrays:
 	left = []
 	right = []
 

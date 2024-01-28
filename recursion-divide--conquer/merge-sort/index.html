@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759714805737">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759740464185">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Merge Sort (122A)</title>
     <meta name="title" content="Merge Sort (122A)">
-    <meta name="description" content="Given A: Arrayint, the idea of merge sort is:">
+    <meta name="description" content="Given A[1...n]: Listint, the idea of merge sort is:">
 
     <!-- Canonical -->
     <link rel="canonical" href="/recursion-divide--conquer/merge-sort/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/recursion-divide--conquer/merge-sort/">
     <meta property="og:title" content="Merge Sort (122A)">
-    <meta property="og:description" content="Given A: Arrayint, the idea of merge sort is:">
+    <meta property="og:description" content="Given A[1...n]: Listint, the idea of merge sort is:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/recursion-divide--conquer/merge-sort/">
     <meta property="twitter:title" content="Merge Sort (122A)">
-    <meta property="twitter:description" content="Given A: Arrayint, the idea of merge sort is:">
+    <meta property="twitter:description" content="Given A[1...n]: Listint, the idea of merge sort is:">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759714805737" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759740464185" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759714805737" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759740464185" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -203,9 +203,9 @@
         <span>Merge Sort (122A)</span>
     </h1>
 </doc-anchor-target>
-<p>Given <code v-pre>A: Array&lt;int&gt;</code>, the idea of merge sort is:</p>
+<p>Given <code v-pre>A[1...n]: List&lt;int&gt;</code>, the idea of merge sort is:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function MergeSort(A[1 … n]):
+<pre class="language-c"><code v-pre class="language-c">function MergeSort(A[1...n]):
 	sorted_left = sort left half      // Recursion Magic
 	sorted_right = sort right half    // Recursion Magic
 	merge(sorted_left, sorted_right)</code></pre>
@@ -259,7 +259,7 @@ MergeSort(A[mid + 1 ... high])</code></pre>
 <p>Let <code v-pre>ptr_l</code> and <code v-pre>ptr_r</code> be the traversing pointers in the left &amp; right sorted arrays respectively.</p>
 <p>It’s probably easier to consider merging with 2 separate arrays first.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1 … n], R[1 … m]) -&gt; Array&lt;int&gt;:
+<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1...n], R[1...m]) -&gt; List&lt;int&gt;:
 	ptr_l = 0  // traverses L array
 	ptr_r = 0  // traverses R array
 	output = []
@@ -279,7 +279,7 @@ MergeSort(A[mid + 1 ... high])</code></pre>
 </doc-codeblock></div>
 <p>Translate into expressions: (Assuming we are sorting in ascending order. Flip &lt; to &gt; if reversed.)</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1 … n], R[1 … m]) -&gt; Array&lt;int&gt;:
+<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1...n], R[1...m]) -&gt; List&lt;int&gt;:
 	ptr_l = 0
 	ptr_r = 0
 	output = []
@@ -323,11 +323,11 @@ MergeSort(A[mid + 1 ... high])</code></pre>
 <template #title>Pseudocode</template>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-c"><code v-pre class="language-c">//pseudocode
-function MergeSort(A[1 … n]):
+function MergeSort(A[1...n]):
 	if n &gt; 1:
 		mid = floor(n / 2)
-		MergeSort(A[1 … mid])
-		MergeSort(A[mid + 1 … n])
+		MergeSort(A[1...mid])
+		MergeSort(A[mid + 1...n])
 		Merge(A, mid)</code></pre>
 </doc-codeblock></div>
 </doc-tab>
@@ -352,7 +352,7 @@ function MergeSort(A[1 … n]):
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Max Subarray (122​A)</span>
+                                                <span class="block mt-1">Max Sub-​array (122​A)</span>
                                             </span>
                                         </a>
                                     </div>

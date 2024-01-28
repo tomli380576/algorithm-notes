@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759714805737">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759740464185">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>Max Subarray (122A)</title>
-    <meta name="title" content="Max Subarray (122A)">
+    <title>Max Sub-array (122A)</title>
+    <meta name="title" content="Max Sub-array (122A)">
     <meta name="description" content="Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum">
 
     <!-- Canonical -->
@@ -19,24 +19,26 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="/recursion-divide--conquer/max-sub-array/">
-    <meta property="og:title" content="Max Subarray (122A)">
+    <meta property="og:title" content="Max Sub-array (122A)">
     <meta property="og:description" content="Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum">
+    <meta property="og:image" content="/assets/recursoin/subarr-1.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/recursion-divide--conquer/max-sub-array/">
-    <meta property="twitter:title" content="Max Subarray (122A)">
+    <meta property="twitter:title" content="Max Sub-array (122A)">
     <meta property="twitter:description" content="Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum">
+    <meta property="twitter:image" content="/assets/recursoin/subarr-1.png">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759714805737" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759740464185" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759714805737" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759740464185" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -197,10 +199,10 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="max-subarray-122a" class="break-words">
+<doc-anchor-target id="max-sub-array-122a" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#max-subarray-122a">#</doc-anchor-trigger>
-        <span>Max Subarray (122A)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#max-sub-array-122a">#</doc-anchor-trigger>
+        <span>Max Sub-array (122A)</span>
     </h1>
 </doc-anchor-target>
 <doc-anchor-target id="problem-statement">
@@ -213,7 +215,7 @@
 <p><strong>Question.</strong> Given a 1-dimensional array, find a <strong>contiguous</strong> sub-array with the largest sum</p>
 </blockquote>
 <dl>
-<dt><span class="math">A[1\dots n]:   \texttt{\gray{\blue{Array}&lt;\blue{number}&gt;}}</span></dt>
+<dt><code v-pre>A[1...N]: List&lt;number&gt;</code></dt>
 <dd>the array we select from</dd>
 </dl>
 <doc-anchor-target id="dividing-the-problem">
@@ -222,7 +224,7 @@
         <span>Dividing the problem</span>
     </h2>
 </doc-anchor-target>
-<p>The maximum subarray can show up in 3 places:</p>
+<p>The maximum sub-array can show up in 3 places:</p>
 <ol>
 <li>The left half of <span class="math">A</span></li>
 <li>The right half of <span class="math">A</span></li>
@@ -283,8 +285,7 @@ for i = mid - 1 to low:
 	if currLeftSum &gt; bestLeftSum:
 		bestLeftSum = currLeftSum</code></pre>
 </doc-codeblock></div>
-<doc-panel id="ex-left-half">
-    <template #title><strong>Ex.</strong> Left Half</template>
+<p><strong>Example.</strong> Left Half</p>
 <div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
     <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white border-r">
         <span>Selecting...</span>
@@ -293,13 +294,12 @@ for i = mid - 1 to low:
         <span>Done selecting, <code v-pre>sum = 4</code></span>
     </div>
     <div class="px-5 py-3 docs-columns-content border-r border-gray-200 dark:border-dark-650">
-<p><img src="../assets/screen_shot_2022-07-16_at_6.06.16_pm.png" alt="" /></p>
+<p><img src="../../assets/recursoin/subarr-1.png" alt="" /></p>
     </div>
     <div class="px-5 py-3 docs-columns-content">
-<p><img src="../assets/screen_shot_2022-07-16_at_6.06.53_pm.png" alt="" /></p>
+<p><img src="../../assets/recursoin/subarr-2.png" alt="" /></p>
     </div>
 </div>
-</doc-panel>
 </li>
 <li><p>Then check from <code v-pre>mid</code> to <code v-pre>high</code></p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -312,8 +312,7 @@ for i = mid to high:
 	if currRightSum &gt; bestRightSum:
 		bestRightSum = currRightSum</code></pre>
 </doc-codeblock></div>
-<doc-panel id="ex-right-half">
-    <template #title><strong>Ex.</strong> Right Half</template>
+<p><strong>Example.</strong> Right Half</p>
 <div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
     <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white border-r">
         <span>Selecting...</span>
@@ -322,13 +321,12 @@ for i = mid to high:
         <span>Done selecting, <code v-pre>sum = 3</code></span>
     </div>
     <div class="px-5 py-3 docs-columns-content border-r border-gray-200 dark:border-dark-650">
-<p><img src="../assets/screen_shot_2022-07-16_at_6.07.45_pm.png" alt="" /></p>
+<p><img src="../../assets/recursoin/subarr-r-1.png" alt="" /></p>
     </div>
     <div class="px-5 py-3 docs-columns-content">
-<p><img src="../assets/screen_shot_2022-07-16_at_6.08.19_pm.png" alt="" /></p>
+<p><img src="../../assets/recursoin/subarr-r-2.png" alt="" /></p>
     </div>
 </div>
-</doc-panel>
 </li>
 <li><p>The best middle sum could also involve both the left and right half, for example if all elements are positive.</p>
 <p>So we take the <code v-pre>max(...)</code> of all:</p>
@@ -359,7 +357,7 @@ return max(leftSum, rightRum, middleSum)</code></pre>
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function MaxSubarray(A[low … high]) -&gt; number:
+<pre class="language-c"><code v-pre class="language-c">function MaxSubarray(A[low...high]) -&gt; number:
 	if A is empty:
 		return 0 
 
@@ -367,14 +365,14 @@ return max(leftSum, rightRum, middleSum)</code></pre>
 		return A[1]
 
 	mid = floor((low + high) / 2)
-	leftSum = MaxSubarray(A[low … mid])
-	rightSum = MaxSubarray(A[mid + 1 … high])
-	middleSum = MaxMiddleSum(A[low … high], mid)
+	leftSum = MaxSubarray(A[low...mid])
+	rightSum = MaxSubarray(A[mid + 1...high])
+	middleSum = MaxMiddleSum(A[low...high], mid)
 
 	return max(leftSum, rightSum, middleSum)</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function MaxMiddleSum(A[low … high], mid) -&gt; number:
+<pre class="language-c"><code v-pre class="language-c">function MaxMiddleSum(A[low...high], mid) -&gt; number:
 	bestLeftSum = -Infinity
 	currLeftSum = 0
 	
@@ -407,7 +405,7 @@ return max(leftSum, rightRum, middleSum)</code></pre>
     <span>Github</span>
 </a></p>
 <hr>
-<p>Go faster: <a href="../../greedy20algorithms20c2bfc59e13f64ad7ab28774c4f85f3e1/greedy20c7450611247145229db85b2778825c94/e29d9620max20subarray20kadanee28099s20algorithm20(wip)20a2ef88ef947940deaf19259a9d10e82a.md"><strong>❖</strong> Max Subarray: Kadane’s Algorithm (WIP)</a></p>
+<p>Go faster: <a href=""><strong>❖</strong> Max Subarray: Kadane’s Algorithm (WIP)</a></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -474,6 +472,6 @@ return max(leftSum, rightRum, middleSum)</code></pre>
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Max Subarray (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Max Sub-array (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>

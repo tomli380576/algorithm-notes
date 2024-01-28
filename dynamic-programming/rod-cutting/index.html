@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759714805737">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759740464185">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759714805737" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759740464185" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759714805737" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759740464185" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -209,7 +209,7 @@
 <p>We are given the following:</p>
 <ul>
 <li><code v-pre>n: int</code>, length of the rod</li>
-<li><code v-pre>p: Array&lt;int&gt;</code>, array of prices for rod length from <code v-pre>i=1</code> to <code v-pre>i=n</code>
+<li><code v-pre>p: List&lt;int&gt;</code>, array of prices for rod length from <code v-pre>i=1</code> to <code v-pre>i=n</code>
 <ul>
 <li>For example: <span class="math">p_1 = 1, p_2 = 3, p_3 = 5, \dots</span></li>
 </ul>
@@ -218,7 +218,7 @@
 <p>We want to find:</p>
 <ul>
 <li><code v-pre>int</code>, the max revenue possible <span class="math">r</span> from rod of length <span class="math">n</span></li>
-<li><code v-pre>Array&lt;int&gt;</code>, cut strategy to make the max revenue. Element at index <span class="math">i</span> represents the amount to cut at step <span class="math">i</span>.</li>
+<li><code v-pre>List&lt;int&gt;</code>, cut strategy to make the max revenue. Element at index <span class="math">i</span> represents the amount to cut at step <span class="math">i</span>.</li>
 </ul>
 <p>Let&#x27;s call this function <code v-pre>CutRod(n, p)</code>. Since <code v-pre>p</code> is fixed, we will omit <code v-pre>p</code> from the call signature from now on.</p>
 <doc-anchor-target id="solve-the-backtracking-problem">
@@ -283,7 +283,7 @@ p_1 &amp; \text{if }n = 1\\
 <doc-tab v-cloak id="pseudocode">
 <template #title>Pseudocode</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">const prices = [ … ] // given, treat it as a frozen constant array
+<pre class="language-java"><code v-pre class="language-java">const prices = [...] // given, treat it as a frozen constant array
 
 function CutRod(rodLen: int) -&gt; int:
 	if rodLen == 0:
@@ -312,7 +312,7 @@ function CutRod(rodLen: int) -&gt; int:
 <doc-tab v-cloak id="no-comment-version">
 <template #title>No Comment Version</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">const prices = [ … ]
+<pre class="language-java"><code v-pre class="language-java">const prices = [...]
 
 function CutRod(rodLen: int) -&gt; int:
     if rodLen == 0:
@@ -382,7 +382,7 @@ function CutRod(rodLen: int) -&gt; int:
 </doc-anchor-target>
 <p>Observe that every call requires only 1 argument <code v-pre>rodLen</code>, so we can use an 1D array to store our results. Let’s define:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">dpTable: Array&lt;int&gt;</code></pre>
+<pre class="language-java"><code v-pre class="language-java">dpTable: List&lt;int&gt;</code></pre>
 </doc-codeblock></div>
 <p>To get the result of a previous call, we can use <code v-pre>dpTable[rodLen]</code>.</p>
 <ul>
@@ -418,7 +418,7 @@ function CutRod(rodLen):
 <doc-tab v-cloak id="pseudocode">
 <template #title>Pseudocode</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">const prices = [ … ] // given
+<pre class="language-java"><code v-pre class="language-java">const prices = [...] // given
 
 function DpCutRod(maxRodLen: int) -&gt; int:
 	dpTable = Array(shape=(maxRodLen)) // preallocate the space
@@ -444,7 +444,7 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 <doc-tab v-cloak id="no-comment-version">
 <template #title>No Comment Version</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">const prices = [ … ]
+<pre class="language-java"><code v-pre class="language-java">const prices = [...]
 
 function DpCutRod(maxRodLen: int) -&gt; int:
     dpTable = Array(shape=(maxRodLen))
@@ -471,7 +471,7 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 </doc-anchor-target>
 <p>The pseudocode above only finds the optimal profit, but it doesn&#x27;t tell us how to actually cut the rod. We can record the cut by adding the following</p>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-c" data-line="12-14,3"><code v-pre class="language-c">function DpCutRod(maxRodLen: int) -&gt; int, Array&lt;int&gt;:
+<pre class="language-c" data-line="12-14,3"><code v-pre class="language-c">function DpCutRod(maxRodLen: int) -&gt; int, List&lt;int&gt;:
     dpTable = Array(shape=(maxRodLen))
     cuts = Array(shape=(maxRodLen))
     

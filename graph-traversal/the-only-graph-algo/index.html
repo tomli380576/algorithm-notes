@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759714805737">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759740464185">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759714805737" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759740464185" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759714805737" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759714805737" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759740464185" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759740464185" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -254,7 +254,7 @@
 		if u is NEW:
 			process(u) 
 			mark u as SEEN
-			for each adjacent vertex v of u:
+			for each v adjacent to u:
 				bag.put(v)</code></pre>
 </doc-codeblock></div>
 <p>Here <code v-pre>process(u)</code> is just a blackbox subroutine. We can do anything inside <code v-pre>process(u)</code> as long as we don’t change the vertex status.</p>
@@ -304,15 +304,16 @@
         </div>
         <div class="pr-5 ml-3 w-full">
             <h5>Implementation Tip</h5>
-<p>In python, we can easily swap between DFS and BFS by using <code v-pre>collections.deque</code>.</p>
+<p>In python, we can easily swap between DFS and BFS by using <a href="https://docs.python.org/3/library/collections.html#collections.deque"><code v-pre>collections.deque</code></a>.</p>
 <ul>
 <li><code v-pre>&lt;deque&gt;.popleft()</code> gives us BFS</li>
 <li><code v-pre>&lt;deque&gt;.pop()</code> gives us DFS</li>
 </ul>
+<p>C++ also has <a href="https://cplusplus.com/reference/deque/deque/"><code v-pre>std::deque&lt;T&gt;</code></a></p>
 <hr>
-<p>For priority queue we could use <code v-pre>heapq</code> on a regular list <code v-pre>[]</code>.</p>
+<p>For priority queue we could use <a href="https://docs.python.org/3/library/heapq.html#module-heapq"><code v-pre>heapq</code></a> on a regular list <code v-pre>[]</code>.</p>
 <ul>
-<li>Use <code v-pre>heappush</code> and <code v-pre>heappop</code> to append and pop from the priority queue. See <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50">here</a>.</li>
+<li>Use <code v-pre>heappush</code> and <code v-pre>heappop</code> to append and pop from the priority queue. See its use in <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50">Dijkstra&#x27;s Algorithm</a>.</li>
 </ul>
 <hr>
 <p>We can represent <code v-pre>NEW</code> and <code v-pre>SEEN</code> with a set</p>
@@ -328,7 +329,7 @@
 		if not seen_vertices.has(u):
 			process(u) 
 			seen_vertices.add(u)
-			for each adjacent vertex v of u:
+			for each v adjacent to u:
 				bag.put(v)</code></pre>
 </doc-codeblock></div>
         </div>
@@ -389,7 +390,7 @@ function WhateverFirst_Visit(G: Graph, start: Vertex):
 		if u is not SEEN:
 			process(u)
 			mark u as SEEN
-			for each adjacent vertex v:
+			for each v adjacent to u:
 				bag.put(v)</code></pre>
 </doc-codeblock></div>
 <p>Changing the bag&#x27;s behavior on <code v-pre>popFirst()</code> will result in the same <doc-anchor-trigger to="#important-variants">variants</doc-anchor-trigger>, but now they can handle disconnected graphs.</p>
