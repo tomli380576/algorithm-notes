@@ -1,14 +1,18 @@
+---
+icon: note
+---
+
 # Pseudocode Syntax Reference
 
 ## Basics
 
-Math operators are the same as they are in formal mathematical writing.
+Math operators are used the same as they are in formal mathematical writing.
 
 `->` **indicates a return type**. Only used for function declarations.
 - If nothing is returned, this symbol is unused.
 
 Any kind of indexing, range, interval is **inclusive** unless explicitly stated.
-- Example: `A[1...N]: List<number>` means
+- Example: `A[1...N]: List<number>` means the list `A` has `N` elements and can be indexed by `1, 2, 3, ... N`.
 
 Angle brackets `<T>` indicate the use of type parameters. For example, `List<Vertex>` means elements of this list are vertices. 
 
