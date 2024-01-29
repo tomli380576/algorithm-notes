@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759741030563">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759805417216">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759741030563" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759805417216" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759741030563" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759805417216" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759741030563" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759741030563" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759805417216" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759805417216" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -206,21 +206,18 @@
 <blockquote>
 <p><strong>Question.</strong> Given a rod with length <span class="math">n</span> and an array of prices of each length <span class="math">p_i</span>, how can we cut the rod to make the most amount of money?</p>
 </blockquote>
-<p>We are given the following:</p>
-<ul>
-<li><code v-pre>n: int</code>, length of the rod</li>
-<li><code v-pre>p: List&lt;int&gt;</code>, array of prices for rod length from <code v-pre>i=1</code> to <code v-pre>i=n</code>
-<ul>
-<li>For example: <span class="math">p_1 = 1, p_2 = 3, p_3 = 5, \dots</span></li>
-</ul>
-</li>
-</ul>
+<dl>
+<dt><code v-pre>n: int</code></dt>
+<dd>Length of the rod</dd>
+<dt><code v-pre>p[1...n]: List&lt;int&gt;</code></dt>
+<dd>List of prices for rod length from <code v-pre>i=1</code> to <code v-pre>i=n</code>. For example: <span class="math">p_1 = 1, p_2 = 3, p_3 = 5, \dots</span></dd>
+</dl>
 <p>We want to find:</p>
 <ul>
-<li><code v-pre>int</code>, the max revenue possible <span class="math">r</span> from rod of length <span class="math">n</span></li>
-<li><code v-pre>List&lt;int&gt;</code>, cut strategy to make the max revenue. Element at index <span class="math">i</span> represents the amount to cut at step <span class="math">i</span>.</li>
+<li><code v-pre>revenue: int</code>, the max revenue possible from rod of length <span class="math">n</span></li>
+<li><code v-pre>cuts: List&lt;int&gt;</code>, cut strategy to make the max revenue. Element at index <span class="math">i</span> represents the length to cut at step <span class="math">i</span>.</li>
 </ul>
-<p>Let&#x27;s call this function <code v-pre>CutRod(n, p)</code>. Since <code v-pre>p</code> is fixed, we will omit <code v-pre>p</code> from the call signature from now on.</p>
+<p>Let&#x27;s call this function <code v-pre>CutRod(n)</code>. Since the price array <code v-pre>p</code> is fixed, we will omit <code v-pre>p</code> from the call signature from now on.</p>
 <doc-anchor-target id="solve-the-backtracking-problem">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#solve-the-backtracking-problem">#</doc-anchor-trigger>
@@ -236,10 +233,12 @@
 <p>Recall from basic recursion that the bases cases are the subproblems that we can immediately solve. We know how to solve:</p>
 <ol>
 <li><p><span class="math">n = 0</span>, we have no rod, so we make no money.</p>
-<div class="math"><pre> \text{CutRod}(0) = 0</pre></div>
+<div class="center"><p><code v-pre>CutRod(0) = 0</code></p>
+</div>
 </li>
-<li><p><span class="math">n = 1</span>, we have the shortest rod that we can possibly sell, so the profit is exactly <span class="math">p_1</span></p>
-<div class="math"><pre> \text{CutRod}(1) = p_1</pre></div>
+<li><p><span class="math">n = 1</span>, we have the shortest rod that we can possibly sell, so the profit is exactly <span class="math">p_1</span>.</p>
+<div class="center"><p><code v-pre>CutRod(1) = p[1]</code></p>
+</div>
 </li>
 </ol>
 <doc-anchor-target id="recursive-cases">
@@ -535,9 +534,9 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 </li>
 </ol>
 <div class="math"><pre>\begin{aligned}
-    \underbrace{{rev}(b) + p_i}_\text{revenue of entire rod} &amp;&gt; \underbrace{{rev}(a) + p_i}_\text{given assumption}
+    \underbrace{rev(b) + p_i}_\text{revenue of entire rod} &amp;&gt; \underbrace{rev(a) + p_i}_\text{given assumption}
     \\
-    {rev}(\text{strategy of length $n$}) &amp;&gt;\text{OPT}(n)
+    rev(\text{strategy of length $n$}) &amp;&gt;\text{OPT}(n)
 \end{aligned}</pre></div>
 <p>We already assumed OPT is the best solution, then a better one cannot exist.</p>
 <p>Contradiction with given. Therefore <span class="math">a</span> is optimal for <span class="math">n-i</span>.</p>

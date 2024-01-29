@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759741030563">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759805417216">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Merge Sort (122A)</title>
     <meta name="title" content="Merge Sort (122A)">
-    <meta name="description" content="Given A[1...n]: Listint, the idea of merge sort is:">
+    <meta name="description" content="Given A[1...n]: Listnumber, the idea of merge sort is:">
 
     <!-- Canonical -->
     <link rel="canonical" href="/recursion-divide--conquer/merge-sort/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/recursion-divide--conquer/merge-sort/">
     <meta property="og:title" content="Merge Sort (122A)">
-    <meta property="og:description" content="Given A[1...n]: Listint, the idea of merge sort is:">
+    <meta property="og:description" content="Given A[1...n]: Listnumber, the idea of merge sort is:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/recursion-divide--conquer/merge-sort/">
     <meta property="twitter:title" content="Merge Sort (122A)">
-    <meta property="twitter:description" content="Given A[1...n]: Listint, the idea of merge sort is:">
+    <meta property="twitter:description" content="Given A[1...n]: Listnumber, the idea of merge sort is:">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759741030563" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759805417216" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759741030563" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759805417216" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759741030563" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759741030563" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759805417216" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759805417216" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -203,7 +203,7 @@
         <span>Merge Sort (122A)</span>
     </h1>
 </doc-anchor-target>
-<p>Given <code v-pre>A[1...n]: List&lt;int&gt;</code>, the idea of merge sort is:</p>
+<p>Given <code v-pre>A[1...n]: List&lt;number&gt;</code>, the idea of merge sort is:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-c"><code v-pre class="language-c">function MergeSort(A[1...n]):
 	sorted_left = sort left half      // Recursion Magic
@@ -226,8 +226,8 @@
 </doc-codeblock></div>
 <p>And the recursive calls are:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">MergeSort(A[1 ... mid])
-MergeSort(A[mid + 1 ... high])</code></pre>
+<pre class="language-c"><code v-pre class="language-c">MergeSort(A[1...mid])
+MergeSort(A[mid + 1...high])</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="base-cases">
     <h2>
@@ -256,49 +256,49 @@ MergeSort(A[mid + 1 ... high])</code></pre>
     </h2>
 </doc-anchor-target>
 <p>Now that the recursion has sorted the left and right array for us, we need to merge them together. We can use the <strong>2 pointer</strong> approach here.</p>
-<p>Let <code v-pre>ptr_l</code> and <code v-pre>ptr_r</code> be the traversing pointers in the left &amp; right sorted arrays respectively.</p>
+<p>Let <code v-pre>l</code> and <code v-pre>r</code> be the traversing pointers in the left &amp; right sorted arrays respectively.</p>
 <p>It’s probably easier to consider merging with 2 separate arrays first.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1...n], R[1...m]) -&gt; List&lt;int&gt;:
-	ptr_l = 0  // traverses L array
-	ptr_r = 0  // traverses R array
+<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1...n], R[1...m]) -&gt; List&lt;number&gt;:
+	l = 0  // traverses L array
+	r = 0  // traverses R array
 	output = []
 
 	while neither pointer has reached the end:
-		if L[ptr_l] should come before R[ptr_r]: // call the predicate here
-			push L[ptr_l] into output
-			ptr_l ++
+		if L[l] should come before R[r]: // call the predicate here
+			push L[l] into output
+			l++
 		else:
-			push R[ptr_r] into output
-			ptr_r ++
+			push R[r] into output
+			r++
 
-	remaining_elements = L if ptr_l not at the end, R if ptr_r not at the end
+	remaining_elements = L if l not at the end, R if r not at the end
 	push all of remaining_elements into output
 
 	return output</code></pre>
 </doc-codeblock></div>
 <p>Translate into expressions: (Assuming we are sorting in ascending order. Flip &lt; to &gt; if reversed.)</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1...n], R[1...m]) -&gt; List&lt;int&gt;:
-	ptr_l = 0
-	ptr_r = 0
+<pre class="language-c"><code v-pre class="language-c">function Merge2SortedArrays(L[1...n], R[1...m]) -&gt; List&lt;number&gt;:
+	l = 0
+	r = 0
 	output = []
 
-	while ptr_l != n and ptr_r != m:
-		if L[ptr_l] &lt; R[ptr_r]:
-			push L[ptr_l] into output
-			ptr_l ++
+	while l != n and r != m:
+		if L[l] &lt; R[r]:
+			push L[l] into output
+			l++
 		else:
-			push R[ptr_r] into output
-			ptr_r ++
+			push R[r] into output
+			r++
 
-	while ptr_l != n:
-		push L[ptr_l] into output
-		ptr_l ++
+	while l != n:
+		push L[l] into output
+		l++
 
-	while ptr_r != m:
-		push R[ptr_r] into output
-		ptr_r ++
+	while r != m:
+		push R[r] into output
+		r++
 
 	return output</code></pre>
 </doc-codeblock></div>
