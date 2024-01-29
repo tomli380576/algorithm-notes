@@ -1,10 +1,5 @@
 # Quick Sort (122A)
 
-
-## Problem Statement
-
-`@Params` $A:\texttt{\gray{\blue{Array}<\blue{number}>}}$, the array to sort
-
 The idea of quick sort is:
 
 ```c
@@ -36,7 +31,7 @@ Unlike merge sort, after left & right partitions are sorted, the merging step is
 Similar to how we considered `merge()`, it’s easier to think about if we use extra space.
 
 ```c
-function Partition(A[1...n], pivotValue) -> pair of Arrays:
+function Partition(A[1...n], pivotValue) -> (List, List):
 	left = []
 	right = []
 
@@ -99,6 +94,6 @@ function ChoosePivot() -> int:
 	return pivot
 ```
 
-## Python: Quick Sort
+##  :icon-code: Python
 
-[!badge variant="dark" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/quick-sort.py)
+[!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/quick-sort.py)

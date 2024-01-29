@@ -2,18 +2,19 @@
 
 > **Question.** Given a rod with length $n$ and an array of prices of each length $p_i$, how can we cut the rod to make the most amount of money?
 
-We are given the following:
+`n: int`
+:   Length of the rod
 
-- `n: int`, length of the rod
-- `p: List<int>`, array of prices for rod length from `i=1` to `i=n`
-  - For example: $p_1 = 1, p_2 = 3, p_3 = 5, \dots$
+`p[1...n]: List<int>`
+:   List of prices for rod length from `i=1` to `i=n`. For example: $p_1 = 1, p_2 = 3, p_3 = 5, \dots$
     
+
 We want to find:
 
-- `int`, the max revenue possible $r$ from rod of length $n$
-- `List<int>`, cut strategy to make the max revenue. Element at index $i$ represents the amount to cut at step $i$.
+- `revenue: int`, the max revenue possible from rod of length $n$
+- `cuts: List<int>`, cut strategy to make the max revenue. Element at index $i$ represents the length to cut at step $i$.
 
-Let's call this function `CutRod(n, p)`. Since `p` is fixed, we will omit `p` from the call signature from now on. 
+Let's call this function `CutRod(n)`. Since the price array `p` is fixed, we will omit `p` from the call signature from now on. 
 
 
 ## Solve the Backtracking Problem
@@ -22,17 +23,15 @@ Let's call this function `CutRod(n, p)`. Since `p` is fixed, we will omit `p` fr
 
 Recall from basic recursion that the bases cases are the subproblems that we can immediately solve. We know how to solve:
 
-1. $n = 0$, we have no rod, so we make no money.
+1. $n = 0$, we have no rod, so we make no money. 
+   :::center
+    `CutRod(0) = 0`
+   :::
     
-    $$
-    \text{CutRod}(0) = 0
-    $$
-    
-2. $n = 1$, we have the shortest rod that we can possibly sell, so the profit is exactly $p_1$
-    
-    $$
-    \text{CutRod}(1) = p_1
-    $$
+2. $n = 1$, we have the shortest rod that we can possibly sell, so the profit is exactly $p_1$. 
+   :::center
+    `CutRod(1) = p[1]`
+   :::
     
 
 ### Recursive Cases
@@ -285,9 +284,9 @@ So the runtime is $O(n^2)$ and memory is $O(n)$ from 1D Array.
 
 $$
 \begin{aligned}
-    \underbrace{{rev}(b) + p_i}_\text{revenue of entire rod} &> \underbrace{{rev}(a) + p_i}_\text{given assumption}
+    \underbrace{rev(b) + p_i}_\text{revenue of entire rod} &> \underbrace{rev(a) + p_i}_\text{given assumption}
     \\
-    {rev}(\text{strategy of length $n$}) &>\text{OPT}(n)
+    rev(\text{strategy of length $n$}) &>\text{OPT}(n)
 \end{aligned}
 $$
 

@@ -1,6 +1,6 @@
 # Merge Sort (122A)
 
-Given `A[1...n]: List<int>`, the idea of merge sort is:
+Given `A[1...n]: List<number>`, the idea of merge sort is:
 
 ```c
 function MergeSort(A[1...n]):
@@ -26,8 +26,8 @@ mid = floor(low + ((high - low) / 2))
 And the recursive calls are:
 
 ```c
-MergeSort(A[1 ... mid])
-MergeSort(A[mid + 1 ... high])
+MergeSort(A[1...mid])
+MergeSort(A[mid + 1...high])
 ```
 
 ## Base Cases
@@ -46,25 +46,25 @@ This is where we actually do the comparison. We have 2 base cases:
 
 Now that the recursion has sorted the left and right array for us, we need to merge them together. We can use the **2 pointer** approach here.
 
-Let `ptr_l` and `ptr_r` be the traversing pointers in the left & right sorted arrays respectively.
+Let `l` and `r` be the traversing pointers in the left & right sorted arrays respectively.
 
 It’s probably easier to consider merging with 2 separate arrays first.
 
 ```c
-function Merge2SortedArrays(L[1...n], R[1...m]) -> List<int>:
-	ptr_l = 0  // traverses L array
-	ptr_r = 0  // traverses R array
+function Merge2SortedArrays(L[1...n], R[1...m]) -> List<number>:
+	l = 0  // traverses L array
+	r = 0  // traverses R array
 	output = []
 
 	while neither pointer has reached the end:
-		if L[ptr_l] should come before R[ptr_r]: // call the predicate here
-			push L[ptr_l] into output
-			ptr_l ++
+		if L[l] should come before R[r]: // call the predicate here
+			push L[l] into output
+			l++
 		else:
-			push R[ptr_r] into output
-			ptr_r ++
+			push R[r] into output
+			r++
 
-	remaining_elements = L if ptr_l not at the end, R if ptr_r not at the end
+	remaining_elements = L if l not at the end, R if r not at the end
 	push all of remaining_elements into output
 
 	return output
@@ -73,26 +73,26 @@ function Merge2SortedArrays(L[1...n], R[1...m]) -> List<int>:
 Translate into expressions: (Assuming we are sorting in ascending order. Flip < to > if reversed.)
 
 ```c
-function Merge2SortedArrays(L[1...n], R[1...m]) -> List<int>:
-	ptr_l = 0
-	ptr_r = 0
+function Merge2SortedArrays(L[1...n], R[1...m]) -> List<number>:
+	l = 0
+	r = 0
 	output = []
 
-	while ptr_l != n and ptr_r != m:
-		if L[ptr_l] < R[ptr_r]:
-			push L[ptr_l] into output
-			ptr_l ++
+	while l != n and r != m:
+		if L[l] < R[r]:
+			push L[l] into output
+			l++
 		else:
-			push R[ptr_r] into output
-			ptr_r ++
+			push R[r] into output
+			r++
 
-	while ptr_l != n:
-		push L[ptr_l] into output
-		ptr_l ++
+	while l != n:
+		push L[l] into output
+		l++
 
-	while ptr_r != m:
-		push R[ptr_r] into output
-		ptr_r ++
+	while r != m:
+		push R[r] into output
+		r++
 
 	return output
 ```

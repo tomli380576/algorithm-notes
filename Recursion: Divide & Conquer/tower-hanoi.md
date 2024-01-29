@@ -1,7 +1,5 @@
 # Tower of Hanoi (36B)
 
-## Problem Statement
-
 > **Question.** Given 3 pegs and $n$ disks, how can we move all the disks from `src` to `dest` such that larger disks cannot stack on top of smaller disks?
 
 `n: int`
