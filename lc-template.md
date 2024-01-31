@@ -5,6 +5,18 @@ icon: project-template
 
 # Ready-to-go leetCode templates
 
+## Basic Utilities
+
+### Count character frequency
+
+```py
+def countFreq(s: str) -> dict[str, int]:
+    frequency = {} # key is character, value is frequency count
+    for char in s:
+        frequency[char] = frequency.get(char, 0) + 1
+    return frequency
+```
+
 ## Whatever first search
 
 ### Adjacency List
