@@ -13,3 +13,5 @@ footer:
 exclude:
   - "README.md"
 favicon: assets/cat.svg
+include:
+  - "**/assets/**"
