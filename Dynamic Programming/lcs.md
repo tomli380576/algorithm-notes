@@ -9,9 +9,6 @@ A common sequence satisfies the following:
 
 Example: `X = "DCUT", Y = "DUTC"`, then `LCS(X, Y) = "DUT"`
 
-<!-- `@EX` $X={\tt{DCUT}}, Y= {\tt{DUTC}}\implies {\text{LCS}}(X, Y) = \texttt{DUT}$ -->
-
-
 ## 1. Solve the Backtracking Problem First
 
 ### 1.1 Function signature
@@ -149,76 +146,10 @@ $$
 \right.
 $$
 
-<p></p>
-
-==- If we chose to skip $j$: (some of the branches, otherwise it gets really big)
-$$
-\small{
-\begin{array}{
-}\\
-&&&  \overset{\text{skip }i}{\nearrow}&\underbrace{\begin{matrix}
-&&&&\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&\tt{D}&\tt{C} & \tt{U}& \tt{\green T} &\\
-
-&\mid & &\mid & \mid&\\
-
-Y:&\tt{D}&&\tt{U} & \tt{\green T}& \tt{C}\\
-&&&&\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}_{i\text{  reached the end, LCS len=2}}\\
-&  \overset{\text{skip }i}{\nearrow}&{\begin{matrix}
-&&&\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&\tt{D}&\tt{C} & \tt{\red U}& \tt{T} &\\
-
-&\mid & &\mid & \mid&\\
-
-Y:&\tt{D}&&\tt{U} & \tt{\red T}& \tt{C}\\
-&&&&\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}&&&\\
-{\begin{matrix}
-&&\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&\tt{D}&\tt{\red C} & \tt{U}& \tt{T} &\\
-
-&\mid & &\mid & \mid&\\
-
-Y:&\tt{D}&&\tt{U} & \tt{\red T}& \tt{C}\\
-&&&&\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}&&&\overset{\text{skip }j}{\searrow} &
-
-\underbrace{\begin{matrix}
-&&&\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&\tt{D}&\tt{ C} & \tt{\red U}& \tt{T} &\\
-
-&\mid & &\mid & \mid&\\
-
-Y:&\tt{D}&&\tt{U} & \tt{T}& \tt{\red C}\\
-&&&&&\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}_{j\text{ reached the end, LCS len=0}}
-\\
-
-&  \overset{\text{skip }j}{\searrow} & \underbrace{{\begin{matrix}
-&&\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&\tt{D}&\tt{\green C} & \tt{U}& \tt{T} &\\
-
-&\mid & &\mid & \mid&\\
-
-Y:&\tt{D}&&\tt{U} & \tt{ T}& \tt{\green C}\\
-&&&&&\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}}_{j\text{ reached the end, LCS len=2}}&&&
-\\
-\end{array}
-}
-$$
-===
-
 Now we know what the function should look like:
 
 :::center
-`function LCS(i: int, j:int) -> int`
+`function LCS(i: int, j: int) -> int`
 :::
 
 The return value is the length of the longest common subsequence.
@@ -226,13 +157,12 @@ The return value is the length of the longest common subsequence.
 ### 1.2 Base cases
 
 1. If either string is empty, then their common subsequence is the empty string with 0 length.
-2. If we use the scanning direction from above, $n + 1$ is when $j$ goes out of bounds. Similar for $i$.
+2. If either `i` or `j` goes out of bounds, common subsequence is nothing $\implies$ length is also 0.
 
 Therefore: 
 $$
 \begin{aligned}\text{LCS}&(i, \red {n + 1}) &= 0\\
 \text{LCS}&(\red {m + 1}, j) &= 0
-
 \end{aligned}
 $$
 
@@ -242,8 +172,8 @@ Let’s first consider what a choice is. **A choice is whether to take or skip a
 
 There are only 2 valid choices at a time:
 
-1. If the current character matches, then we definitely `take` from both
-2. If the current character doesn’t match, then we must `skip` either $i$ or $j$.
+1. If the current character matches, then we definitely *take* from both
+2. If the current character doesn’t match, then we must *skip* either $i$ or $j$.
 
 Now we consider how to **make a choice**. From 1.1 we observed that:
 
@@ -300,7 +230,7 @@ function LCS_length(i: int, j: int) -> int:
 
 ### 1.5 Python: Backtracking LCS
 
-[ECS122A-Algorithms-python-implementation/backtracking-LCS.py at main · tomli380576/ECS122A-Algorithms-python-implementation](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-LCS.py)
+[!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-LCS.py)
 
 !!! Sanity Check
 
@@ -310,6 +240,8 @@ function LCS_length(i: int, j: int) -> int:
 2. Take is the only valid choice when `X[i] == Y[j]`.
 
 !!!
+
+---
 
 ## 2. Convert to Dynamic Programming
 
