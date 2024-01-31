@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759805417216">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759997004277">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,17 +31,29 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759805417216" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759997004277" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759805417216" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759997004277" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759805417216" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759805417216" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759997004277" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759997004277" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+      /* @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"); */
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+      :root {
+        --purple: #dddaec;
+        --red: #ff5188;
+        --cyan: #78dce8;
+        --orange: #fc7f40;
+        --lightgray: #edeff4;
+      }
+
+      
+      /* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap'); */
+
       img {
         max-width: min(500px, 100%) !important;
       }
@@ -60,8 +72,17 @@
       .with-shadow {
         box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.2);
       }
+      .purple {
+        color: var(--purple);
+      }
+      .red {
+        color: var(--red) !important;
+      }
+      .orange {
+        color: var(--orange);
+      }
       code {
-        font-family: "JetBrains Mono", monospace !important;
+        font-family: "JetBrains Mono", serif !important;
       }
     </style>
 
@@ -212,7 +233,6 @@
 <li>Doesn&#x27;t need to be contiguous</li>
 </ul>
 <p>Example: <code v-pre>X = &quot;DCUT&quot;, Y = &quot;DUTC&quot;</code>, then <code v-pre>LCS(X, Y) = &quot;DUT&quot;</code></p>
-<!-- `@EX` $X={\tt{DCUT}}, Y= {\tt{DUTC}}\implies {\text{LCS}}(X, Y) = \texttt{DUT}$ -->
 <doc-anchor-target id="1-solve-the-backtracking-problem-first">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#1-solve-the-backtracking-problem-first">#</doc-anchor-trigger>
@@ -248,58 +268,58 @@ Y:&amp;\tt{\green D}&amp;&amp;\tt{U} &amp; \tt{T}&amp; \tt{C}\\
 \texttt{i += 1, j += 1}}</pre></div>
 <p>To “take” a pair, we advance the indices for both strings. So <span class="math">j</span> is pointing at <code v-pre>U</code> right now:</p>
 <div class="math"><pre>\begin{matrix}
-&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
+&amp;&amp;\overset{\small}{\small \Downarrow}\\
 
 X:&amp;\tt{D}&amp;\tt{\red C} &amp; \tt{U}&amp; \tt{T} &amp;\\
 
 &amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
 
 Y:&amp;\tt{D}&amp;&amp;\tt{\red U} &amp; \tt{T}&amp; \tt{C}\\
-&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
+&amp;&amp;&amp;\underset{\small}{\small\Uparrow}
 \end{matrix}</pre></div>
 <p>That’s a mismatch, we need to skip. To &quot;skip&quot; a pair, we advance only 1 index, either <span class="math">i</span> or <span class="math">j</span>. Here the correct choice is <span class="math">i</span>.</p>
 <div class="math"><pre>\underbrace{\begin{matrix}
-&amp;&amp;\to&amp;\overset{\small{{i}}}{\small \Downarrow}\\
+&amp;&amp;\to&amp;\overset{\small}{\small \Downarrow}\\
 
 X:&amp;\tt{D}&amp;\tt{C} &amp; \tt{\green U}&amp; \tt{T} &amp;\\
 
 &amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
 
 Y:&amp;\tt{D}&amp;&amp;\tt{\green U} &amp; \tt{T}&amp; \tt{C}\\
-&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
+&amp;&amp;&amp;\underset{\small}{\small\Uparrow}
 \end{matrix}}_{\text{skip }i}
 \hspace {2cm}
 \underbrace{\begin{matrix}
-&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
+&amp;&amp;\overset{\small}{\small \Downarrow}\\
 
 X:&amp;\tt{D}&amp;\tt{\red C} &amp; \tt{U}&amp; \tt{T} &amp;\\
 
 &amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
 
 Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{\red T}&amp; \tt{C}\\
-&amp;&amp;&amp;\to&amp;\underset{\small{{j}}}{\small\Uparrow}
+&amp;&amp;&amp;\to&amp;\underset{\small}{\small\Uparrow}
 \end{matrix}}_{\text{skip } j}</pre></div>
 <p>On the graph it might look obvious, but we won’t know that <span class="math">i</span> is correct until the recursion result comes back. So from the algorithm&#x27;s point of view it probably looks like this at current recursion level:</p>
 <div class="math"><pre>\underbrace{\begin{matrix}
-&amp;&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
+&amp;&amp;&amp;\overset{\small}{\small \Downarrow}\\
 
 X:&amp;\tt{D}&amp;\tt{C} &amp; \tt{\green U}&amp; \blacksquare &amp;\blacksquare\\
 
 &amp;\mid &amp; &amp;&amp; &amp;\\
 
 Y:&amp;\tt{D}&amp;&amp;\tt{\green U} &amp; \blacksquare&amp; \blacksquare\\
-&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
+&amp;&amp;&amp;\underset{\small}{\small\Uparrow}
 \end{matrix}}_{\text{skip }i}
 \hspace {2cm}
 \underbrace{\begin{matrix}
-&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
+&amp;&amp;\overset{\small}{\small \Downarrow}\\
 
 X:&amp;\tt{D}&amp;\tt{\red C} &amp; \blacksquare&amp; \blacksquare &amp;\blacksquare\\
 
 &amp;\mid &amp; &amp;&amp; \mid&amp;\\
 
 Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{\red T}&amp; \blacksquare\\
-&amp;&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
+&amp;&amp;&amp;&amp;\underset{\small}{\small\Uparrow}
 \end{matrix}}_{\text{skip } j}</pre></div>
 <p>We don’t know what’s the length of LCS in the blacked out areas, so we continue until one of the strings becomes empty. Suppose we chose to skip <span class="math">i</span>:</p>
 <div class="math"><pre>\left.\underbrace{\begin{matrix}
@@ -334,71 +354,8 @@ Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{\red T}&amp; \blacksquare\\
 \tt{D}&amp;&amp;\tt{U} &amp; \tt{T}&amp; \tt{C}\\
 \end{matrix}}_\texttt{base case}
 \right.</pre></div>
-<p></p>
-<doc-panel id="if-we-chose-to-skip-j-some-of-the-branches-otherwise-it-gets-really-big" collapsed>
-    <template #title>If we chose to skip <span class="math">j</span>: (some of the branches, otherwise it gets really big)</template>
-<div class="math"><pre>\small{
-\begin{array}{
-}\\
-&amp;&amp;&amp;  \overset{\text{skip }i}{\nearrow}&amp;\underbrace{\begin{matrix}
-&amp;&amp;&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&amp;\tt{D}&amp;\tt{C} &amp; \tt{U}&amp; \tt{\green T} &amp;\\
-
-&amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
-
-Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{\green T}&amp; \tt{C}\\
-&amp;&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}_{i\text{  reached the end, LCS len=2}}\\
-&amp;  \overset{\text{skip }i}{\nearrow}&amp;{\begin{matrix}
-&amp;&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&amp;\tt{D}&amp;\tt{C} &amp; \tt{\red U}&amp; \tt{T} &amp;\\
-
-&amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
-
-Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{\red T}&amp; \tt{C}\\
-&amp;&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}&amp;&amp;&amp;\\
-{\begin{matrix}
-&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&amp;\tt{D}&amp;\tt{\red C} &amp; \tt{U}&amp; \tt{T} &amp;\\
-
-&amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
-
-Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{\red T}&amp; \tt{C}\\
-&amp;&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}&amp;&amp;&amp;\overset{\text{skip }j}{\searrow} &amp;
-
-\underbrace{\begin{matrix}
-&amp;&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&amp;\tt{D}&amp;\tt{ C} &amp; \tt{\red U}&amp; \tt{T} &amp;\\
-
-&amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
-
-Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{T}&amp; \tt{\red C}\\
-&amp;&amp;&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}_{j\text{ reached the end, LCS len=0}}
-\\
-
-&amp;  \overset{\text{skip }j}{\searrow} &amp; \underbrace{{\begin{matrix}
-&amp;&amp;\overset{\small{{i}}}{\small \Downarrow}\\
-
-X:&amp;\tt{D}&amp;\tt{\green C} &amp; \tt{U}&amp; \tt{T} &amp;\\
-
-&amp;\mid &amp; &amp;\mid &amp; \mid&amp;\\
-
-Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{ T}&amp; \tt{\green C}\\
-&amp;&amp;&amp;&amp;&amp;\underset{\small{{j}}}{\small\Uparrow}
-\end{matrix}}}_{j\text{ reached the end, LCS len=2}}&amp;&amp;&amp;
-\\
-\end{array}
-}</pre></div>
-</doc-panel>
 <p>Now we know what the function should look like:</p>
-<div class="center"><p><code v-pre>function LCS(i: int, j:int) -&gt; int</code></p>
+<div class="center"><p><code v-pre>function LCS(i: int, j: int) -&gt; int</code></p>
 </div>
 <p>The return value is the length of the longest common subsequence.</p>
 <doc-anchor-target id="12-base-cases">
@@ -409,12 +366,11 @@ Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{ T}&amp; \tt{\green C}\\
 </doc-anchor-target>
 <ol>
 <li>If either string is empty, then their common subsequence is the empty string with 0 length.</li>
-<li>If we use the scanning direction from above, <span class="math">n + 1</span> is when <span class="math">j</span> goes out of bounds. Similar for <span class="math">i</span>.</li>
+<li>If either <code v-pre>i</code> or <code v-pre>j</code> goes out of bounds, common subsequence is nothing <span class="math">\implies</span> length is also 0.</li>
 </ol>
 <p>Therefore:</p>
 <div class="math"><pre>\begin{aligned}\text{LCS}&amp;(i, \red {n + 1}) &amp;= 0\\
 \text{LCS}&amp;(\red {m + 1}, j) &amp;= 0
-
 \end{aligned}</pre></div>
 <doc-anchor-target id="13-recursive-cases">
     <h3>
@@ -425,8 +381,8 @@ Y:&amp;\tt{D}&amp;&amp;\tt{U} &amp; \tt{ T}&amp; \tt{\green C}\\
 <p>Let’s first consider what a choice is. <strong>A choice is whether to take or skip a character in the string.</strong></p>
 <p>There are only 2 valid choices at a time:</p>
 <ol>
-<li>If the current character matches, then we definitely <code v-pre>take</code> from both</li>
-<li>If the current character doesn’t match, then we must <code v-pre>skip</code> either <span class="math">i</span> or <span class="math">j</span>.</li>
+<li>If the current character matches, then we definitely <em>take</em> from both</li>
+<li>If the current character doesn’t match, then we must <em>skip</em> either <span class="math">i</span> or <span class="math">j</span>.</li>
 </ol>
 <p>Now we consider how to <strong>make a choice</strong>. From 1.1 we observed that:</p>
 <ul>
@@ -481,7 +437,10 @@ function LCS_length(i: int, j: int) -&gt; int:
         <span>1.5 Python: Backtracking LCS</span>
     </h3>
 </doc-anchor-target>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-LCS.py">ECS122A-Algorithms-python-implementation/backtracking-LCS.py at main · tomli380576/ECS122A-Algorithms-python-implementation</a></p>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-LCS.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -508,6 +467,7 @@ function LCS_length(i: int, j: int) -&gt; int:
         </div>
     </div>
 </div>
+<hr>
 <doc-anchor-target id="2-convert-to-dynamic-programming">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#2-convert-to-dynamic-programming">#</doc-anchor-trigger>

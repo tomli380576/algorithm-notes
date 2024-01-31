@@ -9,36 +9,34 @@
     <meta name="generator" content="Retype 3.5.0">
 
     <!-- Primary Meta Tags -->
-    <title>The Only Graph Traversal Algorithm</title>
-    <meta name="title" content="The Only Graph Traversal Algorithm">
-    <meta name="description" content="Question. How to visit every vertex exactly once in a graph?">
+    <title>Ready-to-go leetCode templates</title>
+    <meta name="title" content="Ready-to-go leetCode templates">
+    <meta name="description" content="Suppose the graph is stored as">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/graph-traversal/the-only-graph-algo/">
+    <link rel="canonical" href="/lc-template/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/graph-traversal/the-only-graph-algo/">
-    <meta property="og:title" content="The Only Graph Traversal Algorithm">
-    <meta property="og:description" content="Question. How to visit every vertex exactly once in a graph?">
+    <meta property="og:url" content="/lc-template/">
+    <meta property="og:title" content="Ready-to-go leetCode templates">
+    <meta property="og:description" content="Suppose the graph is stored as">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/graph-traversal/the-only-graph-algo/">
-    <meta property="twitter:title" content="The Only Graph Traversal Algorithm">
-    <meta property="twitter:description" content="Question. How to visit every vertex exactly once in a graph?">
+    <meta property="twitter:url" content="/lc-template/">
+    <meta property="twitter:title" content="Ready-to-go leetCode templates">
+    <meta property="twitter:description" content="Suppose the graph is stored as">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.759997004277" rel="stylesheet">
+    <link href="../assets/cat.svg" rel="icon">
+    <link href="../resources/css/retype.css?v=3.5.0.759997004277" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759997004277" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759997004277" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.759997004277" defer></script>
-    <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
-    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.759997004277" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.759997004277" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.759997004277" defer></script>
 
     <style>
       /* @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"); */
@@ -100,10 +98,10 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-xl">
+                        <a id="docs-site-logo" href="../" class="flex items-center leading-snug text-xl">
                             <span class="w-10 mr-2 grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../assets/cat.svg">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../assets/cat.svg">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../assets/cat.svg">
+                                <img class="max-h-10 hidden dark:inline-block" src="../assets/cat.svg">
                             </span>
                             <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Tommy&#x27;s Algorithm Notes</span>
                         </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Notes</span>
@@ -218,214 +216,195 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="the-only-graph-traversal-algorithm" class="break-words">
+<doc-anchor-target id="ready-to-go-leetcode-templates" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#the-only-graph-traversal-algorithm">#</doc-anchor-trigger>
-        <span>The Only Graph Traversal Algorithm</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ready-to-go-leetcode-templates">#</doc-anchor-trigger>
+        <span>Ready-to-go leetCode templates</span>
     </h1>
 </doc-anchor-target>
-<blockquote>
-<p><strong>Question.</strong> How to visit every vertex exactly once in a graph?</p>
-</blockquote>
 <doc-anchor-target id="whatever-first-search">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#whatever-first-search">#</doc-anchor-trigger>
-        <span>Whatever First Search</span>
+        <span>Whatever first search</span>
     </h2>
 </doc-anchor-target>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
-                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-            <h5><strong>Def.</strong> Vertex Status</h5>
-<p>To keep track of which vertices we have seen, we use 2 <code v-pre>STATUS</code> values:</p>
-<ul>
-<li><code v-pre>NEW</code>: Never seen before.</li>
-<li><code v-pre>SEEN</code>: Processed exactly once.</li>
-</ul>
-        </div>
-    </div>
-</div>
-<p>Let <code v-pre>T</code> be the generic type name. We will make up an imaginary data structure called a <code v-pre>Bag&lt;T&gt;</code>. It has 3 methods:</p>
-<ol>
-<li><code v-pre>put(element: T)</code> puts an element in the bag.</li>
-<li><code v-pre>popFirst() -&gt; T</code> returns whatever is the &quot;first&quot; thing in the bag and removes it.</li>
-<li><code v-pre>isEmpty() -&gt; bool</code> returns whether the bag is empty or not.</li>
-</ol>
-<p>Then the pseudocode for whatever first search is:</p>
+<doc-anchor-target id="adjacency-list">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adjacency-list">#</doc-anchor-trigger>
+        <span>Adjacency List</span>
+    </h3>
+</doc-anchor-target>
+<p>Suppose the graph is stored as</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function WhateverFirstSearch(G: Graph, start: Vertex):
-	for each vertex v in G:
-		mark v as NEW
-
-	bag = Bag&lt;Vertex&gt;()
-	bag.put(start)
-
-	while bag is not empty:
-		u = bag.popFirst()
-		if u is NEW:
-			process(u) 
-			mark u as SEEN
-			for each v adjacent to u:
-				bag.put(v)</code></pre>
+<pre class="language-python"><code v-pre class="language-python">type Graph = dict[str, list[str]]</code></pre>
 </doc-codeblock></div>
-<p>Here <code v-pre>process(u)</code> is just a blackbox subroutine. We can do anything inside <code v-pre>process(u)</code> as long as we don’t change the vertex status.</p>
-<doc-anchor-target id="important-variants">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#important-variants">#</doc-anchor-trigger>
-        <span>Important Variants</span>
-    </h3>
-</doc-anchor-target>
-<p>By changing the bag&#x27;s behavior of <code v-pre>popFirst()</code> and <code v-pre>put(element)</code>, we get the familiar search algorithms:</p>
-<dl>
-<dt>Stack</dt>
-<dd>
-<p><a href="../dfs/"><strong>Depth First Search</strong></a>. DFS is usually implemented with recursion allowing cycle detection.</p>
-<ul>
-<li><code v-pre>put(element)</code> appends to the end</li>
-<li><code v-pre>popFirst()</code> pops from the end</li>
-</ul>
-</dd>
-<dt>Queue</dt>
-<dd>
-<p><a href="../bfs/"><strong>Breadth First Search</strong></a></p>
-<ul>
-<li><code v-pre>put(element)</code> appends to the end</li>
-<li><code v-pre>popFirst()</code> pops from the front</li>
-</ul>
-</dd>
-<dt>Priority Queue</dt>
-<dd>
-<p><strong>Best First Search</strong></p>
-<ul>
-<li><code v-pre>put(element)</code> appends with a priority value in <span class="math">O(\log n)</span> time</li>
-<li><code v-pre>popFirst()</code> pops the element with highest priority in <span class="math">O(\log n)</span> time.</li>
-</ul>
-</dd>
-</dl>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-green-500"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-green-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M21 9.09c-.55 0-1 .45-1 1v.92c0 4.96-4.04 8.99-9 8.99-4.97 0-9-4.04-9-9s4.04-9 9-9c1.27 0 2.5.26 3.66.78.51.22 1.1 0 1.32-.51.23-.5 0-1.1-.51-1.32C14.06.32 12.56 0 11.01 0H11C4.94 0 0 4.93 0 10.99 0 17.06 4.93 22 10.99 22H11c6.06 0 11-4.93 11-10.99v-.92c0-.56-.45-1-1-1z"></path>
-                    <path d="M8.71 9.31a.996.996 0 10-1.41 1.41l3 3c.19.19.44.29.71.29.27 0 .52-.11.71-.29l10-10.01a.996.996 0 10-1.41-1.41L11 11.6 8.71 9.31z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-            <h5>Implementation Tip</h5>
-<p>In python, we can easily swap between DFS and BFS by using <a href="https://docs.python.org/3/library/collections.html#collections.deque"><code v-pre>collections.deque</code></a>.</p>
-<ul>
-<li><code v-pre>&lt;deque&gt;.popleft()</code> gives us BFS</li>
-<li><code v-pre>&lt;deque&gt;.pop()</code> gives us DFS</li>
-</ul>
-<p>C++ also has <a href="https://cplusplus.com/reference/deque/deque/"><code v-pre>std::deque&lt;T&gt;</code></a></p>
-<hr>
-<p>For priority queue we could use <a href="https://docs.python.org/3/library/heapq.html#module-heapq"><code v-pre>heapq</code></a> on a regular list <code v-pre>[]</code>.</p>
-<ul>
-<li>Use <code v-pre>heappush</code> and <code v-pre>heappop</code> to append and pop from the priority queue. See its use in <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50">Dijkstra&#x27;s Algorithm</a>.</li>
-</ul>
-<hr>
-<p>We can represent <code v-pre>NEW</code> and <code v-pre>SEEN</code> with a set</p>
-<div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-c" data-line="5"><code v-pre class="language-c">function WhateverFirstSearch(G: Graph, start: Vertex):
-	bag = Bag&lt;Vertex&gt;()
-	bag.put(start)
+<doc-tabs>
+<doc-tab v-cloak id="dfs-bfs">
+<template #title>DFS &amp; BFS</template>
+<div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+    <div class="flex items-center px-5 py-3 font-mono leading-snug text-white docs-columns-code-title border-r">
+        <span>BFS</span>
+    </div>
+    <div class="flex items-center px-5 py-3 font-mono leading-snug text-white docs-columns-code-title">
+        <span>DFS</span>
+    </div>
+    <div class="docs-columns-code docs-columns-content border-r border-gray-200 dark:border-dark-650">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python" data-line="10"><code v-pre class="language-python">from collections import deque
 
-	seen_vertices = Set&lt;Vertex&gt;()
+def bfs(G: dict[str, list[str]], start: str):
+    queue = deque()
+    seen = set()
 
-	while bag is not empty:
-		u = bag.popFirst()
-		if not seen_vertices.has(u):
-			process(u) 
-			seen_vertices.add(u)
-			for each v adjacent to u:
-				bag.put(v)</code></pre>
+    queue.append(start)
+
+    while len(queue) &gt; 0:
+        u = queue.popleft()
+        if u in seen:
+            continue
+
+        # process u here
+        seen.add(u)
+
+        for adj in G[u]:
+            queue.append(adj)</code></pre>
 </doc-codeblock></div>
-        </div>
+    </div>
+    <div class="docs-columns-code docs-columns-content">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python" data-line="10"><code v-pre class="language-python">from collections import deque
+
+def dfs(G: dict[str, list[str]], start: str):
+    stack = deque()
+    seen = set()
+
+    stack.append(start)
+
+    while len(stack) &gt; 0:
+        u = stack.pop()
+        if u in seen:
+            continue
+
+        # process u here
+        seen.add(u)
+
+        for adj in G[u]:
+            stack.append(adj)
+</code></pre>
+</doc-codeblock></div>
     </div>
 </div>
-<doc-anchor-target id="python">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#python">#</doc-anchor-trigger>
-        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> Python</span>
-    </h3>
-</doc-anchor-target>
-<p>The <code v-pre>WhateverFirstSearch_Connected</code> function implements this. <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
-    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
-    <span>Github</span>
-</a></p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-red-500"></div>
-    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-red-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M21.71 6.15L15.85.29c-.19-.18-.44-.29-.71-.29H6.86c-.27 0-.52.11-.71.29L.29 6.15c-.18.19-.29.44-.29.71v8.28c0 .27.11.52.29.71l5.86 5.86c.19.18.44.29.71.29h8.28c.27 0 .52-.11.71-.29l5.86-5.86a.99.99 0 00.29-.71V6.86c0-.27-.11-.52-.29-.71zM20 14.73L14.73 20H7.27L2 14.73V7.27L7.27 2h7.45L20 7.27v7.46z"></path>
-                    <path d="M11 12c.55 0 1-.45 1-1V7c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .55.45 1 1 1zM11.01 14c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-            <h5>Assumption</h5>
-<p>This version of Whatever First Search assumes that the <code v-pre>start</code> can actually reach every other vertex in the graph. This works if we know the graph is connected.</p>
-        </div>
-    </div>
-</div>
-<p>To handle <a href="https://mathworld.wolfram.com/DisconnectedGraph.html#:%7E:text=A%20graph%20is%20said%20to,has%20those%20nodes%20as%20endpoints.">disconnected graphs</a> we need to make the following modifications.</p>
-<doc-anchor-target id="whatever-first-searchall">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#whatever-first-searchall">#</doc-anchor-trigger>
-        <span>Whatever First Search–All</span>
-    </h2>
-</doc-anchor-target>
-<blockquote>
-<p>For each vertex in <span class="math">G</span>, if we’ve never visited this vertex before, visit everything that we can reach from this vertex.</p>
-</blockquote>
-<p>We will make a small wrapper.</p>
-<div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-c" data-line="1-6"><code v-pre class="language-c">function WhateverFirst_Wrapper(G: Graph):
-	for each vertex v in G:
-		mark v as NEW
-	for each vertex v in G:
-		if v is NEW:
-			WhateverFirst_visit(G, v)
-			
-function WhateverFirst_Visit(G: Graph, start: Vertex):
-	bag = Bag&lt;Vertex&gt;()
-	bag.put(start)
+</doc-tab>
+<doc-tab v-cloak id="best-first">
+<template #title>Best First</template>
+<p>This assumes min-heap (elements with numerically smaller priority is popped first). Negate the priority value if max-heap is needed.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python"><code v-pre class="language-python">import heapq # min heap
+from typing import Callable
 
-	while bag is not empty:
-		u = bag.popFirst()
-		if u is not SEEN:
-			process(u)
-			mark u as SEEN
-			for each v adjacent to u:
-				bag.put(v)</code></pre>
+type PriorityFn = Callable[[str, str], int | float]
+
+def bestFirst(
+    G: dict[str, list[str]], start: str, priority: PriorityFn
+):
+    queue = []
+    seen = set()
+
+    heapq.heappush(queue, (0, start))
+
+    while len(queue) &gt; 0:
+        _, u = heapq.heappop(queue)
+        if u in seen:
+            continue
+
+        print(u)
+        seen.add(u)
+
+        for adj in G[u]:
+            heapq.heappush(queue, (priority(u, adj), adj))</code></pre>
 </doc-codeblock></div>
-<p>Changing the bag&#x27;s behavior on <code v-pre>popFirst()</code> will result in the same <doc-anchor-trigger to="#important-variants">variants</doc-anchor-trigger>, but now they can handle disconnected graphs.</p>
-<doc-anchor-target id="python">
+</doc-tab>
+</doc-tabs>
+<doc-anchor-target id="grid">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#python">#</doc-anchor-trigger>
-        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> Python</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#grid">#</doc-anchor-trigger>
+        <span>Grid</span>
     </h3>
 </doc-anchor-target>
-<p>The <code v-pre>WhateverFirstSearch_All</code> function implements this.
-<a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
-    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
-    <span>Github</span>
-</a></p>
+<p>For simplicity we assume the grid is not empty and the first element is a list, i.e. an empty grid is <code v-pre>[[]]</code>. Validate the grid if necessary.</p>
+<doc-tabs>
+<doc-tab v-cloak id="bfs-dfs">
+<template #title>BFS &amp; DFS</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python"><code v-pre class="language-python">from collections import deque
+
+def bfsGrid(grid: list[list[int]], start: tuple[int, int]):
+    R = len(grid)
+    C = len(grid[0])
+
+    # add more directions here if needed
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+    seen = set()
+    queue = deque()
+
+    queue.append(start)
+
+    while len(queue) &gt; 0:
+        r, c = queue.popleft() # use .pop() for dfs
+
+        if (r, c) in seen:
+            continue
+        seen.add((r, c))
+
+        # process grid[r][c] here
+
+        for dr, dc in directions:
+            nr = r + dr # new r
+            nc = c + dc # new c
+            if nr &gt;= 0 and nr &lt; R and nc &gt;= 0 and nc &lt; C:
+                queue.append((nr, nc))
+</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="best-first">
+<template #title>Best First</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python"><code v-pre class="language-python">import heapq
+from typing import Callable
+
+def bestFirstGrid(
+    grid: list[list[int]],
+    start: tuple[int, int],
+    priority: Callable[..., int | float],
+):
+    R = len(grid)
+    C = len(grid[0])
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+    seen = set()
+    queue = []
+
+    queue.append((0, *start))
+
+    while len(queue) &gt; 0:
+        _, r, c = heapq.heappop(queue)
+
+        if (r, c) in seen:
+            continue
+        seen.add((r, c))
+
+        # process grid[r][c]
+
+        for dr, dc in directions:
+            nr = r + dr
+            nc = c + dc
+            if nr &gt;= 0 and nr &lt; R and nc &gt;= 0 and nc &lt; C:
+                # priorityFn call signature could be different
+                heapq.heappush(queue, (priority(grid, nr, nc), nr, nc))</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+</doc-tabs>
 
                                 
                                 <!-- Required only on API pages -->
@@ -435,20 +414,20 @@ function WhateverFirst_Visit(G: Graph, start: Vertex):
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/rod-cutting/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Rod Cutting (122​A)</span>
+                                                <span class="block mt-1">Algorithm Notes</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../graph-traversal/bfs/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../dynamic-programming/dp-intro/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Breadth First Search (122​A)</span>
+                                                <span class="block mt-1">Introduction</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -492,6 +471,6 @@ function WhateverFirst_Visit(G: Graph, start: Vertex):
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "The Only Graph Traversal Algorithm", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Ready-to-go leetCode templates", level: 1, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
