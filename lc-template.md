@@ -3,7 +3,7 @@ order: 100
 icon: project-template
 ---
 
-# Ready-to-go leetCode templates
+# Ready-to-go LeetCode templates
 
 ## Basic Utilities
 
