@@ -1,5 +1,6 @@
 ---
 order: 100
+icon: project-template
 ---
 
 # Ready-to-go leetCode templates
