@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760324124870">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760324688509">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.760324124870" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.760324688509" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760324124870" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760324688509" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760324124870" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.760324124870" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760324688509" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.760324688509" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -325,7 +325,7 @@
     </div>
 </div>
 <p>To compute the number of empty spaces, lets define:</p>
-<div class="math"><pre>\text{Extras}(i, j) = \texttt{pageWidth} -\underbrace{ (j-i)}_\text{space between words} - \underbrace{\sum \text{len}(\texttt{words}[i\dots j])}_\text{actual letters}</pre></div>
+<div class="math"><pre>\text{Extras}(i, j) =  \texttt{page\_width} -\underbrace{ (j-i)}_\text{space between words} - \underbrace{\sum_{k=i}^j \texttt{len(words[k])}}_\text{actual letters}</pre></div>
 <p>where <span class="math">i, j</span> are the indices of the original words array. We can see that computing <span class="math">\text{Extras}</span> will take <span class="math">O(n)</span> time where <span class="math">n</span> is the number of words.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-c"><code v-pre class="language-c">const pageWidth = ...
@@ -495,8 +495,7 @@ function PrettyPrint(j) -&gt; int:
 <li>…</li>
 <li><span class="math">\text{PrettyPrint}(j-1)</span></li>
 </ul>
-<p>We need to compute the function results of the <strong>smaller</strong> <span class="math">j</span>’s first.</p>
-<p>Therefore the order of evaluation for <span class="math">j</span> goes in <strong>ascending order</strong>.</p>
+<p>We need to compute the function results of the <strong>smaller</strong> <span class="math">j</span>’s first, thus the order of evaluation for <span class="math">j</span> goes in <strong>ascending order</strong>.</p>
 <p>The function only needs 1 parameter, so we can use a 1D array.</p>
 <doc-anchor-target id="22-pseudocode">
     <h3>
@@ -679,7 +678,7 @@ for i = 1 to N:
             breakHereCost = totalCost[i - 1] + lineCost
             best = min(breakHereCost, best) 
        
-        totalCost[j] = best
+        totalCost[j] = best 
     
     return totalCost[N]</code></pre>
 </doc-codeblock></div>
