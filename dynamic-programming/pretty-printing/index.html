@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760324124870">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.5.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Pretty printing</title>
+    <meta name="title" content="Pretty printing">
+    <meta name="description" content="Question. Given an array of N words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that...">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="/dynamic-programming/pretty-printing/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/dynamic-programming/pretty-printing/">
+    <meta property="og:title" content="Pretty printing">
+    <meta property="og:description" content="Question. Given an array of N words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that...">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="/dynamic-programming/pretty-printing/">
+    <meta property="twitter:title" content="Pretty printing">
+    <meta property="twitter:description" content="Question. Given an array of N words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that...">
+
+    <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
+
+    <link href="../../assets/cat.svg" rel="icon">
+    <link href="../../resources/css/retype.css?v=3.5.0.760324124870" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760324124870" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760324124870" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.760324124870" defer></script>
+    <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
+    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap");
+      :root {
+        --purple: #dddaec;
+        --red: #ff5188;
+        --cyan: #78dce8;
+        --orange: #fc7f40;
+        --lightgray: #edeff4;
+      }
+
+      img {
+        max-width: min(500px, 100%) !important;
+      }
+      .tab-content,
+      .doc-alert {
+        & p,
+        ol,
+        ul:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+      }
+      .with-shadow {
+        box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.2);
+      }
+      .purple {
+        color: var(--purple);
+      }
+      .red {
+        color: var(--red) !important;
+      }
+      .orange {
+        color: var(--orange);
+      }
+      code {
+        font-family: "Fira Code", monospace !important;
+      }
+    </style>
+
+</head>
+<body>
+    <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
+        <div class="absolute bottom-0 left-0 bg-gray-100 dark:bg-dark-800" style="top: 5rem; right: 50%"></div>
+    
+        <header id="docs-site-header" class="sticky top-0 z-30 flex w-full h-16 bg-white border-b border-gray-200 md:h-20 dark:bg-dark-850 dark:border-dark-650">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton docs-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="docs-sidebar-toggle"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="docs-site-logo" href="../../" class="flex items-center leading-snug text-xl">
+                            <span class="w-10 mr-2 grow-0 shrink-0 overflow-hidden">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../assets/cat.svg">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../assets/cat.svg">
+                            </span>
+                            <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">Tommy&#x27;s Algorithm Notes</span>
+                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Notes</span>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            <li class="mr-6">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://zhongning-tommy-li.notion.site/CS-Notes-Entry-Page-bb5793ada5dd44109455e9f442e28d45?pvs=4">Old notion link</a>
+                            </li>
+        
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-gray-400 transition-colors duration-200 ease-in bg-gray-200 border border-transparent rounded md:text-sm hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-dark-600 dark:border-dark-600 dark:placeholder-dark-400" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="docs-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+        <div class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-gray-100 border-gray-200 sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton dark:bg-dark-800 dark:border-dark-650">
+            
+                <!-- Render this div, if config.showSidebarFilter is `true` -->
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-white border border-gray-200 rounded shadow-none text-sm focus:outline-none focus:border-gray-600 dark:bg-dark-600 dark:border-dark-600" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-dark-650">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-dark-650">
+            
+                        <div class="py-3 px-6 md:hidden border-b dark:border-dark-650">
+                            <nav>
+                                <ul class="flex flex-wrap justify-center items-center">
+                                    <li class="mr-6">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://zhongning-tommy-li.notion.site/CS-Notes-Entry-Page-bb5793ada5dd44109455e9f442e28d45?pvs=4">Old notion link</a>
+                                    </li>
+            
+                                </ul>
+                            </nav>
+                        </div>
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 dark:bg-dark-850">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="docs-markdown" id="docs-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="docs-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="pretty-printing" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pretty-printing">#</doc-anchor-trigger>
+        <span>Pretty printing</span>
+    </h1>
+</doc-anchor-target>
+<blockquote>
+<p><strong>Question.</strong> Given an array of <code v-pre>N</code> words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that any individual word can fit on one line.</p>
+</blockquote>
+<dl>
+<dt><code v-pre>words[1...N]: List&lt;string&gt;</code></dt>
+<dd>the words we want to print neatly on a page</dd>
+<dt><code v-pre>page_width: int</code></dt>
+<dd>the maximum number of characters on a single line</dd>
+<dt><code v-pre>cost: (spaces: int) -&gt; int</code></dt>
+<dd>a function that measures how &quot;bad&quot; a line is. The more empty spaces there are, the worse a line is. Let’s use <span class="math">x^3</span> here, where <span class="math">x</span> is the number of trailing spaces.</dd>
+</dl>
+<p>We want to find:</p>
+<dl>
+<dt><code v-pre>List&lt;int&gt;</code></dt>
+<dd>a list of line break indices</dd>
+<dt><code v-pre>int</code></dt>
+<dd>the total cost after applying the line breaks</dd>
+</dl>
+<p>Depending on the variant of this question, sometimes the last line is free, which means we don’t calculate the cost of the final line.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Def. Line Break</h5>
+<p>To avoid weird indexing problems, let’s define a <strong>break</strong> at index <span class="math">i</span> to mean putting <span class="math">\tt words[i]</span> on a new line.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="1-solve-the-backtracking-problem">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-solve-the-backtracking-problem">#</doc-anchor-trigger>
+        <span>1. Solve the Backtracking Problem</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="11-function-signature--base-case">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#11-function-signature--base-case">#</doc-anchor-trigger>
+        <span>1.1 Function Signature &amp; Base Case</span>
+    </h3>
+</doc-anchor-target>
+<p>To keep track of how many words are remaining, we need an index <code v-pre>j</code> to indicate <strong>the last word</strong> that we need to place onto the paper. So the function looks like:</p>
+<div class="center"><p><code v-pre>PrettyPrint(j: int) -&gt; int</code></p>
+</div>
+<p>and the initial call will be:</p>
+<div class="center"><p><code v-pre>PrettyPrint(N)</code></p>
+</div>
+<p>There’s only 1 base case hereL: when there are no words, then there’s no cost, return 0.</p>
+<div class="center"><p><code v-pre>PrettyPrint(0) = 0</code></p>
+</div>
+<p>In this case we are scanning from the last word to the first word, but reversing the scanning order also works. Flip the base case and initial call accordingly.</p>
+<doc-anchor-target id="12-line-cost">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#12-line-cost">#</doc-anchor-trigger>
+        <span>1.2 Line Cost</span>
+    </h3>
+</doc-anchor-target>
+<p>From the problem inputs, we know that the cost of a line is given by:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function cost(spaces) {
+    return pow(spaces, 3) // raise to 3rd power
+}</code></pre>
+</doc-codeblock></div>
+<p>Then number of empty spaces is:</p>
+<div class="center"><p><code v-pre>num_empty_spaces = page_width - sentence_length</code></p>
+</div>
+<p>For the length of the sentence, we also need to count the number of spaces between the words.</p>
+<p>Let’s define a function <code v-pre>LineCost(i, j)</code>.</p>
+<ul>
+<li><span class="math">i</span> is the index of the first word on this line</li>
+<li><span class="math">j</span> is the index of the last word on this line</li>
+<li>Both <span class="math">i</span> and <span class="math">j</span> are indices for the <span class="math">\texttt{words}</span> array</li>
+</ul>
+<div class="math"><pre>\text{LineCost}(i, j) = \begin{cases}
+\infty&amp;\text{if the words doesn't fit}\\
+0 &amp;\text{if the words fit and $j$ is the last}\\
+(\text{num empty spaces})^3 &amp; \text{Otherwise}
+
+\end{cases}</pre></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-300"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-300" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>This is a bit different from the previous backtracking problems. We are incorporating the <code v-pre>find valid choices</code> step into this cost function by using <span class="math">\infty</span> as 1 of the costs.</p>
+        </div>
+    </div>
+</div>
+<p>To compute the number of empty spaces, lets define:</p>
+<div class="math"><pre>\text{Extras}(i, j) = \texttt{pageWidth} -\underbrace{ (j-i)}_\text{space between words} - \underbrace{\sum \text{len}(\texttt{words}[i\dots j])}_\text{actual letters}</pre></div>
+<p>where <span class="math">i, j</span> are the indices of the original words array. We can see that computing <span class="math">\text{Extras}</span> will take <span class="math">O(n)</span> time where <span class="math">n</span> is the number of words.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">const pageWidth = ...
+const words = [...]
+
+function Extras(i: int, j: int) -&gt; int:
+	numSpacesBetweenWords = j - i
+	numLetters = 0
+
+	for word in words:
+		numLetters += len(word)
+	
+	return pageWidth - numSpaces - numLetters</code></pre>
+</doc-codeblock></div>
+<p>Now we can translate <span class="math">\text{LineCost}</span> into expressions:</p>
+<div class="math"><pre>\text{LineCost}(i, j) = \begin{cases}
+\infty&amp;\text{if Extras}(i, j) &lt; 0\\
+0 &amp;\text{if Extras}(i, j) \ge 0\text{ and }j= n\\
+\text{Extras}(i, j)^3 &amp; \text{Otherwise}
+
+\end{cases}</pre></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function LineCost(i, j) -&gt; int:
+	extras = Extras(i, j)
+	if extras &lt; 0:
+		return Infinity
+	else if extras &gt;= 0 and j == n:
+		return 0 // last line is free
+	return pow(extras, 3)</code></pre>
+</doc-codeblock></div>
+<p>So <span class="math">\text{LineCost}</span> also runs in <span class="math">O(n)</span> time.</p>
+<doc-anchor-target id="13-recursive-cases">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#13-recursive-cases">#</doc-anchor-trigger>
+        <span>1.3 Recursive Cases</span>
+    </h3>
+</doc-anchor-target>
+<p>This falls under the <strong>Best Solution</strong> case with the <code v-pre>FindNext</code> strategy, so we need:</p>
+<ol>
+<li><p>Choices</p>
+<ul>
+<li>Every index before the current index is a choice. We can place a line break at any of them.</li>
+<li>The &quot;valid&quot; choice part is handled by the <span class="math">\text{LineCost}</span> function.</li>
+<li>If the choice is not valid, <span class="math">\text{LineCost}</span> will return <span class="math">\infty</span> and it’s definitely not going to be selected.</li>
+</ul>
+ <p></p>
+</li>
+<li><p>How to make a choice</p>
+<p>To make a choice, we go to the &quot;next&quot; word we want to place.  We can either go from the end or go from the beginning.</p>
+<ul>
+<li>If we go from the end <span class="math">j=n</span>, the next one is <span class="math">j-1</span>.</li>
+<li>If we go from the beginning <span class="math">j=1</span>, the next one is <span class="math">j+1</span>.</li>
+</ul>
+</li>
+</ol>
+<p>Since we want to minimize the total cost, we will also need a <code v-pre>min(...)</code> call</p>
+<doc-anchor-target id="14-recurrence--pseudocode">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#14-recurrence--pseudocode">#</doc-anchor-trigger>
+        <span>1.4 Recurrence &amp; Pseudocode</span>
+    </h3>
+</doc-anchor-target>
+<p>Combining 1.1 ~ 1.3, the recurrence is:</p>
+<div class="math"><pre>\text{PrettyPrint}(j)  =\begin{cases}
+0 &amp;\text{if }j = 0\\
+\displaystyle\min_{\text{possible breaks }i}\left\{\text{total cost before break}  + \text{LineCost}(i, j)\right\}&amp;\text{Otherwise}
+
+\end{cases}</pre></div>
+<p>In expressions:</p>
+<div class="math"><pre>\text{PrettyPrint}(j)  =\begin{cases}
+0 &amp;\text{if }j = 0\\
+\displaystyle\min_{1\le i\le j}\left\{\text{PrettyPrint}(i-1)  + \text{LineCost}(i, j)\right\}&amp;\text{Otherwise}
+
+\end{cases}</pre></div>
+<p>Convert to pseudocode:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">const words = [...]
+const pageWidth = ...
+
+
+function Extras(i: int, j: int) -&gt; int:
+	numSpacesBetweenWords = j - i
+	numLetters = 0
+
+	for word in words:
+		numLetters += len(word)
+	
+	return pageWidth - numSpaces - numLetters
+
+
+function LineCost(i, j) -&gt; int:
+	extras = Extras(i, j)
+	if extras &lt; 0:
+		return Infinity
+	else if extras &gt;= 0 and j == n:
+		return 0 // last line is free
+	return pow(extras, 3)
+
+
+function PrettyPrint(j) -&gt; int:
+	if j == 0:
+		return 0
+	
+	best = Infinity
+	for i = 1 to j:
+		breakHereCost = PrettyPrint(i - 1) + LineCost(i, j)
+		best = min(breakHereCost, best)
+	
+	return best</code></pre>
+</doc-codeblock></div>
+<p>Don’t forget <span class="math">i\red{-1}</span> in the recursive call, otherwise some words are considered multiple times.</p>
+<doc-anchor-target id="1-5-python-backtracking-pretty-printing">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-5-python-backtracking-pretty-printing">#</doc-anchor-trigger>
+        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> 1.5 Python. Backtracking Pretty Printing</span>
+    </h3>
+</doc-anchor-target>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-pretty-printing.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5><strong>Sanity Check</strong></h5>
+<ol>
+<li>At each recursion level, we “choose” a line break</li>
+<li>All indices before the current <span class="math">j</span> is a “valid” choice</li>
+<li>We take the <code v-pre>min</code> from all the choice results</li>
+</ol>
+<p>Make sure you feel comfortable with the brute force solution before moving on to section 2.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="2-convert-to-dynamic-programming">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-convert-to-dynamic-programming">#</doc-anchor-trigger>
+        <span>2. Convert to Dynamic Programming</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="21-order-of-evaluation--data-structure">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#21-order-of-evaluation--data-structure">#</doc-anchor-trigger>
+        <span>2.1 Order of Evaluation &amp; Data Structure</span>
+    </h3>
+</doc-anchor-target>
+<p>From the recurrence:</p>
+<div class="math"><pre>\text{PrettyPrint}(j)  =\begin{cases}
+0 &amp;\text{if }j = 0\\
+\displaystyle\min_{\red{1\le i\le j}}\left\{\text{PrettyPrint}(i-1)  + \text{LineCost}(i, j)\right\}&amp;\text{Otherwise}
+
+\end{cases}</pre></div>
+<p>Unwrapping the <span class="math">\min</span> call shows that <span class="math">\text{PrettyPrint}(j)</span> needs: <code v-pre>@Hint</code> Plug in possible values of <span class="math">i</span>.</p>
+<ul>
+<li><span class="math">\text{PrettyPrint}(0)</span></li>
+<li><span class="math">\text{PrettyPrint}(1)</span></li>
+<li>…</li>
+<li><span class="math">\text{PrettyPrint}(j-1)</span></li>
+</ul>
+<p>We need to compute the function results of the <strong>smaller</strong> <span class="math">j</span>’s first.</p>
+<p>Therefore the order of evaluation for <span class="math">j</span> goes in <strong>ascending order</strong>.</p>
+<p>The function only needs 1 parameter, so we can use a 1D array.</p>
+<doc-anchor-target id="22-pseudocode">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#22-pseudocode">#</doc-anchor-trigger>
+        <span>2.2 Pseudocode</span>
+    </h3>
+</doc-anchor-target>
+<doc-tabs>
+<doc-tab v-cloak id="pseudocode">
+<template #title>Pseudocode</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function PrettyPrint_DP(words[1...N], page_width) -&gt; int:
+	dpTable = Array(shape=(N + 1))
+	// Pretend 0 is a valid index here
+	// we can put it at the end or handle it separately
+	dpTable[0] = 0 // PrettyPrint(0) = 0
+	
+	// for loop for simulating recursive calls, iterate through: 
+	// PrettyPrint(0), PrettyPrint(1), PrettyPrint(2), PrettyPrint(3) 
+	for j = 1 to N:
+		best = Infinity
+		// for loop from the backtracking solution
+		for i = 1 to j:
+			// PrettyPrint(i - 1) + LineCost(i, j)
+			breakHereCost = dpTable[i - 1] + LineCost(i, j) 
+			best = min(breakHereCost, best)
+		dpTable[j] = best
+
+	return dpTable[N] // PrettyPrint(N)</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="no-comment-version">
+<template #title>No comment version</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function PrettyPrint_DP(words[1...N], page_width) -&gt; int:
+    dpTable = Array(shape=(N + 1))
+    dpTable[0] = 0
+
+    for j = 1 to N:
+        best = Infinity
+        for i = 1 to j:
+            breakHereCost = dpTable[i - 1] + LineCost(i, j) 
+            best = min(breakHereCost, best)
+        dpTable[j] = best
+
+    return dpTable[N]</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+</doc-tabs>
+<p>Time complexity is <span class="math">O(n^3)</span> and space complexity is <span class="math">O(n)</span>.</p>
+<doc-anchor-target id="-3-memoizing-linecost-and-extras">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-memoizing-linecost-and-extras">#</doc-anchor-trigger>
+        <span>❖ 3. Memoizing <code v-pre>LineCost</code> and <code v-pre>Extras</code></span>
+    </h2>
+</doc-anchor-target>
+<p>Calling <span class="math">\text{LineCost}</span> inside the nested for loops can be expensive, so we should isolate that from the main memoization loop.</p>
+<p><span class="math">\text{LineCost}</span> needs 2 parameters, so we can use a 2D array. But directly going through all combinations of <span class="math">i, j</span> doesn’t really help because that’s still <span class="math">O(n^3)</span></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">lineCost = Array(shape=(N + 1, N + 1))
+
+for i = 1 to N:
+	for j = 1 to N:
+		lineCost[i, j] =...// normal LineCost evaulation here is O(n)
+
+// total work is still O(n^3)</code></pre>
+</doc-codeblock></div>
+<p>So we need to somehow use previous results to make the evaluation <code v-pre>lineCost[i, j]</code> <span class="math">O(1)</span>.</p>
+<p><strong>Observe that the actual work happens inside <span class="math">\text{Extras}(i, j)</span>.</strong> Instead of recomputing the total number of characters every time we increase <span class="math">j</span>, we can build on top of the previous result like this:</p>
+<div class="math"><pre>\underbrace{\text{Extras}(i, j)}_{\text{including }\texttt{word[j]}} = \underbrace{\text{Extras}(i, j-1)}_{\text{without }\texttt{word[j]}} - \underbrace{1}_\text{space} - \underbrace{\text{len(words[$j$])}}_\text{\texttt{word[j]} itself}</pre></div>
+<p>We can assume the <span class="math">\text{len}</span> function for finding the number of characters is <span class="math">O(1)</span> because the work is done before the <span class="math">\text{PrettyPrint}</span> routine starts.</p>
+<p>The base case is a single word:</p>
+<div class="center"><p><code v-pre>Extras(i, i) = page_width - len(words[i])</code></p>
+</div>
+<p><span class="math">\text{Extras}(i, j)</span> requires <span class="math">\text{Extras}(i, j-1)</span>, so the order of evaluation goes in <strong>ascending order</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">extras = Array(shape=(N + 1, N + 1))
+for i = 1 to N:
+	for j = i to N:
+		if j == i:　// Extras(i, i)
+			extras[i, j] = pageWidth - len(words[i])
+		else:
+			extras[i, j] = extras[i, j-1] - 1 - len(words[j]) // recurrence</code></pre>
+</doc-codeblock></div>
+<p>Now memoizing <span class="math">\text{Extras}</span> becomes <span class="math">O(n^2)</span>.</p>
+<doc-anchor-target id="4-putting-everything-together">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-putting-everything-together">#</doc-anchor-trigger>
+        <span>4. Putting everything together</span>
+    </h2>
+</doc-anchor-target>
+<p>The recurrences are:</p>
+<div class="math"><pre>\begin{aligned}
+    \text{PrettyPrint}(j) &amp;= \begin{cases}
+        0 &amp;\text{if }j = 0\\[5pt]
+    \displaystyle\min_{1\le i\le j}\left\{\text{PrettyPrint}(i-1)  + \text{LineCost}(i, j)\right\}&amp;\text{Otherwise}
+
+    \end{cases}
+\\[25pt]
+    \underbrace{\text{Extras}(i, j)}_{\text{including }\texttt{word[j]}} &amp;= \underbrace{\text{Extras}(i, j-1)}_{\text{without }\texttt{word[j]}} - \underbrace{1}_\text{space} - \underbrace{\text{len(words[$j$])}}_\text{\texttt{word[j]} itself}
+\end{aligned}</pre></div>
+<p>Line cost itself isn’t really a recurrence but it’s important:</p>
+<div class="math"><pre>\text{LineCost}(i, j) = \begin{cases}
+\infty&amp;\text{if Extras}(i, j) &lt; 0\\
+0 &amp;\text{if Extras}(i, j) \ge 0\text{ and }j= n\\
+\text{Extras}(i, j)^3 &amp; \text{Otherwise}
+
+\end{cases}</pre></div>
+<doc-tabs>
+<doc-tab v-cloak id="pseudocode">
+<template #title>Pseudocode</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -&gt; int:
+	totalCost = Array(*shape*=(N + 1))
+	// base case: PrettyPrint(0) = 0
+	totalCost[0] = 0 
+	
+	// Memoizing Extras(i, j)
+	extras = Array(*shape*=(N + 1, N + 1))
+	for i = 1 to N:
+		for j = i to N:
+			if j == i: // base case: Extras(i, i)
+				extras[i, j] = pageWidth - words[i].length
+			else:
+				extras[i, j] = extras[i, j-1] - 1 - words[j].length
+	
+	// Memoizing the main recurrence
+	for j = 1 to N: // PrettyPrint(1), PrettyPrint(2) ... PrettyPrint(N)
+		best = Infinity // simulate min(…)
+
+		for i = 1 to j:
+			// simulate LineCost(i, j)
+			lineCost = Infinity
+			emptySpaces = extras[i, j]
+			
+            if numTrailingSpaces &gt; 0:
+				if j == N:
+					lineCost = 0
+				else:
+					lineCost = pow(emptySpaces, 3)
+			
+            // Simulate PrettyPrint(i-1) + LineCost(i, j)
+			breakHereCost = totalCost[i - 1] + lineCost
+			best = min(breakHereCost, best) 
+
+		totalCost[j] = best // the result of PrettyPrint(j)
+	
+	// Initial call: PrettyPrint(N)
+	return totalCost[N]</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="no-comment-version">
+<template #title>No comment version</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -&gt; int:
+    totalCost = Array(shape=(N + 1))
+    totalCost[0] = 0 
+    
+    extras = Array(shape=(N + 1, N + 1))
+    for i = 1 to N:
+        for j = i to N:
+            if j == i:
+                extras[i, j] = pageWidth - words[i].length
+            else:
+                extras[i, j] = extras[i, j-1] - 1 - words[j].length
+    
+    for j = 1 to N:
+        best = Infinity
+        
+        for i = 1 to j:
+            lineCost = Infinity
+            numTrailingSpaces = extras[i, j]
+            
+            if numTrailingSpaces &gt; 0:
+                if j == N:
+                    lineCost = 0
+                else:
+                    lineCost = pow(numTrailingSpaces, 3)
+            
+            breakHereCost = totalCost[i - 1] + lineCost
+            best = min(breakHereCost, best) 
+       
+        totalCost[j] = best
+    
+    return totalCost[N]</code></pre>
+</doc-codeblock></div>
+</doc-tab>
+</doc-tabs>
+<p>Runtime is <span class="math">O(n^2)</span> with <span class="math">O(n^2)</span> space.</p>
+<doc-anchor-target id="5-python-dp-pretty-printing">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#5-python-dp-pretty-printing">#</doc-anchor-trigger>
+        <span>5. Python: DP Pretty Printing</span>
+    </h2>
+</doc-anchor-target>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/DP-pretty-printing.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer class="clear-both">
+                            
+                                <nav class="flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/optimal-bst/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
+                                                <span class="block mt-1">Optimal Binary Search Tree</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/rod-cutting/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
+                                                <span class="block mt-1">Rod Cutting (122​A)</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div class="border-t dark:border-dark-650 pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between">
+                                <div>
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2024. All rights reserved.</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-white border-gray-200 lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton dark:bg-dark-850 dark:border-dark-650">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="docs-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Pretty printing", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+</body>
+</html>

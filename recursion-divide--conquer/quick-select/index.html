@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760055198287">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.760324124870">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Quick Select (122B)</title>
     <meta name="title" content="Quick Select (122B)">
-    <meta name="description" content="Question. Given an unsorted list of numbers A[1...N]: Listnumber and an integer k: int, how do we find the ">
+    <meta name="description" content="Question. Given an unsorted A[1...N]: Listnumber and a positive integer k, 1 = k = N, how do we find the ">
 
     <!-- Canonical -->
     <link rel="canonical" href="/recursion-divide--conquer/quick-select/">
@@ -20,22 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/recursion-divide--conquer/quick-select/">
     <meta property="og:title" content="Quick Select (122B)">
-    <meta property="og:description" content="Question. Given an unsorted list of numbers A[1...N]: Listnumber and an integer k: int, how do we find the ">
+    <meta property="og:description" content="Question. Given an unsorted A[1...N]: Listnumber and a positive integer k, 1 = k = N, how do we find the ">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/recursion-divide--conquer/quick-select/">
     <meta property="twitter:title" content="Quick Select (122B)">
-    <meta property="twitter:description" content="Question. Given an unsorted list of numbers A[1...N]: Listnumber and an integer k: int, how do we find the ">
+    <meta property="twitter:description" content="Question. Given an unsorted A[1...N]: Listnumber and a positive integer k, 1 = k = N, how do we find the ">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/cat.svg" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.760055198287" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.760324124870" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760055198287" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.760324124870" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760055198287" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.760324124870" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.760324124870" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -220,8 +221,77 @@
     </h1>
 </doc-anchor-target>
 <blockquote>
-<p><strong>Question.</strong> Given an unsorted list of numbers <code v-pre>A[1...N]: List&lt;number&gt;</code> and an integer <code v-pre>k: int</code>, how do we find the <span class="math">k</span>-th smallest element of <span class="math">A</span> in <span class="math">O(n)</span> time?</p>
+<p><strong>Question.</strong> Given an unsorted <code v-pre>A[1...N]: List&lt;number&gt;</code> and a positive integer <code v-pre>k</code>, <code v-pre>1 &lt;= k &lt;= N</code>, how do we find the <span class="math">k</span>-th smallest element of <span class="math">A</span> in <span class="math">O(n)</span> time?</p>
 </blockquote>
+<p>For example, <code v-pre>A = [3,2,1,5,6,4], k = 2</code> gives us <code v-pre>2</code>.</p>
+<doc-anchor-target id="one-armed-quick-select">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#one-armed-quick-select">#</doc-anchor-trigger>
+        <span>One Armed Quick Select</span>
+    </h2>
+</doc-anchor-target>
+<p>The idea is similar to quick sort. Partition <code v-pre>A</code> by some pivot, then recursively search the left and right half with respect to the pivot.</p>
+<ul>
+<li>Let the pivot value be <code v-pre>p</code>, pivot index be <code v-pre>pivot_index</code>. Recall that <code v-pre>A[i]</code> &lt; <code v-pre>p</code> if <code v-pre>i &lt; pivot_index</code>, and <code v-pre>A[i] &gt;= p</code> if <code v-pre>i &gt;= pivot_index</code></li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-c"><code v-pre class="language-c">function quickSelect(A: [1...N], k: int) -&gt; int:
+    pivot_value = selectPivot(A) // black box subroutine
+    
+    small, large = [], []
+
+    for a in A:
+        if a &lt; pivot_value:
+            small.push(a)
+        else if a &gt; pivot_value:
+            large.push(a)
+
+    s = len(small)
+    l = len(large)
+
+    if k &lt; s:
+        return quickSelect(small, k)
+    else if k &gt; N - s:
+        return quickSelect(large, k - (N - s))
+    else:
+        return pivot_value</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="example-walkthrough">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-walkthrough">#</doc-anchor-trigger>
+        <span>Example Walkthrough</span>
+    </h2>
+</doc-anchor-target>
+<p>For <code v-pre>A = [3,2,1,5,6,4], k = 2</code>, we have:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">N = 6
+pivot_value = 4
+small = [3, 2, 1]
+large = [5, 6]
+
+2 &lt; len(small), call quickSelect(small, 2)
+
+---
+
+N = 3
+pivot_value = 1
+small = []
+large = [3, 2]
+
+Neither 2 &lt; 0 nor 2 &gt; 3 - 0, so we hit the else case
+return 1
+</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="decide-which-half-to-search">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#decide-which-half-to-search">#</doc-anchor-trigger>
+        <span>Decide which half to search</span>
+    </h2>
+</doc-anchor-target>
+<p>If <code v-pre>p</code> is the pivot value, then after <code v-pre>partition()</code>, the array <code v-pre>A</code> looks like this:</p>
+<div class="math"><pre>\tt \underbrace{\overbrace{...}^{\text{values &lt; p}}}_{\text{left half}},\;p\dots p,\;\underbrace{\overbrace{...}^{\text{values &gt; p}}}_{\text{right half}}</pre></div>
+<p>Notice that there&#x27;s a chunk of <code v-pre>p</code> next to each other in the middle. Recall that the idea is to recursively search the left and right half. If <code v-pre>k &lt; len(left)</code>, then the <code v-pre>k</code>th smallest is in <code v-pre>left</code>, so we just do the recursive call on <code v-pre>left</code>.</p>
+<p>If is in the right half,</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -288,6 +358,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Quick Select (122B)", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Quick Select (122B)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>
