@@ -91,7 +91,7 @@ This is a bit different from the previous backtracking problems. We are incorpor
 To compute the number of empty spaces, lets define:
 
 $$
-\text{Extras}(i, j) = \texttt{pageWidth} -\underbrace{ (j-i)}_\text{space between words} - \underbrace{\sum \text{len}(\texttt{words}[i\dots j])}_\text{actual letters}
+\text{Extras}(i, j) =  \texttt{page\_width} -\underbrace{ (j-i)}_\text{space between words} - \underbrace{\sum_{k=i}^j \texttt{len(words[k])}}_\text{actual letters}
 $$
 
 where $i, j$ are the indices of the original words array. We can see that computing $\text{Extras}$ will take $O(n)$ time where $n$ is the number of words. 
@@ -250,9 +250,7 @@ Unwrapping the $\min$ call shows that $\text{PrettyPrint}(j)$ needs: `@Hint` Plu
 - …
 - $\text{PrettyPrint}(j-1)$
 
-We need to compute the function results of the **smaller** $j$’s first.
-
-Therefore the order of evaluation for $j$ goes in **ascending order**.
+We need to compute the function results of the **smaller** $j$’s first, thus the order of evaluation for $j$ goes in **ascending order**.
 
 The function only needs 1 parameter, so we can use a 1D array.
 
@@ -447,7 +445,7 @@ function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -> int:
             breakHereCost = totalCost[i - 1] + lineCost
             best = min(breakHereCost, best) 
        
-        totalCost[j] = best
+        totalCost[j] = best 
     
     return totalCost[N]
 ```
