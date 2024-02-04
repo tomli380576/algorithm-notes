@@ -2,6 +2,8 @@
 icon: home
 ---
 
+![](/assets/lmao.png)
+
 # Algorithm Notes
 
 My notes for 122A, 122B and more.

@@ -4,7 +4,7 @@ output: .retype
 branding:
   title: Tommy's Algorithm Notes
   label: Notes
-  logo: assets/cat.svg
+  logo: assets/favicon.png
 links:
 - text: Old notion link
   link: https://zhongning-tommy-li.notion.site/CS-Notes-Entry-Page-bb5793ada5dd44109455e9f442e28d45?pvs=4
@@ -12,6 +12,6 @@ footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."
 exclude:
   - "README.md"
-favicon: assets/cat.svg
+favicon: assets/favicon.png
 include:
   - "**/assets/**"
