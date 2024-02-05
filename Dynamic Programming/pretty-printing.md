@@ -1,3 +1,11 @@
+---
+order: 96
+---
+
+# Pretty Printing
+
+[!badge size="l" variant="warning" text="Leetcode" icon="../assets/leetcode.svg"](https://leetcode.com/problems/text-justification/description/)
+
 > **Question.** Given an array of `N` words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that any individual word can fit on one line.
 > 
 

@@ -1,3 +1,7 @@
+---
+order: 99
+---
+
 # Rod Cutting (122A)
 
 > **Question.** Given a rod with length $n$ and an array of prices of each length $p_i$, how can we cut the rod to make the most amount of money?

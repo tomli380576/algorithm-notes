@@ -1,3 +1,7 @@
+---
+order: 98
+---
+
 # Longest Common Subsequence
 
 > **Question.** Given 2 strings `X[1...m], Y[1...n]` with arbitrary length, what is the longest common subsequence between them?
