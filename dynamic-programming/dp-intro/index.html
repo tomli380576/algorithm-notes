@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761014003434">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761016949852">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,13 +31,19 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761014003434" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.761016949852" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761014003434" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761016949852" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761014003434" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761016949852" data-turbo-eval="false" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
+
+    <meta content="Tommy's Algorithm Notes" property="og:title" />
+    <meta content="My Notes for 122A, 122B, and more" property="og:description" />
+    <meta content="https://tomli380576.github.io/algorithm-notes/" property="og:url" />
+    <meta content="https://tomli380576.github.io/algorithm-notes/assets/lmao.png" property="og:image" />
+    <meta content="#0989f7" data-react-helmet="true" name="theme-color" />
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap");
@@ -219,10 +225,16 @@
         <span>Introduction</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="general-dp-formulation">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#general-dp-formulation">#</doc-anchor-trigger>
+        <span>General DP Formulation</span>
+    </h2>
+</doc-anchor-target>
 <p>Typically a DP problem involves searching for a sequence of decisions that arrives at a maximum or minimum value. Let&#x27;s define:</p>
 <dl>
 <dt><span class="math">t = 1...N</span></dt>
-<dd>A &quot;stage&quot; of the problem. When <span class="math">t=N</span>, we have reached the end of the problem</dd>
+<dd>A &quot;stage&quot; of the problem. When <span class="math">t=N</span>, we have reached the end of the problem. This is usually the variable representing time / planning horizon, but not necessarily</dd>
 <dt><span class="math">s_t\in S</span>  </dt>
 <dd>State at stage <span class="math">t</span>; <span class="math">S</span> is the space of all possible states</dd>
 <dt><span class="math">a_t\in A</span>  </dt>
@@ -230,10 +242,66 @@
 <dt><span class="math">r_t(s_t, a_t)</span>  </dt>
 <dd>Reward function if we take action <span class="math">a_t</span> at state <span class="math">s_t</span></dd>
 <dt><span class="math">R(s_N)</span></dt>
-<dd>Reward if we end on state <span class="math">s_N</span>. This is the cost/reward of our base case, a subproblem that we can immediately solve without recursion.</dd>
+<dd>Reward if we end on state <span class="math">s_N</span>. This is the cost/reward of our base case, a subproblem that we can immediately solve without recursion. If we reach <span class="math">s_N</span>, we have no possible actions.</dd>
 </dl>
-<p>Now the optimality equation / value function is:</p>
-<div class="math"><pre>v_t(s_t) = \left.\underset{a_t\in A}{\max/\min}\,\middle\{r_t(s_t, a_t) + v_{t+1}(s_{t+1})\right\}</pre></div>
+<p>Now the <strong>optimality equation</strong> / <strong>value function</strong> / <strong>objective recurrence</strong> is:</p>
+<div class="math"><pre>v_t(s_t) = \left.\underset{a_t\in A}{\max/\min}\,\middle\{v_{t+1}(s_{t+1}) + r_t(s_t, a_t) \right\}</pre></div>
+<doc-anchor-target id="examples">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#examples">#</doc-anchor-trigger>
+        <span>Examples</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="rod-cutting">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#rod-cutting">#</doc-anchor-trigger>
+        <span>Rod Cutting</span>
+    </h3>
+</doc-anchor-target>
+<p>For a rod of length <span class="math">N</span>,</p>
+<div class="math"><pre>\text{CutRod}(n)  = \begin{cases}
+    0       &amp;   \text{if } n = 0\\
+    p_1     &amp;   \text{if }n = 1\\
+    \displaystyle\max_{1\leqslant i\leqslant n}\{
+    \text{CutRod}(n-i) + p_i
+    \}  &amp;   \text{otherwise}
+\end{cases}</pre></div>
+<p>In this case, the remaining length of the rod is the state <span class="math">s_t</span>, and the number of units of rod to cut is the action <span class="math">a_t</span>. We immediately encounter the first exception of the definition of stage <span class="math">t</span>. The only thing that&#x27;s constant is the <strong>initial</strong> length of the rod, or the maximum length we can cut in 1 go. Therefore the stage is technically time, but it ranges from <span class="math">1...N</span> since the max number of cuts we can make is just the total length <span class="math">N</span> (just cut 1 unit at a time).</p>
+<p>The rest of the variables are straightforward to find: the revenue of a cut is the reward function; final reward is either 0 or <span class="math">p_1</span>, and <span class="math">s_{n+1}</span> is the new length after the cut.</p>
+<p>Let&#x27;s list each component:</p>
+<dl>
+<dt><span class="math">t = 1...N</span></dt>
+<dd>Stage is the &quot;time&quot; elapsed or the total number of cuts we have made</dd>
+<dt><span class="math">s_t\in S</span>  </dt>
+<dd>State is the length of the remaining rod</dd>
+<dt><span class="math">a_t\in A</span>  </dt>
+<dd>Action the the possible cuts we can make. Ranges from 1 to <span class="math">s_t</span></dd>
+<dt><span class="math">r_t(s_t, a_t)</span>  </dt>
+<dd>Reward is the revenue of the cut</dd>
+<dt><span class="math">R(s_N)</span></dt>
+<dd>Base cases, <span class="math">s_N = 0</span> or <span class="math">s_N = 1</span> which means <span class="math">R(0) = 0, R(1) = p_1</span></dd>
+</dl>
+<p>optimality equation is:</p>
+<div class="math"><pre>\max_{1\leqslant i\leqslant n}\{\text{CutRod}(n-i) + p_i\}</pre></div>
+<doc-anchor-target id="edit-distance">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#edit-distance">#</doc-anchor-trigger>
+        <span>Edit Distance</span>
+    </h3>
+</doc-anchor-target>
+<p>For strings <code v-pre>A[1...n], B[1...m]</code></p>
+<div class="math"><pre>{\text{EditDist}(i, j)} = \begin{cases}
+i &amp; \text{if } j = 0\\j &amp; \text{if } i = 0\\
+\min \left.\begin{cases}
+
+\text{EditDist}(i, j-1) + 1\\
+\text{EditDist}(i-1, j) + 1\\
+\text{EditDist}(i-1, j-1) + \begin{cases}1 &amp; \text{if }A[i]\ne B[j]\\
+0 &amp; \text{if }A[i]= B[j]
+\end{cases}\\
+
+\end{cases}\right\} &amp; \text{Otherwise}
+\end{cases}</pre></div>
 
                                 
                                 <!-- Required only on API pages -->
