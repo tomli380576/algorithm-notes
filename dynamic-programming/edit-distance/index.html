@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761016949852">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761018722047">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Levenshtein Edit Distance</title>
     <meta name="title" content="Levenshtein Edit Distance">
-    <meta name="description" content="@Param">
+    <meta name="description" content="Question. Given 2 strings A[1...n] and B[1...m], what is minimum number of edits to A required to make 2 strings identical? An edit could be 1 of the...">
 
     <!-- Canonical -->
     <link rel="canonical" href="/dynamic-programming/edit-distance/">
@@ -20,24 +20,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/dynamic-programming/edit-distance/">
     <meta property="og:title" content="Levenshtein Edit Distance">
-    <meta property="og:description" content="@Param">
-    <meta property="og:image" content="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4fac180-6d7f-4a46-a018-f8facf4618e8/Screen_Shot_2022-06-18_at_6.21.59_PM.png">
+    <meta property="og:description" content="Question. Given 2 strings A[1...n] and B[1...m], what is minimum number of edits to A required to make 2 strings identical? An edit could be 1 of the...">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/dynamic-programming/edit-distance/">
     <meta property="twitter:title" content="Levenshtein Edit Distance">
-    <meta property="twitter:description" content="@Param">
-    <meta property="twitter:image" content="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4fac180-6d7f-4a46-a018-f8facf4618e8/Screen_Shot_2022-06-18_at_6.21.59_PM.png">
+    <meta property="twitter:description" content="Question. Given 2 strings A[1...n] and B[1...m], what is minimum number of edits to A required to make 2 strings identical? An edit could be 1 of the...">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761016949852" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.761018722047" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761016949852" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761018722047" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761016949852" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761018722047" data-turbo-eval="false" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -227,39 +225,37 @@
         <span>Levenshtein Edit Distance</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="problem-statement">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#problem-statement">#</doc-anchor-trigger>
-        <span>Problem Statement</span>
-    </h2>
-</doc-anchor-target>
-<p><code v-pre>@Param</code></p>
-<ul>
-<li><span class="math">A:\texttt{\blue{string}}</span> with <span class="math">n</span> characters</li>
-<li><span class="math">B:\texttt{\blue{string}}</span> with <span class="math">m</span> characters</li>
-</ul>
-<p><code v-pre>@Returns</code> <span class="math">\texttt{\blue{int}}</span>, The minimum number of character-wise edits required to make <span class="math">A = B</span></p>
+<p><a href="https://leetcode.com/problems/edit-distance/description/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-yellow-900 bg-yellow-100 border border-yellow-100 hover:border-yellow-300 dark:hover:bg-yellow-300 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><img class="mb-px inline-flex mr-2" width="22" src="../../assets/leetcode.svg"></span>
+    <span>Leetcode</span>
+</a></p>
 <blockquote>
-<p><strong>Question.</strong> Given 2 strings <span class="math">A</span> and <span class="math">B</span> with arbitrary length, what is minimum number of edits to <span class="math">A</span>  required to make 2 strings identical?</p>
+<p><strong>Question.</strong> Given 2 strings <code v-pre>A[1...n]</code> and <code v-pre>B[1...m]</code>, what is minimum number of edits to <span class="math">A</span>  required to make 2 strings identical? An edit could be 1 of the following:</p>
+<ul>
+<li>Insert a character</li>
+<li>Delete a character</li>
+<li>Replace a character</li>
+</ul>
 </blockquote>
-<p><code v-pre>@EX</code> <span class="math">A=\texttt{&quot;FOOD&quot;}, B=\texttt{&quot;MONEY&quot;}</span>, the edit distance is 4.</p>
-<p><figure class="content-center">
-    <img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4fac180-6d7f-4a46-a018-f8facf4618e8/Screen_Shot_2022-06-18_at_6.21.59_PM.png" alt="Source: Erickson text on Edit Distance">
-    <figcaption class="caption">Source: Erickson text on Edit Distance</figcaption>
-</figure>
-</p>
-<p>Source: Erickson text on Edit Distance</p>
+<p>For example, when <code v-pre>A = &quot;FOOD&quot;, B = &quot;MONEY&quot;</code>, the edit distance is 4.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">FOOD -&gt; MOOD -&gt; MOND -&gt; MONED -&gt; MONEY</code></pre>
+</doc-codeblock></div>
+<p>when <code v-pre>A = &quot;HORSE&quot;, B = &quot;ROS&quot;</code>, the edit distance is 3.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">HORSE -&gt; RORSE -&gt; ROSE -&gt; ROS</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="1-observing-the-problem">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#1-observing-the-problem">#</doc-anchor-trigger>
         <span>1. Observing the Problem</span>
     </h2>
 </doc-anchor-target>
-<p>From the example we can see that there are 3 operations at any given index:</p>
+<p>From the example we can see that there are 3 operations at any given index <code v-pre>i</code>:</p>
 <ol>
-<li><code v-pre>Insert(idx)</code> Cost = 1</li>
-<li><code v-pre>Delete(idx)</code> Cost = 1</li>
-<li><code v-pre>Replace(idx, newChar)</code> Cost = 1 if <span class="math">\tt{A[idx] \ne B[idx]}</span> else Cost = 0</li>
+<li><code v-pre>Insert(i)</code> Cost = 1</li>
+<li><code v-pre>Delete(i)</code> Cost = 1</li>
+<li><code v-pre>Replace(i, newChar)</code> Cost = 1 if <code v-pre>A[i] != B[i]</code>, else Cost = 0</li>
 </ol>
 <doc-anchor-target id="2-solve-the-backtracking-problem-first">
     <h2>
@@ -273,12 +269,9 @@
         <span>2.1 Decide the Function Signature</span>
     </h3>
 </doc-anchor-target>
-<p>Since we eventually need to convert this to DP, it’s easier to use string indices to keep track of which subproblem we are solving.</p>
-<p>Let’s use <span class="math">i</span> for string <span class="math">A[1\dots n]</span> and <span class="math">j</span> for string <span class="math">B[1\dots m]</span>.</p>
-<p>So the function will look like:</p>
+<p>Since we eventually need to convert this to DP, it’s easier to use string indices to keep track of which subproblem we are solving. Let’s use <span class="math">i</span> for string <code v-pre>A[1...n]</code> and <span class="math">j</span> for string <code v-pre>B[1...n]</code>.</p>
 <div class="math"><pre>\text{EditDist}(i, j)</pre></div>
-<p>where <span class="math">A[1\dots i]</span> is the prefix.</p>
-<p>Then our final result is:</p>
+<p>Our final result is:</p>
 <div class="math"><pre>\text{EditDist}(n, m)</pre></div>
 <doc-anchor-target id="22-base-cases">
     <h3>
@@ -286,28 +279,35 @@
         <span>2.2 Base Cases</span>
     </h3>
 </doc-anchor-target>
-<p>If any of the string is empty, then the cost would be the length of that non-empty string.</p>
-<p>This will happen when we call:</p>
+<p>If any of the string is empty, then the cost would be the length of that non-empty string. This will happen when we call:</p>
 <div class="math"><pre>{\text{EditDist}}(\red0, j)\\
 \text{ or }\\
 \text{EditDist}(i, \red0)</pre></div>
-<doc-anchor-target id="implementation-detail">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#implementation-detail">#</doc-anchor-trigger>
-        <span>Implementation Detail</span>
-    </h4>
-</doc-anchor-target>
-<p>Here we used 0 to indicate that an index is going out of bounds.</p>
-<p>In actual code 0 is a valid index, we can use -1 with an if statement to catch it.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-300"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-300" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Implementation Detail</h5>
+<p>Here we used 0 to indicate that an index is going out of bounds. In actual code 0 is a valid index; use -1 with an if statement to catch it.</p>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="23-recursive-cases">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#23-recursive-cases">#</doc-anchor-trigger>
         <span>2.3 Recursive Cases</span>
     </h3>
 </doc-anchor-target>
-<p>We need to know what our choices are and how to make a choice.</p>
-<p>If both strings are not empty, we will try to <strong>insert</strong>, <strong>delete</strong>, or <strong>replace</strong>. These are the 3 possible choices.</p>
-<p>To make a choice:</p>
+<p>If both strings are not empty, we will try to <strong>insert</strong>, <strong>delete</strong>, or <strong>replace</strong>. These are the 3 possible choices. To make a choice:</p>
 <ol>
 <li><p>Let’s consider what it really means to “insert”.</p>
 <p><code v-pre>@EX</code> <span class="math">A=\texttt{&quot;FOOD&quot;}, B=\texttt{&quot;MONEY&quot;}</span></p>
@@ -316,8 +316,7 @@
  A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{D}&amp;\texttt{\red?}\\
  B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{\red Y} 
  \end{matrix}</pre></div>
-<p>If we insert a <span class="math">\tt Y</span> at the questions mark, we have an aligned column.</p>
-<p>Then we can move to the “next” by considering the column to the left.</p>
+<p>If we insert a <span class="math">\tt Y</span> at the questions mark, we have an aligned column. Then we can move to the &quot;next&quot; by considering the column to the left.</p>
 <p>Maybe we can do this by <span class="math">\texttt{i -= 1, j -= 1}</span>, now we are here:</p>
 <div class="math"><pre> \begin{matrix}
  &amp;&amp;&amp;&amp;\Downarrow\\
@@ -421,22 +420,24 @@ i &amp; \text{if } j = 0\\j &amp; \text{if } i = 0\\
         <span>2.5 Python: Backtracking Edit Distance</span>
     </h3>
 </doc-anchor-target>
-<p>Implements the above recurrence.</p>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-edit-distance.py">ECS122A-Algorithms-python-implementation/backtracking-edit-distance.py at main · tomli380576/ECS122A-Algorithms-python-implementation</a></p>
-<p>Backtracking is really slow in this problem.</p>
-<p><figure class="content-center">
-    <img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ae7f53f1-ff17-4e8c-aa78-bd64800eea37/Screen_Shot_2022-07-05_at_3.45.05_PM.png" alt="Screen Shot 2022-07-05 at 3.45.05 PM.png">
-    <figcaption class="caption">Screen Shot 2022-07-05 at 3.45.05 PM.png</figcaption>
-</figure>
-</p>
-<p><figure class="content-center">
-    <img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc3cde4c-5cb1-4822-adf8-38b621cb6f6f/Screen_Shot_2022-07-06_at_11.27.02_AM.png" alt="Backtracking didn’t finish in 11 hours for the same input so I had to kill it">
-    <figcaption class="caption">Backtracking didn’t finish in 11 hours for the same input so I had to kill it</figcaption>
-</figure>
-</p>
-<p>Backtracking didn’t finish in 11 hours for the same input so I had to kill it</p>
-<aside>
-<img src="https://super.so/icon/dark/activity.svg" alt="https://super.so/icon/dark/activity.svg" width="40px" /> **Sanity Check**
+<p>Implements the above recurrence. <a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/backtracking-edit-distance.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5><strong>Sanity Check</strong></h5>
 <ol>
 <li>We still make only 1 choice at each recursion level, the choices are:
 <ol>
@@ -448,7 +449,9 @@ i &amp; \text{if } j = 0\\j &amp; \text{if } i = 0\\
 <li>All choices are valid when the 2 strings are not empty, so we try all 3 of them and see which one is the best.</li>
 <li>Cost is always 1 for both insert and delete, 0 for replace if the characters are the same.</li>
 </ol>
-</aside>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="3-convert-backtracking-to-dynamic-programming">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#3-convert-backtracking-to-dynamic-programming">#</doc-anchor-trigger>
@@ -462,7 +465,8 @@ i &amp; \text{if } j = 0\\j &amp; \text{if } i = 0\\
     </h3>
 </doc-anchor-target>
 <p>The <code v-pre>EditDistance(i, j)</code> call requires 2 arguments, so we can use a 2D array.</p>
-<div class="math"><pre>\tt{EditDist: \texttt{\gray{\blue{Array}&lt;\blue{Array}&lt;\blue{int}&gt;&gt;}}}</pre></div>
+<div class="center"><p><code v-pre>EditDist: List&lt;List&lt;int&gt;&gt;</code></p>
+</div>
 <p>We can access the result of a previous function call by <code v-pre>EditDist[i, j]</code></p>
 <p>The final result will be in <code v-pre>EditDist[n, m]</code></p>
 <doc-anchor-target id="32-order-of-evaluation">
@@ -478,24 +482,35 @@ i &amp; \text{if } j = 0\\j &amp; \text{if } i = 0\\
 <li><span class="math">\text{EditDist}(i-1, j-1)</span></li>
 </ul>
 <p>So both the loop for <span class="math">i</span> and <span class="math">j</span> need to go in <strong>ascending</strong> order.</p>
-<aside>
-<img src="https://super.so/icon/dark/info.svg" alt="https://super.so/icon/dark/info.svg" width="40px" /> Similar to LCS, if we scan the 2 strings backwards, then the order of evaluation will also be flipped.
-<p>In that case <span class="math">i</span> and <span class="math">j</span> goes in descending order. The final call will be in <code v-pre>EditDist[1, 1]</code></p>
-</aside>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-300"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-300" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Similar to LCS, if we scan the 2 strings backwards, then the order of evaluation will also be flipped. In that case <span class="math">i</span> and <span class="math">j</span> goes in descending order. The final call will be in <code v-pre>EditDist[1, 1]</code></p>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="42-python-dp-edit-distance">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#42-python-dp-edit-distance">#</doc-anchor-trigger>
         <span>4.2 Python: DP Edit Distance</span>
     </h2>
 </doc-anchor-target>
-<p>We can also save the recursion results by using the library <code v-pre>@cache</code> decorator. See <a href="https://docs.python.org/3/library/functools.html">LRU Cache</a></p>
-<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/DP-edit-distance.py">ECS122A-Algorithms-python-implementation/DP-edit-distance.py at main · tomli380576/ECS122A-Algorithms-python-implementation</a></p>
+<p>We can also save the recursion results by using the library <code v-pre>@cache</code> decorator. See <a href="https://docs.python.org/3/library/functools.html">LRU Cache</a>.</p>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/DP-edit-distance.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-white bg-gray-700 dark:bg-dark-450 hover:bg-gray-600 dark:hover:bg-dark-400 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><symbol id="mark-github-icon-symbol" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></symbol><use xlink:href="#mark-github-icon-symbol" /></g></svg></span>
+    <span>Github</span>
+</a></p>
 <p>This file has DP and <code v-pre>@cache</code> brute force.</p>
-<hr>
-<p>Dig Deeper:</p>
-<p><a href="https://www.notion.so/Saving-Space-Sliding-Window-894054a6f1d34dd6b0794b2421d4bff0?pvs=21"><strong>❖</strong> Saving Space: Sliding Window </a></p>
-<p>Go to next:</p>
-<p><a href="https://www.notion.so/Rod-Cutting-122A-79f7086d5f834207ae43cd469242d1b7?pvs=21">Rod Cutting (122A)</a></p>
 
                                 
                                 <!-- Required only on API pages -->
