@@ -1,5 +1,6 @@
 ---
 icon: home
+image: /assets/lmao.png
 ---
 
 ![](/assets/lmao.png)
