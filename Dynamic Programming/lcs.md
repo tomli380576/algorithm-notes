@@ -4,6 +4,8 @@ order: 98
 
 # Longest Common Subsequence
 
+[!badge size="l" variant="warning" text="Leetcode" icon="../assets/leetcode.svg"](https://leetcode.com/problems/longest-common-subsequence/description/)
+
 > **Question.** Given 2 strings `X[1...m], Y[1...n]` with arbitrary length, what is the longest common subsequence between them?
 
 A common sequence satisfies the following:

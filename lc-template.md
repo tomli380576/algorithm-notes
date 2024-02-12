@@ -17,6 +17,29 @@ def countFreq(s: str) -> dict[str, int]:
     return frequency
 ```
 
+### Binary Search
+
+Returns -1 if `target` is not found
+
+```py
+def binSearch(arr: list[int], target: int) -> int:
+    if len(arr) == 0:
+        return -1
+
+    l, r = 0, len(arr) - 1
+
+    while l <= r:
+        mid = (l + r) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] > target:
+            r = mid - 1
+        else:
+            l = mid + 1
+
+    return -1
+```
+
 ## Whatever first search
 
 ### Adjacency List
