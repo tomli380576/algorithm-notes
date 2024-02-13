@@ -385,12 +385,12 @@ $$
 +++ Pseudocode
 ```c
 function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -> int:
-	totalCost = Array(*shape*=(N + 1))
+	totalCost = Array(shape=(N + 1))
 	// base case: PrettyPrint(0) = 0
 	totalCost[0] = 0 
 	
 	// Memoizing Extras(i, j)
-	extras = Array(*shape*=(N + 1, N + 1))
+	extras = Array(shape=(N + 1, N + 1))
 	for i = 1 to N:
 		for j = i to N:
 			if j == i: // base case: Extras(i, i)

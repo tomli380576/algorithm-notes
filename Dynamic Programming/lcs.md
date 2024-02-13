@@ -6,12 +6,10 @@ order: 98
 
 [!badge size="l" variant="warning" text="Leetcode" icon="../assets/leetcode.svg"](https://leetcode.com/problems/longest-common-subsequence/description/)
 
-> **Question.** Given 2 strings `X[1...m], Y[1...n]` with arbitrary length, what is the longest common subsequence between them?
-
-A common sequence satisfies the following:
-
-- They appear in the same order as they do in the original sequence
-- Doesn't need to be contiguous
+> **Question.** Given 2 strings `X[1...m], Y[1...n]`, what is the longest common subsequence between them?
+> A common sequence satisfies the following:
+> - They appear in the same order as they do in the original sequence
+> - Doesn't need to be contiguous
 
 Example: `X = "DCUT", Y = "DUTC"`, then `LCS(X, Y) = "DUT"`
 
@@ -275,7 +273,7 @@ In pseudocode:
 
 +++ With Comments 
 ```c
-function LCS_length_DP(X[1...m], Y[1...n]) -> number:
+function LCS_length_DP(X[1...m], Y[1...n]) -> int:
 	dpTable = Array(shape=(m + 1, n + 1))
 
 	// base cases
@@ -299,11 +297,11 @@ function LCS_length_DP(X[1...m], Y[1...n]) -> number:
 	return dpTable[1, 1]  // LCS(1, 1) initial call
 ```
 
-+++ No comments
++++ No Comment Version
 
 ```c
-function LCS_length_DP(X[1...m], Y[1...n]) -> number:
-	dpTable = Array(*shape*=(m + 1, n + 1))
+function LCS_length_DP(X[1...m], Y[1...n]) -> int:
+	dpTable = Array(shape=(m + 1, n + 1))
 
 	for j = 1 to n + 1:
 		dpTable[m + 1, j] = 0
