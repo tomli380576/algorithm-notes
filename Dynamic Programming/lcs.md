@@ -386,7 +386,7 @@ $$
 
 We can record the choices with a map, where the keys are the input parameters and the values are the choices:
 
-```c
+```java
 lcsChoices: Map<Inputs, Choices>
 ```
 

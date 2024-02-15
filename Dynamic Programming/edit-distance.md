@@ -83,7 +83,7 @@ If both strings are not empty, we will try to **insert**, **delete**, or **repla
     
     If we insert a $\tt Y$ at the questions mark, we have an aligned column. Then we can move to the "next" by considering the column to the left. 
     
-    Maybe we can do this by $\texttt{i -= 1, j -= 1}$, now we are here:
+    Maybe we can do this by `i -= 1, j -= 1`, now we are here:
     
     $$
     \begin{matrix}
