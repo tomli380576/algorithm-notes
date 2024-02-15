@@ -4,7 +4,7 @@ order: 96
 
 # Pretty Printing
 
-[!badge size="l" variant="warning" text="Leetcode" icon="../assets/leetcode.svg"](https://leetcode.com/problems/text-justification/description/)
+[!badge size="l" variant="warning" text="Leetcode (greedy ver.)" icon="../assets/leetcode.svg"](https://leetcode.com/problems/text-justification/description/)
 
 > **Question.** Given an array of `N` words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that any individual word can fit on one line.
 > 
@@ -42,19 +42,19 @@ To avoid weird indexing problems, let’s define a **break** at index $i$ to mea
 To keep track of how many words are remaining, we need an index `j` to indicate **the last word** that we need to place onto the paper. So the function looks like:
 
 :::center
-`PrettyPrint(j: int) -> int`
+`PrettyPrint(j: int) -> int`{.language-c .inline-code}
 :::
 
 and the initial call will be:
 
 :::center
-`PrettyPrint(N)`
+`PrettyPrint(N)`{.language-c .inline-code}
 :::
 
-There’s only 1 base case hereL: when there are no words, then there’s no cost, return 0.
+There’s only 1 base case here: when there are no words, then there’s no cost, return 0.
 
 :::center
-`PrettyPrint(0) = 0`
+`PrettyPrint(0) = 0`{.language-c .inline-code}
 :::
 
 In this case we are scanning from the last word to the first word, but reversing the scanning order also works. Flip the base case and initial call accordingly.
@@ -109,7 +109,7 @@ const pageWidth = ...
 const words = [...]
 
 function Extras(i: int, j: int) -> int:
-	numSpacesBetweenWords = j - i
+	numSpaces = j - i
 	numLetters = 0
 
 	for word in words:
@@ -191,7 +191,7 @@ const pageWidth = ...
 
 
 function Extras(i: int, j: int) -> int:
-	numSpacesBetweenWords = j - i
+	numSpaces = j - i
 	numLetters = 0
 
 	for word in words:
@@ -221,7 +221,7 @@ function PrettyPrint(j) -> int:
 	return best
 ```
 
-Don’t forget $i\red{-1}$ in the recursive call, otherwise some words are considered multiple times.
+Don’t forget $i\red{-1}$ in the recursive call, otherwise we will call `PrettyPrint(j)` again when `i == j`, which leads to infinite recursion.
 
 ### :icon-code: 1.5 Python. Backtracking Pretty Printing
 
@@ -236,6 +236,8 @@ Don’t forget $i\red{-1}$ in the recursive call, otherwise some words are consi
 Make sure you feel comfortable with the brute force solution before moving on to section 2.
 
 !!!
+
+---
 
 ## 2. Convert to Dynamic Programming
 
@@ -253,10 +255,12 @@ $$
 
 Unwrapping the $\min$ call shows that $\text{PrettyPrint}(j)$ needs: `@Hint` Plug in possible values of $i$.
 
-- $\text{PrettyPrint}(0)$
-- $\text{PrettyPrint}(1)$
-- …
-- $\text{PrettyPrint}(j-1)$
+$$
+\text{PrettyPrint}(0)\\
+\text{PrettyPrint}(1)\\
+\hspace{0.5em} \vdots\\
+\text{PrettyPrint}(j-1)
+$$
 
 We need to compute the function results of the **smaller** $j$’s first, thus the order of evaluation for $j$ goes in **ascending order**.
 
@@ -308,18 +312,25 @@ function PrettyPrint_DP(words[1...N], page_width) -> int:
 
 Time complexity is $O(n^3)$ and space complexity is $O(n)$.
 
+!!!success Implementation Tip
+If handling special indices like 0, -1 feels cumbersome, we can use a map.
+<p style="margin-top: 1.5rem"></p>
+
+```py
+dpTable = {-1: 0}
+```
+!!!
+
 ## ❖ 3. Memoizing `LineCost` and `Extras`
 
-Calling $\text{LineCost}$ inside the nested for loops can be expensive, so we should isolate that from the main memoization loop.
-
-$\text{LineCost}$ needs 2 parameters, so we can use a 2D array. But directly going through all combinations of $i, j$ doesn’t really help because that’s still $O(n^3)$
+Calling `LineCost` inside nested for loops can be expensive, so we should isolate that from the main memoization loop. Since `LineCost` needs 2 parameters, we can use a 2D array to memoize the results. But directly going through all combinations of $i, j$ doesn’t really help because that’s still $O(n^3)$
 
 ```c
-lineCost = Array(shape=(N + 1, N + 1))
+lineCost = Array(shape=(N, N))
 
 for i = 1 to N:
 	for j = 1 to N:
-		lineCost[i, j] =...// normal LineCost evaulation here is O(n)
+		lineCost[i, j] = ...// normal LineCost evaluation here is O(n)
 
 // total work is still O(n^3)
 ```
@@ -337,13 +348,13 @@ We can assume the $\text{len}$ function for finding the number of characters is 
 The base case is a single word:
 
 :::center
-`Extras(i, i) = page_width - len(words[i])`
+`Extras(i, i) = page_width - len(words[i])`{.language-c .inline-code}
 :::
 
 $\text{Extras}(i, j)$ requires $\text{Extras}(i, j-1)$, so the order of evaluation goes in **ascending order**:
 
 ```c
-extras = Array(shape=(N + 1, N + 1))
+extras = Array(shape=(N, N))
 for i = 1 to N:
 	for j = i to N:
 		if j == i:　// Extras(i, i)
@@ -384,78 +395,78 @@ $$
 
 +++ Pseudocode
 ```c
-function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -> int:
+function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
 	totalCost = Array(shape=(N + 1))
 	// base case: PrettyPrint(0) = 0
 	totalCost[0] = 0 
 	
 	// Memoizing Extras(i, j)
-	extras = Array(shape=(N + 1, N + 1))
+	extras = Array(shape=(N, N))
 	for i = 1 to N:
 		for j = i to N:
 			if j == i: // base case: Extras(i, i)
 				extras[i, j] = pageWidth - words[i].length
 			else:
-				extras[i, j] = extras[i, j-1] - 1 - words[j].length
+				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
 	
 	// Memoizing the main recurrence
 	for j = 1 to N: // PrettyPrint(1), PrettyPrint(2) ... PrettyPrint(N)
-		best = Infinity // simulate min(…)
+		bestCost = Infinity
 
 		for i = 1 to j:
 			// simulate LineCost(i, j)
+			lineCost = Infinity // default to inf for emptySpaces < 0
+			emptySpaces = extras[i, j]
+			
+            if emptySpaces >= 0:
+				if j == N:
+					lineCost = 0 // last line is free
+				else:
+					lineCost = pow(emptySpaces, 3)
+			
+            // Simulate PrettyPrint(i - 1) + LineCost(i, j)
+			breakCost = totalCost[i - 1] + lineCost
+			bestCost = min(bestCost, breakCost) 
+
+		totalCost[j] = bestCost // the result of PrettyPrint(j)
+	
+	// Initial call: PrettyPrint(N)
+	return totalCost[N]
+```    
++++ No Comment Version
+
+```c
+function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
+	totalCost = Array(shape=(N + 1))
+	totalCost[0] = 0 
+	
+	extras = Array(shape=(N, N))
+	for i = 1 to N:
+		for j = i to N:
+			if j == i:
+				extras[i, j] = pageWidth - words[i].length
+			else:
+				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
+	
+	for j = 1 to N:
+		bestCost = Infinity
+
+		for i = 1 to j:
 			lineCost = Infinity
 			emptySpaces = extras[i, j]
 			
-            if numTrailingSpaces > 0:
+            if emptySpaces >= 0:
 				if j == N:
 					lineCost = 0
 				else:
 					lineCost = pow(emptySpaces, 3)
 			
-            // Simulate PrettyPrint(i-1) + LineCost(i, j)
-			breakHereCost = totalCost[i - 1] + lineCost
-			best = min(breakHereCost, best) 
+			breakCost = totalCost[i - 1] + lineCost
+			bestCost = min(bestCost, breakCost) 
 
-		totalCost[j] = best // the result of PrettyPrint(j)
+		totalCost[j] = bestCost
 	
-	// Initial call: PrettyPrint(N)
 	return totalCost[N]
-```    
-+++ No comment version
-
-```c
-function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -> int:
-    totalCost = Array(shape=(N + 1))
-    totalCost[0] = 0 
-    
-    extras = Array(shape=(N + 1, N + 1))
-    for i = 1 to N:
-        for j = i to N:
-            if j == i:
-                extras[i, j] = pageWidth - words[i].length
-            else:
-                extras[i, j] = extras[i, j-1] - 1 - words[j].length
-    
-    for j = 1 to N:
-        best = Infinity
-        
-        for i = 1 to j:
-            lineCost = Infinity
-            numTrailingSpaces = extras[i, j]
-            
-            if numTrailingSpaces > 0:
-                if j == N:
-                    lineCost = 0
-                else:
-                    lineCost = pow(numTrailingSpaces, 3)
-            
-            breakHereCost = totalCost[i - 1] + lineCost
-            best = min(breakHereCost, best) 
-       
-        totalCost[j] = best 
-    
-    return totalCost[N]
 ```
 
 +++
