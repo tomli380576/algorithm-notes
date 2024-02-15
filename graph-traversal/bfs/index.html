@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761275747291">
+    <meta name="turbo-root" content="/algorithm-notes">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761351783491">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -14,31 +15,31 @@
     <meta name="description" content="We can implement BFS from whatever first search by using a Queue.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/graph-traversal/bfs/">
+    <link rel="canonical" href="https://tomli380576.github.io/algorithm-notes/graph-traversal/bfs/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/graph-traversal/bfs/">
+    <meta property="og:url" content="https://tomli380576.github.io/algorithm-notes/graph-traversal/bfs/">
     <meta property="og:title" content="Breadth First Search (122A)">
     <meta property="og:description" content="We can implement BFS from whatever first search by using a Queue.">
-    <meta property="og:image" content="/assets/bfs_dfs/bfs-ex1.png">
+    <meta property="og:image" content="https://tomli380576.github.io/algorithm-notes/assets/bfs_dfs/bfs-ex1.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/graph-traversal/bfs/">
+    <meta property="twitter:url" content="https://tomli380576.github.io/algorithm-notes/graph-traversal/bfs/">
     <meta property="twitter:title" content="Breadth First Search (122A)">
     <meta property="twitter:description" content="We can implement BFS from whatever first search by using a Queue.">
-    <meta property="twitter:image" content="/assets/bfs_dfs/bfs-ex1.png">
+    <meta property="twitter:image" content="https://tomli380576.github.io/algorithm-notes/assets/bfs_dfs/bfs-ex1.png">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761275747291" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.761351783491" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761275747291" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761351783491" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761275747291" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761275747291" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761351783491" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761351783491" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -264,7 +265,7 @@
 		mark v as NEW
 
 	queue = Queue()
-	put start in queue
+	queue.put(start)
 	mark start as VISITED
 
 	while queue is not empty:
@@ -273,7 +274,7 @@
 		for each adjacent vertex v:
 			if v is NEW:
 				mark v as VISITED
-				put v in queue</code></pre>
+				queue.put(v)</code></pre>
 </doc-codeblock></div>
     </div>
     <div class="docs-columns-code docs-columns-content">
@@ -283,7 +284,7 @@
 		mark v as NEW
 
 	queue = Queue()
-	put start in queue
+	queue.put(start)
 
 	while queue is not empty:
 		u = queue.popFirst()
@@ -292,7 +293,7 @@
 			process(u)
 			mark u as VISITED
 			for each adjacent vertex v:
-				put v in queue</code></pre>
+				queue.put(v)</code></pre>
 </doc-codeblock></div>
     </div>
 </div>
@@ -323,7 +324,7 @@
 		DISCOVER_TIME[v] = Infinity
 	
 	DISCOVER_TIME[start] = 0
-	put start in queue
+	queue.put(start)
 
 	while queue is not empty:
 		u = queue.popFirst()
@@ -331,7 +332,7 @@
 			if DISCOVER_TIME[v] == Infinity:
 				process(v) // arbitrary subroutine
 				DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
-				put v in queue</code></pre>
+				queue.put(v)</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="observing-bfss-behavior">
     <h2>
@@ -353,20 +354,20 @@
 	for each vertex v in G:
 		mark v as NEW
 
-	put start in queue
-	put TOKEN in queue
+	queue.put(v)
+	queue.put(TOKEN)
 
 	while queue has at least 1 vertex:
 		u = queue.popFirst()
 		if u == TOKEN:
 			print(TOKEN)
-			put u in queue
+			queue.put(u)
 		else:
 			if u is NEW:
 				process(u)
 				mark u as VISITED
 				for each adjacent vertex v:
-						put v in queue</code></pre>
+					queue.put(v)</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-red-500"></div>
@@ -396,19 +397,20 @@
 		DISCOVER_TIME[v] = Infinity
 	
 	DISCOVER_TIME[start] = 0
-	put start in queue
-	put TOKEN in queue
+	queue.put(v)
+	queue.put(TOKEN)
 
 	while queue has at least 1 vertex:
 		u = queue.popFirst()
 		if u = TOKEN:
-			put u in queue
+			print(TOKEN)
+			queue.put(u)
 		else:
 			for all edges u→v:
 				if DISCOVER_TIME[v] == Infinity:
 					process(v)
 					DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
-					put v in queue</code></pre>
+					queue.put(v)</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-red-500"></div>

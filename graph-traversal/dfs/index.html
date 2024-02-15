@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761275747291">
+    <meta name="turbo-root" content="/algorithm-notes">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761351783491">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -14,31 +15,31 @@
     <meta name="description" content="Similar to whatever first search, we assign each vertex a \\purple{\\texttt{STATUS}}.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/graph-traversal/dfs/">
+    <link rel="canonical" href="https://tomli380576.github.io/algorithm-notes/graph-traversal/dfs/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/graph-traversal/dfs/">
+    <meta property="og:url" content="https://tomli380576.github.io/algorithm-notes/graph-traversal/dfs/">
     <meta property="og:title" content="Recursive Depth First Search (122A)">
     <meta property="og:description" content="Similar to whatever first search, we assign each vertex a \\purple{\\texttt{STATUS}}.">
-    <meta property="og:image" content="/assets/bfs_dfs/dfs-edge-classification.png">
+    <meta property="og:image" content="https://tomli380576.github.io/algorithm-notes/assets/bfs_dfs/dfs-edge-classification.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/graph-traversal/dfs/">
+    <meta property="twitter:url" content="https://tomli380576.github.io/algorithm-notes/graph-traversal/dfs/">
     <meta property="twitter:title" content="Recursive Depth First Search (122A)">
     <meta property="twitter:description" content="Similar to whatever first search, we assign each vertex a \\purple{\\texttt{STATUS}}.">
-    <meta property="twitter:image" content="/assets/bfs_dfs/dfs-edge-classification.png">
+    <meta property="twitter:image" content="https://tomli380576.github.io/algorithm-notes/assets/bfs_dfs/dfs-edge-classification.png">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761275747291" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.761351783491" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761275747291" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761351783491" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761275747291" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761275747291" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761351783491" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761351783491" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -266,21 +267,21 @@
 <template #title>Barebones Version</template>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-c"><code v-pre class="language-c">// main routine
-function DFS_Search(G):
+function DfsSearch(G):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			DFS_Visit(v)
+			DfsVisit(v)
 
-function DFS_Visit(u):
+function DfsVisit(u):
 	mark u as ACTIVE
 	// process when u is ACTIVE
 	Preprocess(u) 
 	
 	for each adjacent vertex v:
 		if v is NEW: 
-			DFS_Visit(v) 
+			DfsVisit(v) 
 
 	mark u as FINISHED
 	// process when u is FINISHED
@@ -297,14 +298,14 @@ DISCOVER_TIME = {}
 FINISH_TIME = {}
 
 // main routine
-function DFS_Search(G):
+function DfsSearch(G):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			DFS_Visit(v)
+			DfsVisit(v)
 
-function DFS_Visit(u):
+function DfsVisit(u):
 	mark u as ACTIVE
 	time++
 	DISCOVER_TIME[u] = time
@@ -312,7 +313,7 @@ function DFS_Visit(u):
 	
 	for each adjacent vertex v:
 		if v is NEW: 
-			DFS_Visit(v) 
+			DfsVisit(v) 
 
 	mark u as FINISHED
 	time++
@@ -346,14 +347,14 @@ function DFS_Visit(u):
     </div>
     <div class="docs-columns-code docs-columns-content border-r border-gray-200 dark:border-dark-650">
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function WFS_Depth(G):
+<pre class="language-c"><code v-pre class="language-c">function WfsDepth(G: Graph):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			WFS_Visit(G, v)
+			WfsVisit(G, v)
 			
-function WFS_Visit(G, start):
+function WfsVisit(G: Graph, start: Vertex):
 	stack = Stack()
 	stack.put(start)
 
@@ -368,37 +369,36 @@ function WFS_Visit(G, start):
     </div>
     <div class="docs-columns-code docs-columns-content">
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function DFS_Search(G):
+<pre class="language-c"><code v-pre class="language-c">function DfsSearch(G: Graph):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			DFS_Visit(v)
+			DfsVisit(v)
 
-function DFS_Visit(u):
+function DfsVisit(u: Vertex):
 	mark u as ACTIVE
 	Preprocess(u)
 	
 	for each adjacent vertex v:
 		if v is NEW: 
-			DFS_Visit(v) 
+			DfsVisit(v) 
 
 	mark u as FINISHED
-	Postprocess(u)
-</code></pre>
+	Postprocess(u)</code></pre>
 </doc-codeblock></div>
     </div>
 </div>
-<p>The recursive version replaces <code v-pre>stack.put(v)</code> with the recursive call <code v-pre>DFS_Visit(v)</code>.</p>
+<p>The recursive version replaces <code v-pre>stack.put(v)</code> with the recursive call <code v-pre>DfsVisit(v)</code>.</p>
 <p><code v-pre>while stack is not empty</code> is the same as coming back to the initial call (empty call stack).</p>
-<p>Every time <code v-pre>DFS_Visit(v)</code> is called in the main routine, a new call stack is initialized. WFS does this by calling the stack constructor.</p>
+<p>Every time <code v-pre>DfsVisit(v)</code> is called in the main routine, a new call stack is initialized. WFS does this by calling the stack constructor.</p>
 <doc-anchor-target id="runtime-analysis">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#runtime-analysis">#</doc-anchor-trigger>
         <span>Runtime Analysis</span>
     </h2>
 </doc-anchor-target>
-<p>For a graph with <span class="math">V</span> vertices and <span class="math">E</span> edges, we call the <code v-pre>DFS_Visit(v)</code> function <span class="math">V</span> times in the main routine. The total number of recursive calls inside <code v-pre>DFS_Visit(v)</code> is <span class="math">E</span> times because we will traverse each edge exactly once, so <span class="math">E</span> times for the entire graph.</p>
+<p>For a graph with <span class="math">V</span> vertices and <span class="math">E</span> edges, we call the <code v-pre>DfsVisit(v)</code> function <span class="math">V</span> times in the main routine. The total number of recursive calls inside <code v-pre>DfsVisit(v)</code> is <span class="math">E</span> times because we will traverse each edge exactly once, so <span class="math">E</span> times for the entire graph.</p>
 <p>Therefore the total runtime is <span class="math">O(V+E)</span>.</p>
 <doc-anchor-target id="classifying-edges-and-cycle-detection">
     <h2>
