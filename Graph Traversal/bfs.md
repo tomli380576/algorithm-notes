@@ -17,7 +17,7 @@ function BFS_Search(G, start):
 		mark v as NEW
 
 	queue = Queue()
-	put start in queue
+	queue.put(start)
 	mark start as VISITED
 
 	while queue is not empty:
@@ -26,7 +26,7 @@ function BFS_Search(G, start):
 		for each adjacent vertex v:
 			if v is NEW:
 				mark v as VISITED
-				put v in queue
+				queue.put(v)
 ```
 
 ||| Queue based WhateverFirstSearch
@@ -37,7 +37,7 @@ function WFS_Breadth(G, start):
 		mark v as NEW
 
 	queue = Queue()
-	put start in queue
+	queue.put(start)
 
 	while queue is not empty:
 		u = queue.popFirst()
@@ -46,7 +46,7 @@ function WFS_Breadth(G, start):
 			process(u)
 			mark u as VISITED
 			for each adjacent vertex v:
-				put v in queue
+				queue.put(v)
 ```
 |||
 
@@ -69,7 +69,7 @@ function BFS_Search(G, start):
 		DISCOVER_TIME[v] = Infinity
 	
 	DISCOVER_TIME[start] = 0
-	put start in queue
+	queue.put(start)
 
 	while queue is not empty:
 		u = queue.popFirst()
@@ -77,7 +77,7 @@ function BFS_Search(G, start):
 			if DISCOVER_TIME[v] == Infinity:
 				process(v) // arbitrary subroutine
 				DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
-				put v in queue
+				queue.put(v)
 ```
 
 ##  Observing BFS’s Behavior
@@ -94,20 +94,20 @@ function BFS_WithToken(G, start):
 	for each vertex v in G:
 		mark v as NEW
 
-	put start in queue
-	put TOKEN in queue
+	queue.put(v)
+	queue.put(TOKEN)
 
 	while queue has at least 1 vertex:
 		u = queue.popFirst()
 		if u == TOKEN:
 			print(TOKEN)
-			put u in queue
+			queue.put(u)
 		else:
 			if u is NEW:
 				process(u)
 				mark u as VISITED
 				for each adjacent vertex v:
-						put v in queue
+					queue.put(v)
 ```
 
 !!!danger
@@ -125,19 +125,20 @@ function BFS_WithToken(G, start):
 		DISCOVER_TIME[v] = Infinity
 	
 	DISCOVER_TIME[start] = 0
-	put start in queue
-	put TOKEN in queue
+	queue.put(v)
+	queue.put(TOKEN)
 
 	while queue has at least 1 vertex:
 		u = queue.popFirst()
 		if u = TOKEN:
-			put u in queue
+			print(TOKEN)
+			queue.put(u)
 		else:
 			for all edges u→v:
 				if DISCOVER_TIME[v] == Infinity:
 					process(v)
 					DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
-					put v in queue
+					queue.put(v)
 ```
 
 !!!danger

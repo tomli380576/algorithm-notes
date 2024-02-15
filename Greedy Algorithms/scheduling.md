@@ -2,9 +2,7 @@
 
 >  **Question.** Given a list of class schedules consisting of start times $S$ and end times $F$, what’s the maximum amount of classes we can take?
 
-<!-- - $S:\texttt{\blue{Map}\gray{<\blue{string}, \blue{Time}>}}$,  -->
-
-`s: Map<string, Time>`    
+`s: Map<String, Time>`
 :   a map of start times of classes, where the key is the class name and the value is the start time.
 
 `f: Map<string, Time>`
@@ -18,7 +16,7 @@ We want to find `List<string>`, the longest list of classes we can take without 
 
 Well no but actually yes because this problem can be solved recursively.
 
-![](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/99ea6da8-3fc7-40a2-a30c-613ff9282305/Untitled.png)
+![](/assets/greedy/wellnobutyes.png)
 
 We either take a class or skip. Since we want the maximum amount of classes, this problem falls under the [best solution]() case.
 
@@ -41,7 +39,7 @@ Convert to expressions:
 
 $$
 \text{Schedule}(curr, prev) = \begin{cases}
-0 & \text{if $S$ is empty}\\
+0 & \text{if $s$ is empty}\\ 
 \text{Schedule}(curr.\text{next}, prev) & \text{if $s[curr]> f[prev]$}
 \\
 \max\left.\begin{cases}
@@ -92,9 +90,7 @@ function GreedySchedule(s[1...n], f[1...n]) -> List<string>:
 	return schedule
 ```
 
-If we use merge/quick sort, this algorithm is $O(n\log n  + n) = O(n\log n)$.
-
-Note that this greedy strategy won’t work if the classes are weighted.
+If we use merge/quick sort, this algorithm is $O(n\log n  + n) = O(n\log n)$. Note that this greedy strategy won’t work if the classes are weighted.
 
 ### 2.1 Python. Greedy Scheduling
 

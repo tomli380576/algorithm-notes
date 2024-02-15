@@ -113,15 +113,16 @@ To handle [disconnected graphs](https://mathworld.wolfram.com/DisconnectedGraph.
 
 We will make a small wrapper.
 
-```c #1-6
-function WhateverFirst_Wrapper(G: Graph):
+```c #1-7
+// main routine
+function WhateverFirstSearch(G: Graph):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			WhateverFirst_visit(G, v)
+			WhateverFirstVisit(G, v)
 			
-function WhateverFirst_Visit(G: Graph, start: Vertex):
+function WhateverFirstVisit(G: Graph, start: Vertex):
 	bag = Bag<Vertex>()
 	bag.put(start)
 

@@ -19,21 +19,21 @@ Similar to whatever first search, we assign each vertex a $\purple{\texttt{STATU
 
 ```c
 // main routine
-function DFS_Search(G):
+function DfsSearch(G):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			DFS_Visit(v)
+			DfsVisit(v)
 
-function DFS_Visit(u):
+function DfsVisit(u):
 	mark u as ACTIVE
 	// process when u is ACTIVE
 	Preprocess(u) 
 	
 	for each adjacent vertex v:
 		if v is NEW: 
-			DFS_Visit(v) 
+			DfsVisit(v) 
 
 	mark u as FINISHED
 	// process when u is FINISHED
@@ -50,14 +50,14 @@ DISCOVER_TIME = {}
 FINISH_TIME = {}
 
 // main routine
-function DFS_Search(G):
+function DfsSearch(G):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			DFS_Visit(v)
+			DfsVisit(v)
 
-function DFS_Visit(u):
+function DfsVisit(u):
 	mark u as ACTIVE
 	time++
 	DISCOVER_TIME[u] = time
@@ -65,7 +65,7 @@ function DFS_Visit(u):
 	
 	for each adjacent vertex v:
 		if v is NEW: 
-			DFS_Visit(v) 
+			DfsVisit(v) 
 
 	mark u as FINISHED
 	time++
@@ -86,14 +86,14 @@ function DFS_Visit(u):
 
 |||WFS with Stack
 ```c
-function WFS_Depth(G):
+function WfsDepth(G: Graph):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			WFS_Visit(G, v)
+			WfsVisit(G, v)
 			
-function WFS_Visit(G, start):
+function WfsVisit(G: Graph, start: Vertex):
 	stack = Stack()
 	stack.put(start)
 
@@ -107,39 +107,36 @@ function WFS_Visit(G, start):
 ```
 |||Recursive
 ```c
-function DFS_Search(G):
+function DfsSearch(G: Graph):
 	for each vertex v in G:
 		mark v as NEW
 	for each vertex v in G:
 		if v is NEW:
-			DFS_Visit(v)
+			DfsVisit(v)
 
-function DFS_Visit(u):
+function DfsVisit(u: Vertex):
 	mark u as ACTIVE
 	Preprocess(u)
 	
 	for each adjacent vertex v:
 		if v is NEW: 
-			DFS_Visit(v) 
+			DfsVisit(v) 
 
 	mark u as FINISHED
 	Postprocess(u)
-
 ```
 |||
 
 
-The recursive version replaces `stack.put(v)` with the recursive call `DFS_Visit(v)`.
+The recursive version replaces `stack.put(v)` with the recursive call `DfsVisit(v)`.
 
 `while stack is not empty` is the same as coming back to the initial call (empty call stack).
 
-Every time `DFS_Visit(v)` is called in the main routine, a new call stack is initialized. WFS does this by calling the stack constructor.
-
-
+Every time `DfsVisit(v)` is called in the main routine, a new call stack is initialized. WFS does this by calling the stack constructor.
 
 ## Runtime Analysis
 
-For a graph with $V$ vertices and $E$ edges, we call the `DFS_Visit(v)` function $V$ times in the main routine. The total number of recursive calls inside `DFS_Visit(v)` is $E$ times because we will traverse each edge exactly once, so $E$ times for the entire graph.
+For a graph with $V$ vertices and $E$ edges, we call the `DfsVisit(v)` function $V$ times in the main routine. The total number of recursive calls inside `DfsVisit(v)` is $E$ times because we will traverse each edge exactly once, so $E$ times for the entire graph.
 
 Therefore the total runtime is $O(V+E)$.
 
