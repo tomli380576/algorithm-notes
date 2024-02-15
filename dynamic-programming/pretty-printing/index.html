@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761175699947">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761274465039">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -31,19 +31,25 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761175699947" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.761274465039" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761175699947" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761274465039" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761175699947" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761175699947" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761274465039" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761274465039" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
     <meta content="Tommy's Algorithm Notes" property="og:title" />
     <meta content="My Notes for 122A, 122B, and more" property="og:description" />
-    <meta content="https://tomli380576.github.io/algorithm-notes/" property="og:url" />
-    <meta content="https://tomli380576.github.io/algorithm-notes/assets/lmao.png" property="og:image" />
+    <meta
+      content="https://tomli380576.github.io/algorithm-notes/"
+      property="og:url"
+    />
+    <meta
+      content="https://tomli380576.github.io/algorithm-notes/assets/lmao.png"
+      property="og:image"
+    />
     <meta content="#0989f7" data-react-helmet="true" name="theme-color" />
 
     <style>
@@ -85,6 +91,15 @@
       }
       code {
         font-family: "Fira Code", monospace !important;
+        /* font-size: 14px !important;; */
+      }
+      .inline-code {
+        background-color: #353535;
+        border-color: rgb(66, 66, 66);
+        border-radius: 0.25rem;
+        border-width: 1px;
+        line-height: 1;
+        padding: 4px 8px;
       }
     </style>
 
@@ -228,7 +243,7 @@
 </doc-anchor-target>
 <p><a href="https://leetcode.com/problems/text-justification/description/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-yellow-900 bg-yellow-100 border border-yellow-100 hover:border-yellow-300 dark:hover:bg-yellow-300 transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
     <span><img class="mb-px inline-flex mr-2" width="22" src="../../assets/leetcode.svg"></span>
-    <span>Leetcode</span>
+    <span>Leetcode (greedy ver.)</span>
 </a></p>
 <blockquote>
 <p><strong>Question.</strong> Given an array of <code v-pre>N</code> words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that any individual word can fit on one line.</p>
@@ -280,13 +295,13 @@
     </h3>
 </doc-anchor-target>
 <p>To keep track of how many words are remaining, we need an index <code v-pre>j</code> to indicate <strong>the last word</strong> that we need to place onto the paper. So the function looks like:</p>
-<div class="center"><p><code v-pre>PrettyPrint(j: int) -&gt; int</code></p>
+<div class="center"><p><code v-pre class="language-c inline-code">PrettyPrint(j: int) -&gt; int</code></p>
 </div>
 <p>and the initial call will be:</p>
-<div class="center"><p><code v-pre>PrettyPrint(N)</code></p>
+<div class="center"><p><code v-pre class="language-c inline-code">PrettyPrint(N)</code></p>
 </div>
-<p>There’s only 1 base case hereL: when there are no words, then there’s no cost, return 0.</p>
-<div class="center"><p><code v-pre>PrettyPrint(0) = 0</code></p>
+<p>There’s only 1 base case here: when there are no words, then there’s no cost, return 0.</p>
+<div class="center"><p><code v-pre class="language-c inline-code">PrettyPrint(0) = 0</code></p>
 </div>
 <p>In this case we are scanning from the last word to the first word, but reversing the scanning order also works. Flip the base case and initial call accordingly.</p>
 <doc-anchor-target id="12-line-cost">
@@ -342,7 +357,7 @@
 const words = [...]
 
 function Extras(i: int, j: int) -&gt; int:
-	numSpacesBetweenWords = j - i
+	numSpaces = j - i
 	numLetters = 0
 
 	for word in words:
@@ -417,7 +432,7 @@ const pageWidth = ...
 
 
 function Extras(i: int, j: int) -&gt; int:
-	numSpacesBetweenWords = j - i
+	numSpaces = j - i
 	numLetters = 0
 
 	for word in words:
@@ -446,7 +461,7 @@ function PrettyPrint(j) -&gt; int:
 	
 	return best</code></pre>
 </doc-codeblock></div>
-<p>Don’t forget <span class="math">i\red{-1}</span> in the recursive call, otherwise some words are considered multiple times.</p>
+<p>Don’t forget <span class="math">i\red{-1}</span> in the recursive call, otherwise we will call <code v-pre>PrettyPrint(j)</code> again when <code v-pre>i == j</code>, which leads to infinite recursion.</p>
 <doc-anchor-target id="1-5-python-backtracking-pretty-printing">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#1-5-python-backtracking-pretty-printing">#</doc-anchor-trigger>
@@ -480,6 +495,7 @@ function PrettyPrint(j) -&gt; int:
         </div>
     </div>
 </div>
+<hr>
 <doc-anchor-target id="2-convert-to-dynamic-programming">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#2-convert-to-dynamic-programming">#</doc-anchor-trigger>
@@ -499,12 +515,10 @@ function PrettyPrint(j) -&gt; int:
 
 \end{cases}</pre></div>
 <p>Unwrapping the <span class="math">\min</span> call shows that <span class="math">\text{PrettyPrint}(j)</span> needs: <code v-pre>@Hint</code> Plug in possible values of <span class="math">i</span>.</p>
-<ul>
-<li><span class="math">\text{PrettyPrint}(0)</span></li>
-<li><span class="math">\text{PrettyPrint}(1)</span></li>
-<li>…</li>
-<li><span class="math">\text{PrettyPrint}(j-1)</span></li>
-</ul>
+<div class="math"><pre>\text{PrettyPrint}(0)\\
+\text{PrettyPrint}(1)\\
+\hspace{0.5em} \vdots\\
+\text{PrettyPrint}(j-1)</pre></div>
 <p>We need to compute the function results of the <strong>smaller</strong> <span class="math">j</span>’s first, thus the order of evaluation for <span class="math">j</span> goes in <strong>ascending order</strong>.</p>
 <p>The function only needs 1 parameter, so we can use a 1D array.</p>
 <doc-anchor-target id="22-pseudocode">
@@ -556,20 +570,40 @@ function PrettyPrint(j) -&gt; int:
 </doc-tab>
 </doc-tabs>
 <p>Time complexity is <span class="math">O(n^3)</span> and space complexity is <span class="math">O(n)</span>.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-green-500"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-green-500" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M21 9.09c-.55 0-1 .45-1 1v.92c0 4.96-4.04 8.99-9 8.99-4.97 0-9-4.04-9-9s4.04-9 9-9c1.27 0 2.5.26 3.66.78.51.22 1.1 0 1.32-.51.23-.5 0-1.1-.51-1.32C14.06.32 12.56 0 11.01 0H11C4.94 0 0 4.93 0 10.99 0 17.06 4.93 22 10.99 22H11c6.06 0 11-4.93 11-10.99v-.92c0-.56-.45-1-1-1z"></path>
+                    <path d="M8.71 9.31a.996.996 0 10-1.41 1.41l3 3c.19.19.44.29.71.29.27 0 .52-.11.71-.29l10-10.01a.996.996 0 10-1.41-1.41L11 11.6 8.71 9.31z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Implementation Tip</h5>
+<p>If handling special indices like 0, -1 feels cumbersome, we can use a map.</p>
+<p style="margin-top: 1.5rem"></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python"><code v-pre class="language-python">dpTable = {-1: 0}</code></pre>
+</doc-codeblock></div>
+        </div>
+    </div>
+</div>
 <doc-anchor-target id="-3-memoizing-linecost-and-extras">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#-3-memoizing-linecost-and-extras">#</doc-anchor-trigger>
         <span>❖ 3. Memoizing <code v-pre>LineCost</code> and <code v-pre>Extras</code></span>
     </h2>
 </doc-anchor-target>
-<p>Calling <span class="math">\text{LineCost}</span> inside the nested for loops can be expensive, so we should isolate that from the main memoization loop.</p>
-<p><span class="math">\text{LineCost}</span> needs 2 parameters, so we can use a 2D array. But directly going through all combinations of <span class="math">i, j</span> doesn’t really help because that’s still <span class="math">O(n^3)</span></p>
+<p>Calling <code v-pre>LineCost</code> inside nested for loops can be expensive, so we should isolate that from the main memoization loop. Since <code v-pre>LineCost</code> needs 2 parameters, we can use a 2D array to memoize the results. But directly going through all combinations of <span class="math">i, j</span> doesn’t really help because that’s still <span class="math">O(n^3)</span></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">lineCost = Array(shape=(N + 1, N + 1))
+<pre class="language-c"><code v-pre class="language-c">lineCost = Array(shape=(N, N))
 
 for i = 1 to N:
 	for j = 1 to N:
-		lineCost[i, j] =...// normal LineCost evaulation here is O(n)
+		lineCost[i, j] = ...// normal LineCost evaluation here is O(n)
 
 // total work is still O(n^3)</code></pre>
 </doc-codeblock></div>
@@ -578,11 +612,11 @@ for i = 1 to N:
 <div class="math"><pre>\underbrace{\text{Extras}(i, j)}_{\text{including }\texttt{word[j]}} = \underbrace{\text{Extras}(i, j-1)}_{\text{without }\texttt{word[j]}} - \underbrace{1}_\text{space} - \underbrace{\text{len(words[$j$])}}_\text{\texttt{word[j]} itself}</pre></div>
 <p>We can assume the <span class="math">\text{len}</span> function for finding the number of characters is <span class="math">O(1)</span> because the work is done before the <span class="math">\text{PrettyPrint}</span> routine starts.</p>
 <p>The base case is a single word:</p>
-<div class="center"><p><code v-pre>Extras(i, i) = page_width - len(words[i])</code></p>
+<div class="center"><p><code v-pre class="language-c inline-code">Extras(i, i) = page_width - len(words[i])</code></p>
 </div>
 <p><span class="math">\text{Extras}(i, j)</span> requires <span class="math">\text{Extras}(i, j-1)</span>, so the order of evaluation goes in <strong>ascending order</strong>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">extras = Array(shape=(N + 1, N + 1))
+<pre class="language-c"><code v-pre class="language-c">extras = Array(shape=(N, N))
 for i = 1 to N:
 	for j = i to N:
 		if j == i:　// Extras(i, i)
@@ -618,79 +652,79 @@ for i = 1 to N:
 <doc-tab v-cloak id="pseudocode">
 <template #title>Pseudocode</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -&gt; int:
+<pre class="language-c"><code v-pre class="language-c">function PrettyPrintDpFull(words[1...N], pageWidth: int) -&gt; int:
 	totalCost = Array(shape=(N + 1))
 	// base case: PrettyPrint(0) = 0
 	totalCost[0] = 0 
 	
 	// Memoizing Extras(i, j)
-	extras = Array(shape=(N + 1, N + 1))
+	extras = Array(shape=(N, N))
 	for i = 1 to N:
 		for j = i to N:
 			if j == i: // base case: Extras(i, i)
 				extras[i, j] = pageWidth - words[i].length
 			else:
-				extras[i, j] = extras[i, j-1] - 1 - words[j].length
+				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
 	
 	// Memoizing the main recurrence
 	for j = 1 to N: // PrettyPrint(1), PrettyPrint(2) ... PrettyPrint(N)
-		best = Infinity // simulate min(…)
+		bestCost = Infinity
 
 		for i = 1 to j:
 			// simulate LineCost(i, j)
-			lineCost = Infinity
+			lineCost = Infinity // default to inf for emptySpaces &lt; 0
 			emptySpaces = extras[i, j]
 			
-            if numTrailingSpaces &gt; 0:
+            if emptySpaces &gt;= 0:
 				if j == N:
-					lineCost = 0
+					lineCost = 0 // last line is free
 				else:
 					lineCost = pow(emptySpaces, 3)
 			
-            // Simulate PrettyPrint(i-1) + LineCost(i, j)
-			breakHereCost = totalCost[i - 1] + lineCost
-			best = min(breakHereCost, best) 
+            // Simulate PrettyPrint(i - 1) + LineCost(i, j)
+			breakCost = totalCost[i - 1] + lineCost
+			bestCost = min(bestCost, breakCost) 
 
-		totalCost[j] = best // the result of PrettyPrint(j)
+		totalCost[j] = bestCost // the result of PrettyPrint(j)
 	
 	// Initial call: PrettyPrint(N)
 	return totalCost[N]</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 <doc-tab v-cloak id="no-comment-version">
-<template #title>No comment version</template>
+<template #title>No Comment Version</template>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function PrettyPrint_DP_Full(words[1...N], pageWidth: int) -&gt; int:
-    totalCost = Array(shape=(N + 1))
-    totalCost[0] = 0 
-    
-    extras = Array(shape=(N + 1, N + 1))
-    for i = 1 to N:
-        for j = i to N:
-            if j == i:
-                extras[i, j] = pageWidth - words[i].length
-            else:
-                extras[i, j] = extras[i, j-1] - 1 - words[j].length
-    
-    for j = 1 to N:
-        best = Infinity
-        
-        for i = 1 to j:
-            lineCost = Infinity
-            numTrailingSpaces = extras[i, j]
-            
-            if numTrailingSpaces &gt; 0:
-                if j == N:
-                    lineCost = 0
-                else:
-                    lineCost = pow(numTrailingSpaces, 3)
-            
-            breakHereCost = totalCost[i - 1] + lineCost
-            best = min(breakHereCost, best) 
-       
-        totalCost[j] = best 
-    
-    return totalCost[N]</code></pre>
+<pre class="language-c"><code v-pre class="language-c">function PrettyPrintDpFull(words[1...N], pageWidth: int) -&gt; int:
+	totalCost = Array(shape=(N + 1))
+	totalCost[0] = 0 
+	
+	extras = Array(shape=(N, N))
+	for i = 1 to N:
+		for j = i to N:
+			if j == i:
+				extras[i, j] = pageWidth - words[i].length
+			else:
+				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
+	
+	for j = 1 to N:
+		bestCost = Infinity
+
+		for i = 1 to j:
+			lineCost = Infinity
+			emptySpaces = extras[i, j]
+			
+            if emptySpaces &gt;= 0:
+				if j == N:
+					lineCost = 0
+				else:
+					lineCost = pow(emptySpaces, 3)
+			
+			breakCost = totalCost[i - 1] + lineCost
+			bestCost = min(bestCost, breakCost) 
+
+		totalCost[j] = bestCost
+	
+	return totalCost[N]</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 </doc-tabs>
