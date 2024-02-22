@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761353507808">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761880826494">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -34,12 +34,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761353507808" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.761880826494" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761353507808" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761880826494" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761353507808" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761353507808" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761880826494" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761880826494" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -260,7 +260,7 @@
     </div>
     <div class="docs-columns-code docs-columns-content border-r border-gray-200 dark:border-dark-650">
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function BFS_Search(G, start):
+<pre class="language-c"><code v-pre class="language-c">function BfsSearch(G, start):
 	for each vertex v in G:
 		mark v as NEW
 
@@ -279,7 +279,7 @@
     </div>
     <div class="docs-columns-code docs-columns-content">
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-c"><code v-pre class="language-c">function WFS_Breadth(G, start):
+<pre class="language-c"><code v-pre class="language-c">function WfsBreadth(G, start):
 	for each vertex v in G:
 		mark v as NEW
 
@@ -316,22 +316,22 @@
 </doc-anchor-target>
 <p>We can also record &quot;when&quot; a vertex is visited. Each time we see a new vertex, we increment the &quot;time&quot;. The discover time of a vertex starts with <span class="math">\infin</span>.</p>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-c" data-line="2"><code v-pre class="language-c">function BFS_Search(G, start):
-	DISCOVER_TIME = {}
+<pre class="language-c" data-line="2"><code v-pre class="language-c">function BfsSearch(G, start):
+	discover_time = {}
 	queue = Queue()
 
 	for each vertex v in G:
-		DISCOVER_TIME[v] = Infinity
+		discover_time[v] = Infinity
 	
-	DISCOVER_TIME[start] = 0
+	discover_time[start] = 0
 	queue.put(start)
 
 	while queue is not empty:
 		u = queue.popFirst()
 		for each adjacent vertex v:
-			if DISCOVER_TIME[v] == Infinity:
+			if discover_time[v] == Infinity:
 				process(v) // arbitrary subroutine
-				DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
+				discover_time[v] = discover_time[u] + 1
 				queue.put(v)</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="observing-bfss-behavior">
@@ -348,7 +348,7 @@
 <doc-tab v-cloak id="barebones-version">
 <template #title>Barebones Version</template>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-c" data-line="8,12-15"><code v-pre class="language-c">function BFS_WithToken(G, start):
+<pre class="language-c" data-line="8,12-15"><code v-pre class="language-c">function BfsWithToken(G, start):
 	queue = Queue()
 
 	for each vertex v in G:
@@ -389,14 +389,14 @@
 <doc-tab v-cloak id="with-clock-122a-version">
 <template #title>With Clock (122A Version)</template>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-c" data-line="10,14-16"><code v-pre class="language-c">function BFS_WithToken(G, start):
-	DISCOVER_TIME = {}
+<pre class="language-c" data-line="10,14-16"><code v-pre class="language-c">function BfsWithToken(G, start):
+	discover_time = {}
 	queue = new Queue()
 
 	for each vertex v in G:
-		DISCOVER_TIME[v] = Infinity
+		discover_time[v] = Infinity
 	
-	DISCOVER_TIME[start] = 0
+	discover_time[start] = 0
 	queue.put(v)
 	queue.put(TOKEN)
 
@@ -407,9 +407,9 @@
 			queue.put(u)
 		else:
 			for all edges u→v:
-				if DISCOVER_TIME[v] == Infinity:
+				if discover_time[v] == Infinity:
 					process(v)
-					DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
+					discover_time[v] = discover_time[u] + 1
 					queue.put(v)</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
@@ -492,9 +492,7 @@
     <figcaption class="caption"></figcaption>
 </figure>
 </p>
-<p>If we start at <span class="math">\tt{\color{darkorange}A}</span>, then the graph will be visited in this order: <span class="math">\tt{{\color{darkorange} A}\to \red {BCE}\to\purple D}</span></p>
-<p>Vertices with the same color could be visited in any order depending on the order of insertion, but the overall order is Orange → Red → Purple.</p>
-<p>Running the code from 2.3:</p>
+<p>If we start at <code v-pre>A</code>, then the graph will be visited in this order: <code v-pre>A -&gt; BCE -&gt; D</code>. Vertices with the same color could be visited in any order depending on the order of insertion, but the overall order is Orange → Red → Purple.</p>
 <div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
     <div class="flex items-center px-5 py-3 font-medium leading-snug text-gray-900 border-b border-gray-200 dark:border-dark-650 dark:text-white border-r">
         <span>Text</span>
