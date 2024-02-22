@@ -1,9 +1,9 @@
 ---
 icon: home
-image: /assets/lmao.png
+image: /assets/lmao2.png
 ---
 
-![](/assets/lmao.png)
+![](/assets/lmao2.png)
 
 # Algorithm Notes
 

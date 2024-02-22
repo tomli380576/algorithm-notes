@@ -7,11 +7,16 @@ icon: "../assets/bfs_dfs/DFS.svg"
 
 ## Vertex Status
 
-Similar to whatever first search, we assign each vertex a $\purple{\texttt{STATUS}}$.
+Similar to whatever first search, we assign each vertex a `STATUS`.
 
-- $\texttt{NEW}$: literally never seen before, all vertices start with this status
-- $\texttt{ACTIVE}$: seen before, but the adjacent vertices are not done processing yet
-- $\texttt{FINISHED}$: the vertex is seen and all its children are done processing
+`NEW`
+: 	literally never seen before, all vertices start with this status
+
+`ACTIVE`
+:	seen before, but the adjacent vertices are not done processing yet
+
+`FINISHED`
+:	the vertex is seen and all its children are done processing
 
 ## Pseudocode
 

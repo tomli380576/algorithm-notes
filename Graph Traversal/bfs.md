@@ -12,7 +12,7 @@ We can implement BFS from whatever first search by using a **Queue**.
 |||  Barebones 122A Version
 
 ```c
-function BFS_Search(G, start):
+function BfsSearch(G, start):
 	for each vertex v in G:
 		mark v as NEW
 
@@ -32,7 +32,7 @@ function BFS_Search(G, start):
 ||| Queue based WhateverFirstSearch
 
 ```c
-function WFS_Breadth(G, start):
+function WfsBreadth(G, start):
 	for each vertex v in G:
 		mark v as NEW
 
@@ -61,22 +61,22 @@ The 122A version checks whether the adjacent vertex `v` is visited. The WFS vers
 We can also record "when" a vertex is visited. Each time we see a new vertex, we increment the "time". The discover time of a vertex starts with $\infin$.
 
 ```c #2
-function BFS_Search(G, start):
-	DISCOVER_TIME = {}
+function BfsSearch(G, start):
+	discover_time = {}
 	queue = Queue()
 
 	for each vertex v in G:
-		DISCOVER_TIME[v] = Infinity
+		discover_time[v] = Infinity
 	
-	DISCOVER_TIME[start] = 0
+	discover_time[start] = 0
 	queue.put(start)
 
 	while queue is not empty:
 		u = queue.popFirst()
 		for each adjacent vertex v:
-			if DISCOVER_TIME[v] == Infinity:
+			if discover_time[v] == Infinity:
 				process(v) // arbitrary subroutine
-				DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
+				discover_time[v] = discover_time[u] + 1
 				queue.put(v)
 ```
 
@@ -88,7 +88,7 @@ We can observe how each ‘layer’ of the graph is being visited by BFS by addi
 +++ Barebones Version
 
 ```c #8,12-15
-function BFS_WithToken(G, start):
+function BfsWithToken(G, start):
 	queue = Queue()
 
 	for each vertex v in G:
@@ -117,14 +117,14 @@ function BFS_WithToken(G, start):
 +++ With Clock (122A Version)
     
 ```c #10,14-16
-function BFS_WithToken(G, start):
-	DISCOVER_TIME = {}
+function BfsWithToken(G, start):
+	discover_time = {}
 	queue = new Queue()
 
 	for each vertex v in G:
-		DISCOVER_TIME[v] = Infinity
+		discover_time[v] = Infinity
 	
-	DISCOVER_TIME[start] = 0
+	discover_time[start] = 0
 	queue.put(v)
 	queue.put(TOKEN)
 
@@ -135,9 +135,9 @@ function BFS_WithToken(G, start):
 			queue.put(u)
 		else:
 			for all edges u→v:
-				if DISCOVER_TIME[v] == Infinity:
+				if discover_time[v] == Infinity:
 					process(v)
-					DISCOVER_TIME[v] = DISCOVER_TIME[u] + 1
+					discover_time[v] = discover_time[u] + 1
 					queue.put(v)
 ```
 
@@ -171,11 +171,7 @@ Starting from $\tt  S$, we can see that all the red nodes $\tt{\red{ACG}}$ are 1
 
 ![](../assets/bfs_dfs/bfs-ex2.png){class="image-m"}
 
-If we start at $\tt{\color{darkorange}A}$, then the graph will be visited in this order: $\tt{{\color{darkorange} A}\to \red {BCE}\to\purple D}$
-
-Vertices with the same color could be visited in any order depending on the order of insertion, but the overall order is Orange → Red → Purple.
-
-Running the code from 2.3:
+If we start at `A`, then the graph will be visited in this order: `A -> BCE -> D`. Vertices with the same color could be visited in any order depending on the order of insertion, but the overall order is Orange → Red → Purple.
 
 |||Text
 ![](../assets/bfs_dfs/bfs-ex2-text.png)
