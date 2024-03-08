@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.761880987337">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.763171491022">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.761880987337" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.763171491022" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.761880987337" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.763171491022" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.761880987337" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.761880987337" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.763171491022" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.763171491022" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -257,6 +257,7 @@
 <li><code v-pre>cuts: List&lt;int&gt;</code>, cut strategy to make the max revenue. Element at index <span class="math">i</span> represents the length to cut at step <span class="math">i</span>.</li>
 </ul>
 <p>Let&#x27;s call this function <code v-pre>CutRod(n)</code>. Since the price array <code v-pre>p</code> is fixed, we will omit <code v-pre>p</code> from the call signature from now on.</p>
+<hr>
 <doc-anchor-target id="solve-the-backtracking-problem">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#solve-the-backtracking-problem">#</doc-anchor-trigger>
@@ -269,7 +270,7 @@
         <span>Base Cases</span>
     </h3>
 </doc-anchor-target>
-<p>Recall from basic recursion that the bases cases are the subproblems that we can immediately solve. We know how to solve:</p>
+<p>Recall from basic recursion that the bases cases are the sub-problems that we can immediately solve. We know how to solve:</p>
 <ol>
 <li><p><span class="math">n = 0</span>, we have no rod, so we make no money.</p>
 <div class="center"><p><code v-pre>CutRod(0) = 0</code></p>
@@ -406,6 +407,7 @@ function CutRod(rodLen: int) -&gt; int:
     </div>
 </div>
 <p>Make sure you are comfortable with the brute force approach before moving to DP conversion.</p>
+<hr>
 <doc-anchor-target id="convert-to-dynamic-programming">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#convert-to-dynamic-programming">#</doc-anchor-trigger>
@@ -552,33 +554,22 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 		// some O(1) work</code></pre>
 </doc-codeblock></div>
 <p>So the runtime is <span class="math">O(n^2)</span> and memory is <span class="math">O(n)</span> from 1D Array.</p>
+<hr>
 <doc-anchor-target id="proof-optimal-substructure">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#proof-optimal-substructure">#</doc-anchor-trigger>
         <span>Proof. Optimal Substructure</span>
     </h2>
 </doc-anchor-target>
-<ol>
-<li><p>State the given:</p>
-<ul>
-<li>Given <span class="math">\text{OPT}(n)</span> for rod of length <span class="math">n</span> with first cut <span class="math">i</span></li>
-<li><span class="math">\text{OPT}(n)=p_i + a</span>, where <span class="math">a</span> is the amount of money made on rod of length <span class="math">n-i</span></li>
-</ul>
-</li>
-<li><p>Prove: <span class="math">a</span> is the optimal solution for rod of length <span class="math">n-i</span>, or <span class="math">a = \text{OPT}(n-i)</span></p>
-</li>
-<li><p>Assume <span class="math">a</span> is not optimal for rod of length <span class="math">n-i</span></p>
-<p>Let <span class="math">rev(t)</span> denote the revenue from strategy <span class="math">t</span></p>
-<p>Then there exists another strategy <span class="math">b</span> such that <span class="math">rev(b) &gt; rev(a)</span></p>
-</li>
-</ol>
+<p>Given <span class="math">\text{OPT}(n)</span> for rod of length <span class="math">n</span> with first cut <span class="math">i</span>, we have <span class="math">\text{OPT}(n)=p_i + a</span>, where <span class="math">a</span> is the amount of money made on rod of length <span class="math">n-i</span>.</p>
+<p>We want to prove that <span class="math">a</span> is the optimal solution for rod of length <span class="math">n-i</span>, or <span class="math">a = \text{OPT}(n-i)</span>.</p>
+<p>Assume <span class="math">a</span> is not optimal for rod of length <span class="math">n-i</span>. Let <span class="math">rev(t)</span> denote the revenue from strategy <span class="math">t</span>, then there exists another strategy <span class="math">b</span> such that <span class="math">rev(b) &gt; rev(a)</span>.</p>
 <div class="math"><pre>\begin{aligned}
     \underbrace{rev(b) + p_i}_\text{revenue of entire rod} &amp;&gt; \underbrace{rev(a) + p_i}_\text{given assumption}
     \\
     rev(\text{strategy of length $n$}) &amp;&gt;\text{OPT}(n)
 \end{aligned}</pre></div>
-<p>We already assumed OPT is the best solution, then a better one cannot exist.</p>
-<p>Contradiction with given. Therefore <span class="math">a</span> is optimal for <span class="math">n-i</span>.</p>
+<p>We already assumed OPT is the best solution, then a better one cannot exist. Therefore we found a contradiction with given; <span class="math">a</span> is optimal for <span class="math">n-i</span>.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-green-500"></div>
     <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
@@ -592,7 +583,7 @@ function DpCutRod(maxRodLen: int) -&gt; int:
         </div>
         <div class="pr-5 ml-3 w-full">
             <h5>Hint</h5>
-<p>The key point is that the <em>optimal solution to the subproblem is unique</em>.</p>
+<p>The key point is that the <em><strong>optimal solution to the subproblem is unique</strong></em>.</p>
         </div>
     </div>
 </div>
