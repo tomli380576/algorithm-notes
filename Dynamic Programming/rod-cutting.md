@@ -20,12 +20,13 @@ We want to find:
 
 Let's call this function `CutRod(n)`. Since the price array `p` is fixed, we will omit `p` from the call signature from now on. 
 
+---
 
 ## Solve the Backtracking Problem
 
 ### Base Cases
 
-Recall from basic recursion that the bases cases are the subproblems that we can immediately solve. We know how to solve:
+Recall from basic recursion that the bases cases are the sub-problems that we can immediately solve. We know how to solve:
 
 1. $n = 0$, we have no rod, so we make no money. 
    :::center
@@ -140,6 +141,8 @@ In short, the components of this [recursive backtracking problem](https://www.no
 !!!
 
 Make sure you are comfortable with the brute force approach before moving to DP conversion.
+
+---
 
 ## Convert to Dynamic Programming
 
@@ -272,19 +275,15 @@ for rodLen = 2 to maxRodLen:
 
 So the runtime is $O(n^2)$ and memory is $O(n)$ from 1D Array.
 
+---
+
 ## Proof. Optimal Substructure
 
-1. State the given:
-    - Given $\text{OPT}(n)$ for rod of length $n$ with first cut $i$
-    - $\text{OPT}(n)=p_i + a$, where $a$ is the amount of money made on rod of length $n-i$
+Given $\text{OPT}(n)$ for rod of length $n$ with first cut $i$, we have $\text{OPT}(n)=p_i + a$, where $a$ is the amount of money made on rod of length $n-i$.
 
-2. Prove: $a$ is the optimal solution for rod of length $n-i$, or $a = \text{OPT}(n-i)$
-3. Assume $a$ is not optimal for rod of length $n-i$
-    
-    Let $rev(t)$ denote the revenue from strategy $t$
-    
-    Then there exists another strategy $b$ such that $rev(b) > rev(a)$
-    
+We want to prove that $a$ is the optimal solution for rod of length $n-i$, or $a = \text{OPT}(n-i)$.
+
+Assume $a$ is not optimal for rod of length $n-i$. Let $rev(t)$ denote the revenue from strategy $t$, then there exists another strategy $b$ such that $rev(b) > rev(a)$. 
 
 $$
 \begin{aligned}
@@ -294,11 +293,9 @@ $$
 \end{aligned}
 $$
 
-We already assumed OPT is the best solution, then a better one cannot exist.
-
-Contradiction with given. Therefore $a$ is optimal for $n-i$.
+We already assumed OPT is the best solution, then a better one cannot exist. Therefore we found a contradiction with given; $a$ is optimal for $n-i$.
 
 !!!success Hint
-The key point is that the *optimal solution to the subproblem is unique*.
+The key point is that the ***optimal solution to the subproblem is unique***.
 !!!
 
