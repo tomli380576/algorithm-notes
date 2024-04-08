@@ -17,14 +17,21 @@ My notes for 122A, 122B and more.
 - [CLRS](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844)
 - [Algorithm Design by Kleinberg](https://www.amazon.com/Algorithm-Design-Jon-Kleinberg/dp/0321295358)
 
-<span id="updateDate"></span>
+<span id="updateDate1222">Fetching last updated date...</span>
 
-<script>
-    const element = document.getElementById("updateDate")
-    const url = "https://api.github.com/repos/tomli380576/algorithm-notes/commits";
+<script defer>
+    window.onload = function() {
 
-    fetch(url).then(res => res.json()).then(json => {
-        const dateStr = json[0].commit.author.date
-        element.innerText = `Last updated: ${new Date(dateStr).toLocaleDateString()}`
-    })
+        const element = document.getElementById("updateDate1222");
+        const url = "https://api.github.com/repos/tomli380576/algorithm-notes/commits";
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((json) => {
+                const dateStr = json[0].commit.author.date;
+                element.innerHTML = `Last updated: ${new Date(
+                    dateStr
+                ).toLocaleDateString()}`;
+            });
+    }
 </script>
