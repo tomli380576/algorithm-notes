@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.763171491022">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.765856898263">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.763171491022" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.765856898263" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.763171491022" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.765856898263" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.763171491022" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.763171491022" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.765856898263" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.765856898263" defer></script>
 
     <meta content="Tommy's Algorithm Notes" property="og:title" />
     <meta content="My Notes for 122A, 122B, and more" property="og:description" />
@@ -301,8 +301,8 @@
 <pre class="language-python"><code v-pre class="language-python">type Graph = dict[str, list[str]]</code></pre>
 </doc-codeblock></div>
 <doc-tabs>
-<doc-tab v-cloak id="dfs-bfs">
-<template #title>DFS &amp; BFS</template>
+<doc-tab v-cloak id="iterative-dfs-bfs">
+<template #title>Iterative DFS &amp; BFS</template>
 <div class="mb-6 overflow-hidden border rounded-md docs-columns dark:border-dark-650" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
     <div class="flex items-center px-5 py-3 font-mono leading-snug text-white docs-columns-code-title border-r">
         <span>BFS</span>
@@ -316,7 +316,7 @@
 
 def bfs(G: dict[str, list[str]], start: str):
     queue = deque()
-    seen = set()
+    seen = set[str]()
 
     queue.append(start)
 
@@ -338,7 +338,7 @@ def bfs(G: dict[str, list[str]], start: str):
 
 def dfs(G: dict[str, list[str]], start: str):
     stack = deque()
-    seen = set()
+    seen = set[str]()
 
     stack.append(start)
 
@@ -356,6 +356,28 @@ def dfs(G: dict[str, list[str]], start: str):
 </doc-codeblock></div>
     </div>
 </div>
+</doc-tab>
+<doc-tab v-cloak id="recursive-dfs">
+<template #title>Recursive DFS</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python"><code v-pre class="language-python">def dfs(G: dict[str, list[str]], start: str):
+    seen = set[str]()
+
+    def dfsVisit(G: dict[str, list[str]], curr: str):
+        # Pre-process
+
+        seen.add(curr)
+        for adjacent in G[curr]:
+            if adjacent not in seen:
+                dfsVisit(G, adjacent)
+
+        # Post-process
+
+    for vertex in G:
+        # handle disconnected graphs
+        if vertex not in seen:
+            dfsVisit(G, vertex)</code></pre>
+</doc-codeblock></div>
 </doc-tab>
 <doc-tab v-cloak id="best-first">
 <template #title>Best First</template>
@@ -395,8 +417,8 @@ def bestFirst(
 </doc-anchor-target>
 <p>For simplicity we assume the grid is not empty and the first element is a list, i.e. an empty grid is <code v-pre>[[]]</code>. Validate the grid if necessary.</p>
 <doc-tabs>
-<doc-tab v-cloak id="bfs-dfs">
-<template #title>BFS &amp; DFS</template>
+<doc-tab v-cloak id="iterative-bfs-dfs">
+<template #title>Iterative BFS &amp; DFS</template>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-python"><code v-pre class="language-python">from collections import deque
 
@@ -427,6 +449,39 @@ def bfsGrid(grid: list[list[int]], start: tuple[int, int]):
             if nr &gt;= 0 and nr &lt; R and nc &gt;= 0 and nc &lt; C:
                 queue.append((nr, nc))
 </code></pre>
+</doc-codeblock></div>
+</doc-tab>
+<doc-tab v-cloak id="recursive-dfs">
+<template #title>Recursive DFS</template>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-python"><code v-pre class="language-python">def dfsGrid(grid: list[list[int]], start: tuple[int, int]):
+    R = len(grid)
+    C = len(grid[0])
+
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    seen = set()
+
+    def dfsVisit(grid: list[list[int]], curr: tuple[int, int]):
+        # pre-process curr
+
+        seen.add(curr)
+        r, c = curr
+
+        for dr, dc in directions:
+            nr = r + dr  # new r
+            nc = c + dc  # new c
+            if nr &gt;= 0 and nr &lt; R and nc &gt;= 0 and nc &lt; C:
+                dfsVisit(grid, (nr, nc))
+        
+        # post-process curr
+
+    dfsVisit(grid, start)  # optional, enforce starting position
+
+    # handle disconnected graphs
+    for r in range(R):
+        for c in range(C):
+            if (r, c) not in seen:
+                dfsVisit(grid, (r, c))</code></pre>
 </doc-codeblock></div>
 </doc-tab>
 <doc-tab v-cloak id="best-first">

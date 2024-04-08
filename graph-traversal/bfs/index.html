@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.763171491022">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.765856898263">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -34,12 +34,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../assets/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.763171491022" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.765856898263" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.763171491022" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.765856898263" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.763171491022" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.763171491022" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.765856898263" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.5.0.765856898263" defer></script>
     <link href="../../resources/css/katex.css?v=3.5.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.5.0" defer></script>
 
@@ -334,13 +334,13 @@
 				discover_time[v] = discover_time[u] + 1
 				queue.put(v)</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="observing-bfss-behavior">
+<doc-anchor-target id="observing-bfss-behavior--level-order-traversal">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#observing-bfss-behavior">#</doc-anchor-trigger>
-        <span>Observing BFS’s Behavior</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#observing-bfss-behavior--level-order-traversal">#</doc-anchor-trigger>
+        <span>Observing BFS’s Behavior / Level Order Traversal</span>
     </h2>
 </doc-anchor-target>
-<p>We can observe how each ‘layer’ of the graph is being visited by BFS by adding a special token.</p>
+<p>We can observe how each &quot;layer&quot; of the graph is being visited by BFS by adding a special token.</p>
 <ul>
 <li>The changes are highlighted. Everything else is the same.</li>
 </ul>
@@ -386,6 +386,33 @@
     </div>
 </div>
 </doc-tab>
+<doc-tab v-cloak id="using-a-different-while-loop-condition">
+<template #title>Using a different while loop condition</template>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-c" data-line="8,10,12-15"><code v-pre class="language-c">function BfsWithToken(G, start):
+	queue = Queue()
+
+	for each vertex v in G:
+		mark v as NEW
+
+	queue.put(v)
+	queue.put(TOKEN)
+
+	while queue is not empty:
+		u = queue.popFirst()
+		if u == TOKEN:
+			print(TOKEN)
+			if queue is empty:
+				break
+			queue.put(u)
+		else:
+			if u is NEW:
+				process(u)
+				mark u as VISITED
+				for each adjacent vertex v:
+					queue.put(v)</code></pre>
+</doc-codeblock></div>
+</doc-tab>
 <doc-tab v-cloak id="with-clock-122a-version">
 <template #title>With Clock (122A Version)</template>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
@@ -430,6 +457,7 @@
 </div>
 </doc-tab>
 </doc-tabs>
+<p>This is particularly useful if we are doing level-order traversal of a graph, because <code v-pre>TOKEN</code> marks the end of a level.</p>
 <doc-anchor-target id="python">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#python">#</doc-anchor-trigger>
