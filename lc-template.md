@@ -50,7 +50,7 @@ Suppose the graph is stored as
 type Graph = dict[str, list[str]]
 ```
 
-+++ DFS & BFS
++++ Iterative DFS & BFS
 
 ||| BFS
 
@@ -59,7 +59,7 @@ from collections import deque
 
 def bfs(G: dict[str, list[str]], start: str):
     queue = deque()
-    seen = set()
+    seen = set[str]()
 
     queue.append(start)
 
@@ -82,7 +82,7 @@ from collections import deque
 
 def dfs(G: dict[str, list[str]], start: str):
     stack = deque()
-    seen = set()
+    seen = set[str]()
 
     stack.append(start)
 
@@ -100,6 +100,28 @@ def dfs(G: dict[str, list[str]], start: str):
 ```
 
 |||
+
++++ Recursive DFS
+
+```py
+def dfs(G: dict[str, list[str]], start: str):
+    seen = set[str]()
+
+    def dfsVisit(G: dict[str, list[str]], curr: str):
+        # Pre-process
+
+        seen.add(curr)
+        for adjacent in G[curr]:
+            if adjacent not in seen:
+                dfsVisit(G, adjacent)
+
+        # Post-process
+
+    for vertex in G:
+        # handle disconnected graphs
+        if vertex not in seen:
+            dfsVisit(G, vertex)
+```
 
 +++ Best First
 
@@ -137,7 +159,7 @@ def bestFirst(
 
 For simplicity we assume the grid is not empty and the first element is a list, i.e. an empty grid is `[[]]`. Validate the grid if necessary.
 
-+++ BFS & DFS
++++ Iterative BFS & DFS
 
 ```py
 from collections import deque
@@ -169,6 +191,39 @@ def bfsGrid(grid: list[list[int]], start: tuple[int, int]):
             if nr >= 0 and nr < R and nc >= 0 and nc < C:
                 queue.append((nr, nc))
 
+```
+
++++ Recursive DFS
+
+```py
+def dfsGrid(grid: list[list[int]], start: tuple[int, int]):
+    R = len(grid)
+    C = len(grid[0])
+
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    seen = set()
+
+    def dfsVisit(grid: list[list[int]], curr: tuple[int, int]):
+        # pre-process curr
+
+        seen.add(curr)
+        r, c = curr
+
+        for dr, dc in directions:
+            nr = r + dr  # new r
+            nc = c + dc  # new c
+            if nr >= 0 and nr < R and nc >= 0 and nc < C:
+                dfsVisit(grid, (nr, nc))
+        
+        # post-process curr
+
+    dfsVisit(grid, start)  # optional, enforce starting position
+
+    # handle disconnected graphs
+    for r in range(R):
+        for c in range(C):
+            if (r, c) not in seen:
+                dfsVisit(grid, (r, c))
 ```
 
 +++ Best First

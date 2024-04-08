@@ -80,9 +80,9 @@ function BfsSearch(G, start):
 				queue.put(v)
 ```
 
-##  Observing BFS’s Behavior
+##  Observing BFS’s Behavior / Level Order Traversal
 
-We can observe how each ‘layer’ of the graph is being visited by BFS by adding a special token.
+We can observe how each "layer" of the graph is being visited by BFS by adding a special token.
 - The changes are highlighted. Everything else is the same. 
 
 +++ Barebones Version
@@ -113,6 +113,34 @@ function BfsWithToken(G, start):
 !!!danger
 `while queue has at least 1 vertex` does not mean `queue.size > 0`. The special token is not a vertex.
 !!!
+
++++ Using a different while loop condition
+
+```c #8,10,12-15
+function BfsWithToken(G, start):
+	queue = Queue()
+
+	for each vertex v in G:
+		mark v as NEW
+
+	queue.put(v)
+	queue.put(TOKEN)
+
+	while queue is not empty:
+		u = queue.popFirst()
+		if u == TOKEN:
+			print(TOKEN)
+			if queue is empty:
+				break
+			queue.put(u)
+		else:
+			if u is NEW:
+				process(u)
+				mark u as VISITED
+				for each adjacent vertex v:
+					queue.put(v)
+```
+
 
 +++ With Clock (122A Version)
     
@@ -146,6 +174,8 @@ function BfsWithToken(G, start):
 !!!
 
 +++
+
+This is particularly useful if we are doing level-order traversal of a graph, because `TOKEN` marks the end of a level. 
 
 ### :icon-code: Python
 
