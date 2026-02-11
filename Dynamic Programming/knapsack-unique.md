@@ -1,6 +1,8 @@
 # Knapsack (Unique items)
 
-> **Question.** Given a single backpack with capacity $C$, a list of $N$ unique items (can only take each once) with weight $w_i$ and value $v_i$, what combination of items that fits in the backpack will maximize the total value?
+!!!question Problem Statement
+Given a single backpack with capacity $C$, a list of $N$ items (can only take each item once) with weight $w_i$ and value $v_i$, what combination of items that fits in the backpack will maximize the total value?
+!!!
 
 Let's first formalize what we want to maximize. Let the final selection of items be $S$,
 $$
