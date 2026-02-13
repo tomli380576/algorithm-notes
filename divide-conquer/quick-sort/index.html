@@ -10,26 +10,24 @@
     <meta name="generator" content="Retype 3.12.0">
 
     <!-- Primary Meta Tags -->
-    <title>Maximum Sum After Partitioning</title>
-    <meta name="title" content="Maximum Sum After Partitioning">
-    <meta name="description" content="Question. Given an array A[1...N] and a partition size k, 1 = k = N, partition the array into (contiguous) subarrays of length at most k.">
+    <title>Quick Sort (122A)</title>
+    <meta name="title" content="Quick Sort (122A)">
+    <meta name="description" content="The idea of quick sort is:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://tomli380576.github.io/algorithm-notes/dynamic-programming/max-sum-after-partition/">
+    <link rel="canonical" href="https://tomli380576.github.io/algorithm-notes/divide-conquer/quick-sort/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tomli380576.github.io/algorithm-notes/dynamic-programming/max-sum-after-partition/">
-    <meta property="og:title" content="Maximum Sum After Partitioning">
-    <meta property="og:description" content="Question. Given an array A[1...N] and a partition size k, 1 = k = N, partition the array into (contiguous) subarrays of length at most k.">
-    <meta property="og:image" content="https://tomli380576.github.io/algorithm-notes/assets/dp-1/partition-sum.png">
+    <meta property="og:url" content="https://tomli380576.github.io/algorithm-notes/divide-conquer/quick-sort/">
+    <meta property="og:title" content="Quick Sort (122A)">
+    <meta property="og:description" content="The idea of quick sort is:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://tomli380576.github.io/algorithm-notes/dynamic-programming/max-sum-after-partition/">
-    <meta property="twitter:title" content="Maximum Sum After Partitioning">
-    <meta property="twitter:description" content="Question. Given an array A[1...N] and a partition size k, 1 = k = N, partition the array into (contiguous) subarrays of length at most k.">
-    <meta property="twitter:image" content="https://tomli380576.github.io/algorithm-notes/assets/dp-1/partition-sum.png">
+    <meta property="twitter:url" content="https://tomli380576.github.io/algorithm-notes/divide-conquer/quick-sort/">
+    <meta property="twitter:title" content="Quick Sort (122A)">
+    <meta property="twitter:description" content="The idea of quick sort is:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
@@ -39,6 +37,7 @@
     <script data-cfasync="false" src="../../resources/js/config.js?v=3.12.0.824316673037" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.12.0" data-turbo-eval="false" defer></script>
     <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.12.0.824316673037" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.12.0.824316673037" defer></script>
     <link href="../../resources/css/katex.css?v=3.12.0" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=3.12.0" defer></script>
 
@@ -197,36 +196,119 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="maximum-sum-after-partitioning" class="break-words">
+<doc-anchor-target id="quick-sort-122a" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#maximum-sum-after-partitioning">#</doc-anchor-trigger>
-        <span>Maximum Sum After Partitioning</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#quick-sort-122a">#</doc-anchor-trigger>
+        <span>Quick Sort (122A)</span>
     </h1>
 </doc-anchor-target>
-<p><a href="https://leetcode.com/problems/partition-array-for-maximum-sum/" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border hover:text-badge-warning-text-hover hover:bg-badge-warning-hover hover:border-badge-warning-border-hover transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
-    <span><img class="mb-px inline-flex mr-2" width="22" src="../../assets/leetcode.svg"></span>
-    <span>Leetcode</span>
-</a></p>
-<blockquote>
-<p><strong>Question.</strong> Given an array <code translate="no" v-pre>A[1...N]</code> and a partition size <code translate="no" v-pre>k, 1 &lt;= k &lt;= N</code>, partition the array into (contiguous) subarrays of length at most k. After partitioning, each subarray has their values changed to become the maximum value of that subarray. What is the largest sum of the given array after partitioning?</p>
-</blockquote>
-<doc-anchor-target id="recurrence">
+<p>The idea of quick sort is:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-c"><code v-pre class="language-c">function QuickSort(A[1...n]):
+	pivotValue = ChoosePivot()
+
+	partitionLeft = from A select value where value &lt; pivot value
+	partitionMid = from A select value where value == pivot value
+	partitionRight = from A select value where value &gt; pivot value
+	
+	Recursively sort partitionLeft           // *Recursion Magic*
+	Recursively sort partitionRight          // *Recursion Magic*</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="base-case">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#recurrence">#</doc-anchor-trigger>
-        <span>Recurrence</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#base-case">#</doc-anchor-trigger>
+        <span>Base Case</span>
     </h2>
 </doc-anchor-target>
-<div class="math"><pre translate="no">\text{PartitionSum}(i) = \begin{cases}
-    0 &amp; \text{if } i = 0\\
-    \left.\displaystyle\max_{1\,\leqslant\,j\,\leqslant\, k}\middle\{\text{PartitionSum}(i-j) + \max (A[i - j + 1\dots i]) \cdot j\right\} &amp; \text{otherwise}
-\end{cases}</pre></div>
-<p>The final answer is <code translate="no" v-pre>PartitionSum(N)</code>. Visually, the recurrence describes the follows, (suppose <span class="math">j=3</span>):</p>
-<p><figure class="content-center">
-    <img src="../../assets/dp-1/partition-sum.png" alt="" class="rounded-image-rounded border-image-border border-image-border-width" />
-    <figcaption class="caption"></figcaption>
-</figure>
-</p>
-<p>Adjust the indices with -1 offset when implementing this.</p>
+<p>When <span class="math">A</span> has 1 or 0 elements, we do nothing.</p>
+<doc-anchor-target id="partition">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#partition">#</doc-anchor-trigger>
+        <span>Partition</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-c"><code v-pre class="language-c">partitionLeft = from A select value where value &lt; pivot value</code></pre>
+</doc-codeblock></div>
+<p>↑ This partitioning step is doing most of the work.</p>
+<p>Unlike merge sort, after left &amp; right partitions are sorted, the merging step is already done.</p>
+<p>Similar to how we considered <code translate="no" v-pre>merge()</code>, it’s easier to think about if we use extra space.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-c"><code v-pre class="language-c">function Partition(A[1...n], pivotValue) -&gt; (List, List):
+	left = []
+	right = []
+
+	for i = 1 to n:
+		if A[i]	&lt; pivotValue:
+			push A[i] into left
+		else if A[i] == pivotValue: 
+			if not first time seeing pivotValue:
+				push A[i] into left
+		else:
+			push A[i] into right
+
+	return left, right</code></pre>
+</doc-codeblock></div>
+<p>(Change <span class="math">&lt;</span> to other predicates depending on the sorting order)</p>
+<p>This is also a linear scan, so the runtime is <span class="math">O(n)</span>.</p>
+<doc-anchor-target id="choosing-the-pivot">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#choosing-the-pivot">#</doc-anchor-trigger>
+        <span>Choosing the Pivot</span>
+    </h2>
+</doc-anchor-target>
+<p>There are a lot of ways for choosing pivots:</p>
+<ol>
+<li>Always pick first</li>
+<li>Always pick last</li>
+<li>Choose randomly</li>
+<li>Somehow pick out the true median of <span class="math">A</span> (important for quick select)</li>
+</ol>
+<p><a href="https://www.geeksforgeeks.org/quick-sort/">Source</a></p>
+<doc-anchor-target id="pseudocode">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pseudocode">#</doc-anchor-trigger>
+        <span>Pseudocode</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-c"><code v-pre class="language-c">function QuickSort(A[1...n]) -&gt; Array:
+	if n &gt; 1: 
+		pivot_value = ChoosePivot()
+		left, right = Partition(A[1...n], pivot_value)
+		return flatten([QuickSort(left), [pivot_value], QuickSort(right)])
+	else:
+		return A
+
+function Partition(A[1...n], pivot_value) -&gt; pair of Arrays:
+	left = []
+	right = []
+
+	for i = 1 to n:
+		if A[i]	&lt; pivot_value:
+			push A[i] into left
+		else if A[i] == pivot: 
+			if not first time seeing pivot:
+				push A[i] into left
+		else:
+			push A[i] into right
+
+	return left, right
+
+function ChoosePivot() -&gt; int:
+	// depends on implementation, assume this is O(1)
+	return pivot</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="python">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#python">#</doc-anchor-trigger>
+        <span><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></g></g></svg> Python</span>
+    </h2>
+</doc-anchor-target>
+<p><a href="https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/quick-sort.py" target="_blank" class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-dark-text bg-badge-dark border border-badge-dark-border hover:text-badge-dark-text-hover hover:bg-badge-dark-hover hover:border-badge-dark-border-hover transition-colors duration-200 ease-out h-8 px-3 text-sm rounded-md">
+    <span><svg xmlns="http://www.w3.org/2000/svg" class="mb-px inline-flex mr-2" width="22" height="22" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><path d="M10.303 16.652c-2.837-.344-4.835-2.385-4.835-5.028 0-1.074.387-2.235 1.031-3.008-.279-.709-.236-2.214.086-2.837.86-.107 2.02.344 2.708.967.816-.258 1.676-.386 2.728-.386 1.053 0 1.913.128 2.686.365.666-.602 1.848-1.053 2.708-.946.3.581.344 2.085.064 2.815.688.817 1.053 1.913 1.053 3.03 0 2.643-1.998 4.641-4.877 5.006.73.473 1.224 1.504 1.224 2.686v2.235c0 .644.537 1.01 1.182.752 3.889-1.483 6.94-5.372 6.94-10.185 0-6.081-4.942-11.044-11.022-11.044-6.081 0-10.98 4.963-10.98 11.044a10.84 10.84 0 0 0 7.112 10.206c.58.215 1.139-.172 1.139-.752v-1.719a2.768 2.768 0 0 1-1.032.215c-1.418 0-2.256-.773-2.857-2.213-.237-.58-.495-.924-.989-.988-.258-.022-.344-.129-.344-.258 0-.258.43-.451.86-.451.623 0 1.16.386 1.719 1.181.43.623.881.903 1.418.903.537 0 .881-.194 1.375-.688.365-.365.645-.687.903-.902Z"/></g></svg></span>
+    <span>Github</span>
+</a></p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -236,20 +318,20 @@
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/lcs/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../divide-conquer/quick-select/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">Longest Common Subsequence</span>
+                                                <span class="block mt-1">Quick Select (122​B)</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../dynamic-programming/pretty-printing/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../divide-conquer/rand-qselect/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">Pretty Printing</span>
+                                                <span class="block mt-1">Randomized Quick Select (122​B)</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -293,6 +375,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Maximum Sum After Partitioning", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Quick Sort (122A)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
 </body>
 </html>
