@@ -1,6 +1,6 @@
 # Geometric Series Shortcuts
 
-For a constant $\alpha \in \R_{>0}$, we have this nice shortcut to get the upper bound:
+For a constant $\alpha \in \R_{>0}$ and some upper bound $k$ (doesn't have to be an integer when we are dealing with big Os), we have this nice shortcut to get the upper bound:
 
 $$
 \begin{aligned}
@@ -24,5 +24,5 @@ Expand, the number of levels is $i = \log_2n$
 
 $$
 
-T(n) \leq cn\cdot (1 + \frac 32 + (\frac32)^2 + \cdots (\frac32)^{\log_2(n-1)}) + 3
+T(n) \leq cn\cdot \left(1 + \frac 32 + (\frac32)^2 + \cdots (\frac32)^{\log_2(n-1)}\right) + 3
 $$

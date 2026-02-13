@@ -18,7 +18,7 @@ My notes for 122A, 122B and more.
 - [Algorithm Design by Kleinberg](https://www.amazon.com/Algorithm-Design-Jon-Kleinberg/dp/0321295358)
 
 
-The logo is generated [here](https://bluearchive-logo.esing.dev/). All credits goes to the original author.
+The logo is generated [here](https://bluearchive-logo.esing.dev/).
 
 <span id="updateDate1222">Fetching last updated date...</span>
 
