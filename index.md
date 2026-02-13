@@ -17,6 +17,9 @@ My notes for 122A, 122B and more.
 - [CLRS](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844)
 - [Algorithm Design by Kleinberg](https://www.amazon.com/Algorithm-Design-Jon-Kleinberg/dp/0321295358)
 
+
+The logo is generated [here](https://bluearchive-logo.esing.dev/).
+
 <span id="updateDate1222">Fetching last updated date...</span>
 
 <script defer>
