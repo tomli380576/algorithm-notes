@@ -1,5 +1,4 @@
-# Masters Theorem
-
+# Masters Theorem (122A)
 
 ## Shortcut version
 
@@ -20,7 +19,7 @@ $$
 T(n) = \begin{cases}
     O(n^d) & \text{if }d > \log_ba\\
     O(n^d\log n) & \text{if } d = \log_b a\\
-    O(n^{log_ba})&{if }d < \log_ba
+    O(n^{\log_ba})&{if }d < \log_ba
 \end{cases}
 $$
 
