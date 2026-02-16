@@ -1,18 +1,28 @@
 # Geometric Series Shortcuts
 
-For a constant $\alpha \in \R_{>0}$ and some upper bound $k$ (doesn't have to be an integer when we are dealing with big Os), we have this nice shortcut to get the upper bound:
+For a constant $r \in \R_{>0}$ and some upper bound $k$ ($k\in\Z$ is not required when we are dealing with big Os since we can bound it with $\lceil k\rceil$), we have this nice shortcut to get the upper bound:
 
 $$
 \begin{aligned}
-    \sum^k_{n=0} \alpha^n &= 1 + \alpha + \alpha^2 + \cdots + \alpha^k\\
+    \sum^k_{n=0} r^n &= 1 + r + r^2 + \cdots + r^k\\
     &= \begin{cases}
-        O(\alpha^k) & \text{if } \alpha > 1\\
-        O(k) & \text{if } \alpha = 1\\
-        O(1) & \text{if } \alpha < 1
+        O(r^k) & \text{if } r > 1\\
+        O(k) & \text{if } r = 1\\
+        O(1) & \text{if } r < 1
     \end{cases}
 \end{aligned}
+$$
+
+The basic idea is to **bound each term** in this series. For example when $r > 1$, the last term of the series $r^k$ is the largest. So we can bound each term with it and get:
 
 $$
+\sum^k_{n=1} r^n \leq \sum^k_{n=1}r^{\red k} = O(kr^k) = O(r^k)
+$$
+
+When $r=1$, it's just $k$. Since we are conveniently allowing non-integer $k$ values, the bound is $O(k)$ instead of just $k$.
+
+Similarly when $r <1$, the first term dominates since the rest is just powers of $0<r<1$. 
+
 
 ## Examples
 
