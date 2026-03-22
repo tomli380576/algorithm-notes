@@ -59,4 +59,76 @@
     line-height: 1;
     padding: 4px 8px;
   }
+
+
+  .thm,
+  .lemma,
+  .def,
+  .prop,
+  .rmk,
+  .strat,
+  .cor {
+    padding: 1.25rem 1.25rem 0 1.25rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+
+    border: 1px solid rgba(255, 255, 255, 0);
+    /* border-left: 0.25rem solid lightgray; */
+
+    /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+      rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+
+    & h4 {
+      margin-bottom: 0.5rem;
+      & strong {
+        font-weight: bolder;
+      }
+    }
+  }
+
+  .thm,
+  .strat {
+    /* border-left: 0.25rem solid var(--purple); */
+    & h4 {
+      & strong {
+        color: var(--purple);
+      }
+    }
+  }
+
+  .def {
+    & h4 {
+      & strong {
+        color: var(--red);
+      }
+    }
+  }
+
+  .prop {
+    /* border: 1px solid var(--orange); */
+    & h4 {
+      & strong {
+        color: rgb(236, 206, 88);
+      }
+    }
+  }
+
+  .rmk,
+  .cor {
+    & h4 {
+      & strong {
+        color: var(--orange);
+      }
+    }
+  }
+
+  .lemma {
+    & h4 {
+      & strong {
+        color: var(--cyan);
+      }
+    }
+  }
 </style>
