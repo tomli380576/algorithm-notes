@@ -49,3 +49,4 @@ $$
 
 If not, then we can use either $D(|V|, *)$ or $D(|V|-1, *)$ as the final return array. 
 
+Note that Bellman-Ford can only find negative cycles that are REACHABLE from $s$.
