@@ -20,7 +20,6 @@ $$
 For a flow network $G=(V, E, C)$ and flow $f_e$ for each $e\in E$, the residual network $G^f=(V, E^f)$ is given by:
 
 1. If edge is not saturated: $vw \in E$ and $f_{vw} < c_{vw}$, then add the edge in to $G^f$ with its remaining capacity $c_{vw} - f_{vw}$
-
 2. If the edge $vw$ has a positive flow, then add the backward edge $wv$ t $G^f$ with capacity $f_{vw}$
 
 ## Ford-Fulkerson
@@ -33,9 +32,7 @@ For a flow network $G=(V, E, C)$ and flow $f_e$ for each $e\in E$, the residual 
 
 ## Running Time
 
-A big assumption here is that all capacities are integers.
-
-If we have this, the flow always increase by $\geq 1$ every round.
+A big assumption here is that all capacities are **integers**. If we have this, we know that the flow always increase by $\geq 1$ every round.
 
 Let $f^*$ be the maximum flow, then we have at most $f^*$ rounds.
 
