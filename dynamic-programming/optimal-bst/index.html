@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.3.0.827478815799">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.3.0.827479617050">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.3.0">
@@ -35,11 +35,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.3.0.827478815799" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.3.0.827479617050" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.3.0.827478815799" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.3.0.827479617050" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.3.0.827478815799" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.3.0.827479617050" data-turbo-eval="false" defer></script>
 
     <meta content="Tommy's Algorithm Notes" property="og:title" />
     <meta content="My Notes for 122A, 122B, and more" property="og:description" />
@@ -101,6 +101,78 @@
         border-width: 1px;
         line-height: 1;
         padding: 4px 8px;
+      }
+
+
+      .thm,
+      .lemma,
+      .def,
+      .prop,
+      .rmk,
+      .strat,
+      .cor {
+        padding: 1.25rem 1.25rem 0 1.25rem;
+        border-radius: 0.25rem;
+        margin-bottom: 1.5rem;
+
+        border: 1px solid rgba(255, 255, 255, 0);
+        /* border-left: 0.25rem solid lightgray; */
+
+        /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+          rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+
+        & h4 {
+          margin-bottom: 0.5rem;
+          & strong {
+            font-weight: bolder;
+          }
+        }
+      }
+
+      .thm,
+      .strat {
+        /* border-left: 0.25rem solid var(--purple); */
+        & h4 {
+          & strong {
+            color: var(--purple);
+          }
+        }
+      }
+
+      .def {
+        & h4 {
+          & strong {
+            color: var(--red);
+          }
+        }
+      }
+
+      .prop {
+        /* border: 1px solid var(--orange); */
+        & h4 {
+          & strong {
+            color: rgb(236, 206, 88);
+          }
+        }
+      }
+
+      .rmk,
+      .cor {
+        & h4 {
+          & strong {
+            color: var(--orange);
+          }
+        }
+      }
+
+      .lemma {
+        & h4 {
+          & strong {
+            color: var(--cyan);
+          }
+        }
       }
     </style>
 
