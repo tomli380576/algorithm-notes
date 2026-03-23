@@ -3,7 +3,7 @@ output: .retype
 url: https://tomli380576.github.io/algorithm-notes/
 branding:
   label: Notes
-  logo: assets/lmao2.png
+  logo: assets/favicon.png
 footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."
 exclude:
