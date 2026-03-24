@@ -3,7 +3,7 @@ icon: home
 image: /assets/lmao2.png
 ---
 
-![](/assets/lmao2.png)
+![](/assets/lmao3.png)
 
 # Algorithm Notes
 

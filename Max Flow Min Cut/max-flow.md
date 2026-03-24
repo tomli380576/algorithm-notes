@@ -24,9 +24,9 @@ For a flow network $G=(V, E, C)$ and flow $f_e$ for each $e\in E$, the residual 
 
 ## Ford-Fulkerson
 
-1. Let $f_e= 0$ for all $e\in E$
+1. Init flow graph $f$ with $f_e= 0$ for all $e\in E$. 
 2. Make $G^f$ for current flow $f$
-3. Check if there's any path from $s$ to $t$, call it $\cal P$, in $G^f$. If not, return $f$.
+3. Check if there's any path from $s$ to $t$ in $G^f$, call it $\cal P$, in $G^f$. If not, return $f$.
 4. In $\cal P$, let $c(\cal P)$ be the minimum capacity along $\cal P$ in $G^f$
 5. For each forward edge in $\cal P$, increase its flow by $c(\cal P)$. For each backward edge, decrease its flow by $c(\cal P$).
 
@@ -46,3 +46,11 @@ $\implies$ Time per round is $O(E)$
 $\implies$ Total running time is $O(f^*E)$
 
 This running time is pseudo-polynomial because it involves $f^*$.
+
+## Convert to Edmond-Karp
+
+**Take the shortest path from s to t in $G^f$ instead of any path.** Shortest path here means the path with the minimum number of vertices $\implies$ use BFS only.
+
+### Running time
+
+$O(E^2V)$
