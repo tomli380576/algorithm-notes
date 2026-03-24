@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.3.0.827560796438">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.4.0.827677510599">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.3.0">
+    <meta name="generator" content="Retype 4.4.0">
 
     <!-- Primary Meta Tags -->
     <title>Maximum Flow</title>
@@ -35,16 +35,16 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.3.0.827560796438" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.4.0.827677510599" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.3.0.827560796438" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.3.0.827560796438" data-turbo-eval="false" defer></script>
-    <link href="../../resources/css/katex.css?v=4.3.0" rel="stylesheet">
-    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.3.0" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.4.0.827677510599" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.4.0.827677510599" data-turbo-eval="false" defer></script>
+    <link href="../../resources/css/katex.css?v=4.4.0" rel="stylesheet">
+    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.4.0" defer></script>
 
-    <meta content="Tommy's Algorithm Notes" property="og:title" />
-    <meta content="My Notes for 122A, 122B, and more" property="og:description" />
+    <meta content="Algorithm & Data Structures" property="og:title" />
+    <meta content="Notes for 122A, 122B, and more" property="og:description" />
     <meta
       content="https://tomli380576.github.io/algorithm-notes/"
       property="og:url"
@@ -194,8 +194,7 @@
                 <div class="flex items-center px-2 md:px-6">
                     <a id="retype-branding-logo" href="https://tomli380576.github.io/algorithm-notes/" class="flex items-center leading-snug text-2xl">
                         <span class="grow-0 shrink-0 overflow-hidden">
-                            <img class="max-h-10 dark:hidden md:inline-block" src="../../assets/favicon.png" alt="" width="257" height="186">
-                            <img class="max-h-10 hidden dark:inline-block" src="../../assets/favicon.png" alt="" width="257" height="186">
+                            <img class="max-h-10 md:inline-block" src="../../assets/lmao2.png" alt="" width="180" height="40">
                         </span>
                     </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Notes</span>
                 </div>
@@ -291,7 +290,7 @@
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-base"></div>
     <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
         <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-base" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+            <svg xmlns="http://www.w3.org/2000/svg" class="block text-callout-base" width="22" height="22" viewBox="0 0 24 24" role="presentation">
                 <g fill="currentColor"><g>
                     <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
                     <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
@@ -319,9 +318,9 @@
 </ol>
 <h2 id="ford-fulkerson">Ford-Fulkerson</h2>
 <ol>
-<li>Let <span class="math">f_e= 0</span> for all <span class="math">e\in E</span></li>
+<li>Init flow graph <span class="math">f</span> with <span class="math">f_e= 0</span> for all <span class="math">e\in E</span>.</li>
 <li>Make <span class="math">G^f</span> for current flow <span class="math">f</span></li>
-<li>Check if there&#x27;s any path from <span class="math">s</span> to <span class="math">t</span>, call it <span class="math">\cal P</span>, in <span class="math">G^f</span>. If not, return <span class="math">f</span>.</li>
+<li>Check if there&#x27;s any path from <span class="math">s</span> to <span class="math">t</span> in <span class="math">G^f</span>, call it <span class="math">\cal P</span>, in <span class="math">G^f</span>. If not, return <span class="math">f</span>.</li>
 <li>In <span class="math">\cal P</span>, let <span class="math">c(\cal P)</span> be the minimum capacity along <span class="math">\cal P</span> in <span class="math">G^f</span></li>
 <li>For each forward edge in <span class="math">\cal P</span>, increase its flow by <span class="math">c(\cal P)</span>. For each backward edge, decrease its flow by <span class="math">c(\cal P</span>).</li>
 </ol>
@@ -338,6 +337,10 @@
 <p><span class="math">\implies</span> Time per round is <span class="math">O(E)</span>
 <span class="math">\implies</span> Total running time is <span class="math">O(f^*E)</span></p>
 <p>This running time is pseudo-polynomial because it involves <span class="math">f^*</span>.</p>
+<h2 id="convert-to-edmond-karp">Convert to Edmond-Karp</h2>
+<p><strong>Take the shortest path from s to t in <span class="math">G^f</span> instead of any path.</strong> Shortest path here means the path with the minimum number of vertices <span class="math">\implies</span> use BFS only.</p>
+<h3 id="running-time-1">Running time</h3>
+<p><span class="math">O(E^2V)</span></p>
 
                 
                 <!-- Required only on API pages -->

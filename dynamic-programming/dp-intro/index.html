@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.3.0.827560796438">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.4.0.827677510599">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.3.0">
+    <meta name="generator" content="Retype 4.4.0">
 
     <!-- Primary Meta Tags -->
     <title>Introduction</title>
@@ -35,16 +35,16 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.3.0.827560796438" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.4.0.827677510599" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.3.0.827560796438" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.3.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.3.0.827560796438" data-turbo-eval="false" defer></script>
-    <link href="../../resources/css/katex.css?v=4.3.0" rel="stylesheet">
-    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.3.0" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.4.0.827677510599" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.4.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.4.0.827677510599" data-turbo-eval="false" defer></script>
+    <link href="../../resources/css/katex.css?v=4.4.0" rel="stylesheet">
+    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.4.0" defer></script>
 
-    <meta content="Tommy's Algorithm Notes" property="og:title" />
-    <meta content="My Notes for 122A, 122B, and more" property="og:description" />
+    <meta content="Algorithm & Data Structures" property="og:title" />
+    <meta content="Notes for 122A, 122B, and more" property="og:description" />
     <meta
       content="https://tomli380576.github.io/algorithm-notes/"
       property="og:url"
@@ -194,8 +194,7 @@
                 <div class="flex items-center px-2 md:px-6">
                     <a id="retype-branding-logo" href="https://tomli380576.github.io/algorithm-notes/" class="flex items-center leading-snug text-2xl">
                         <span class="grow-0 shrink-0 overflow-hidden">
-                            <img class="max-h-10 dark:hidden md:inline-block" src="../../assets/favicon.png" alt="" width="257" height="186">
-                            <img class="max-h-10 hidden dark:inline-block" src="../../assets/favicon.png" alt="" width="257" height="186">
+                            <img class="max-h-10 md:inline-block" src="../../assets/lmao2.png" alt="" width="180" height="40">
                         </span>
                     </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Notes</span>
                 </div>
@@ -288,15 +287,15 @@
 <h2 id="general-dp-formulation">General DP Formulation</h2>
 <p>Typically a DP problem involves searching for a sequence of decisions that arrives at a maximum or minimum value. Let&#x27;s define:</p>
 <dl>
-<dt><span class="math">t = 1...N</span></dt>
+<dt id="term"><span class="math">t = 1...N</span></dt>
 <dd>A &quot;stage&quot; of the problem. When <span class="math">t=N</span>, we have reached the end of the problem. This is usually the variable representing time / planning horizon, but not necessarily</dd>
-<dt><span class="math">s_t\in S</span>  </dt>
+<dt id="term-1"><span class="math">s_t\in S</span>  </dt>
 <dd>State at stage <span class="math">t</span>; <span class="math">S</span> is the space of all possible states</dd>
-<dt><span class="math">a_t\in A</span>  </dt>
+<dt id="term-2"><span class="math">a_t\in A</span>  </dt>
 <dd>Action at stage <span class="math">t</span>; <span class="math">A</span> is the space of all possible actions</dd>
-<dt><span class="math">r_t(s_t, a_t)</span>  </dt>
+<dt id="term-3"><span class="math">r_t(s_t, a_t)</span>  </dt>
 <dd>Reward function if we take action <span class="math">a_t</span> at state <span class="math">s_t</span></dd>
-<dt><span class="math">R(s_N)</span></dt>
+<dt id="term-4"><span class="math">R(s_N)</span></dt>
 <dd>Reward if we end on state <span class="math">s_N</span>. This is the cost/reward of our base case, a subproblem that we can immediately solve without recursion. If we reach <span class="math">s_N</span>, we have no possible actions.</dd>
 </dl>
 <p>Now the <strong>optimality equation</strong> / <strong>value function</strong> / <strong>objective recurrence</strong> is:</p>
@@ -315,15 +314,15 @@
 <p>The rest of the variables are straightforward to find: the revenue of a cut is the reward function; final reward is either 0 or <span class="math">p_1</span>, and <span class="math">s_{n+1}</span> is the new length after the cut.</p>
 <p>Let&#x27;s list each component:</p>
 <dl>
-<dt><span class="math">t = 1...N</span></dt>
+<dt id="term-5"><span class="math">t = 1...N</span></dt>
 <dd>Stage is the &quot;time&quot; elapsed or the total number of cuts we have made</dd>
-<dt><span class="math">s_t\in S</span>  </dt>
+<dt id="term-6"><span class="math">s_t\in S</span>  </dt>
 <dd>State is the length of the remaining rod</dd>
-<dt><span class="math">a_t\in A</span>  </dt>
+<dt id="term-7"><span class="math">a_t\in A</span>  </dt>
 <dd>Action the the possible cuts we can make. Ranges from 1 to <span class="math">s_t</span></dd>
-<dt><span class="math">r_t(s_t, a_t)</span>  </dt>
+<dt id="term-8"><span class="math">r_t(s_t, a_t)</span>  </dt>
 <dd>Reward is the revenue of the cut</dd>
-<dt><span class="math">R(s_N)</span></dt>
+<dt id="term-9"><span class="math">R(s_N)</span></dt>
 <dd>Base cases, <span class="math">s_N = 0</span> or <span class="math">s_N = 1</span> which means <span class="math">R(0) = 0, R(1) = p_1</span></dd>
 </dl>
 <p>optimality equation is:</p>
