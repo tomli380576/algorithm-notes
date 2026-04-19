@@ -1,7 +1,7 @@
 # Kruskal's 
 
 > Scan $E$ by increasing weight.
-> If the current edge is safe, add it to $F$
+> If the current edge is safe, add it to $T$
 
 ## MakeSet, Union, Find
 
@@ -16,19 +16,19 @@ In actual implementation the function arguments might be different (passing obje
 ## Pseudocode
 
 ```
-function KruskalsMST(G) -> Array<Edges>:
-	F = {}
-	sorted_edges = sorted(G.Edges)
+function KruskalsMST(G=(V, E)) -> Array<Edges>:
+	T = {}
+	sorted_edges = sorted(E)
 
-	for each vertex **v** in G:
+	for v in V:
 		MakeSet(v)
 
-	for each edge **uv** in sorted_edges:
+	for uv in sorted_edges:
 		if Find(u) != Find(v): // if safe
-			put uv in F
+			T.add(uv)
 			Union(u, v)
 
-	return F
+	return T
 ```
 
 ## Runtime Analysis
@@ -36,7 +36,7 @@ function KruskalsMST(G) -> Array<Edges>:
 Initialization + Sort + Find + Union:
 
 $$
-V + E\log E + E\cdot O(\ce{find}) + (V-1)\cdot O(\ce{union}) = O(E\log E)
+V + E\log E + E\cdot O(\text{find}) + (V-1)\cdot O(\text{union}) = O(E\log E)
 $$
 
 Usually $O(E\log E)$. This can also be improved to $O(E\log V)$
