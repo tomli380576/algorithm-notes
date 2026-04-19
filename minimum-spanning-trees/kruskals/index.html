@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.4.0.828713240317">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.4.0">
+    <meta name="generator" content="Retype 4.5.3">
 
     <!-- Primary Meta Tags -->
     <title>Kruskal&#39;s</title>
     <meta name="title" content="Kruskal's">
-    <meta name="description" content="Scan E by increasing weight. If the current edge is safe, add it to F">
+    <meta name="description" content="Scan E by increasing weight. If the current edge is safe, add it to T">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/kruskals/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://tomli380576.github.io/algorithm-notes/sitemap.xml">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/kruskals/">
     <meta property="og:title" content="Kruskal's">
-    <meta property="og:description" content="Scan E by increasing weight. If the current edge is safe, add it to F">
+    <meta property="og:description" content="Scan E by increasing weight. If the current edge is safe, add it to T">
     <meta property="og:site_name" content="">
     <meta property="og:locale" content="en_US">
 
@@ -30,18 +31,21 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/kruskals/">
     <meta name="twitter:title" content="Kruskal's">
-    <meta name="twitter:description" content="Scan E by increasing weight. If the current edge is safe, add it to F">
+    <meta name="twitter:description" content="Scan E by increasing weight. If the current edge is safe, add it to T">
+
+    <!-- Alternate Markdown -->
+    <link rel="alternate" type="text/markdown" href="https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/kruskals.md">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.4.0.828713240317" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.4.0.828713240317" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.4.0.828713240317" data-turbo-eval="false" defer></script>
-    <link href="../../resources/css/katex.css?v=4.4.0" rel="stylesheet">
-    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.4.0" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
+    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
     <meta content="Algorithm & Data Structures" property="og:title" />
     <meta content="Notes for 122A, 122B, and more" property="og:description" />
@@ -279,14 +283,16 @@
 <div class="flex">
     <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
         <main class="relative pb-12 lg:pt-2">
-            <div class="retype-markdown" id="retype-content">
+            <div class="relative retype-markdown" id="retype-content">
                 <!-- Rendered if sidebar right is enabled -->
                 <div id="retype-sidebar-right-toggle"></div>
+                <doc-page-actions></doc-page-actions>
+
                 <!-- Page content  -->
 <h1 id="kruskals">Kruskal&#x27;s</h1>
 <blockquote>
 <p>Scan <span class="math">E</span> by increasing weight.
-If the current edge is safe, add it to <span class="math">F</span></p>
+If the current edge is safe, add it to <span class="math">T</span></p>
 </blockquote>
 <h2 id="makeset-union-find">MakeSet, Union, Find</h2>
 <p>To combine the newly selected safe edge to the current tree, Kruskal’s Algorithm uses these 3 helper functions:</p>
@@ -298,23 +304,23 @@ If the current edge is safe, add it to <span class="math">F</span></p>
 <p>In actual implementation the function arguments might be different (passing objects on the stack is expensive) but the behavior should be the same.</p>
 <h2 id="pseudocode">Pseudocode</h2>
 <div id="pseudocode-code-1" class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-none"><code v-pre class="language-none">function KruskalsMST(G) -&gt; Array&lt;Edges&gt;:
-	F = {}
-	sorted_edges = sorted(G.Edges)
+<pre translate="no" class="language-none"><code v-pre class="language-none">function KruskalsMST(G=(V, E)) -&gt; Array&lt;Edges&gt;:
+	T = {}
+	sorted_edges = sorted(E)
 
-	for each vertex **v** in G:
+	for v in V:
 		MakeSet(v)
 
-	for each edge **uv** in sorted_edges:
+	for uv in sorted_edges:
 		if Find(u) != Find(v): // if safe
-			put uv in F
+			T.add(uv)
 			Union(u, v)
 
-	return F</code></pre>
+	return T</code></pre>
 </doc-codeblock></div>
 <h2 id="runtime-analysis">Runtime Analysis</h2>
 <p>Initialization + Sort + Find + Union:</p>
-<div class="math"><pre translate="no">V + E\log E + E\cdot O(\ce{find}) + (V-1)\cdot O(\ce{union}) = O(E\log E)</pre></div>
+<div class="math"><pre translate="no">V + E\log E + E\cdot O(\text{find}) + (V-1)\cdot O(\text{union}) = O(E\log E)</pre></div>
 <p>Usually <span class="math">O(E\log E)</span>. This can also be improved to <span class="math">O(E\log V)</span></p>
 
                 
@@ -382,6 +388,6 @@ If the current edge is safe, add it to <span class="math">F</span></p>
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Kruskal's", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+        <script data-cfasync="false">window.__DOCS__ = { "title": "Kruskal's", level: 2, icon: "file", hasPrism: false, hasInstagram: false, hasMermaid: false, hasMath: true, tocDepth: 23, "md": "/minimum-spanning-trees/kruskals.md" }</script>
 </body>
 </html>

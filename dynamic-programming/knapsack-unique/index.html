@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.4.0.828713240317">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.4.0">
+    <meta name="generator" content="Retype 4.5.3">
 
     <!-- Primary Meta Tags -->
     <title>Knapsack (Unique items)</title>
     <meta name="title" content="Knapsack (Unique items)">
-    <meta name="description" content="Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that">
+    <meta name="description" content="Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that fits in the backpack will maximize the total value?">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://tomli380576.github.io/algorithm-notes/dynamic-programming/knapsack-unique/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://tomli380576.github.io/algorithm-notes/sitemap.xml">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tomli380576.github.io/algorithm-notes/dynamic-programming/knapsack-unique/">
     <meta property="og:title" content="Knapsack (Unique items)">
-    <meta property="og:description" content="Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that">
+    <meta property="og:description" content="Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that fits in the backpack will maximize the total value?">
     <meta property="og:site_name" content="">
     <meta property="og:locale" content="en_US">
 
@@ -30,18 +31,21 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://tomli380576.github.io/algorithm-notes/dynamic-programming/knapsack-unique/">
     <meta name="twitter:title" content="Knapsack (Unique items)">
-    <meta name="twitter:description" content="Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that">
+    <meta name="twitter:description" content="Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that fits in the backpack will maximize the total value?">
+
+    <!-- Alternate Markdown -->
+    <link rel="alternate" type="text/markdown" href="https://tomli380576.github.io/algorithm-notes/dynamic-programming/knapsack-unique.md">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.4.0.828713240317" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.4.0.828713240317" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.4.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.4.0.828713240317" data-turbo-eval="false" defer></script>
-    <link href="../../resources/css/katex.css?v=4.4.0" rel="stylesheet">
-    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.4.0" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
+    <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
     <meta content="Algorithm & Data Structures" property="og:title" />
     <meta content="Notes for 122A, 122B, and more" property="og:description" />
@@ -279,9 +283,11 @@
 <div class="flex">
     <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
         <main class="relative pb-12 lg:pt-2">
-            <div class="retype-markdown" id="retype-content">
+            <div class="relative retype-markdown" id="retype-content">
                 <!-- Rendered if sidebar right is enabled -->
                 <div id="retype-sidebar-right-toggle"></div>
+                <doc-page-actions></doc-page-actions>
+
                 <!-- Page content  -->
 <h1 id="knapsack-unique-items">Knapsack (Unique items)</h1>
 <div class="flex mb-6">
@@ -429,6 +435,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Knapsack (Unique items)", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: true, tocDepth: 23 }</script>
+        <script data-cfasync="false">window.__DOCS__ = { "title": "Knapsack (Unique items)", level: 2, icon: "file", hasPrism: false, hasInstagram: false, hasMermaid: false, hasMath: true, tocDepth: 23, "md": "/dynamic-programming/knapsack-unique.md" }</script>
 </body>
 </html>

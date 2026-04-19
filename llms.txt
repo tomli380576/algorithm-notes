@@ -1,0 +1,70 @@
+﻿# Algorithm Notes
+
+> My notes for 122A, 122B and more.
+
+- [Algorithm Notes](https://tomli380576.github.io/algorithm-notes/index.md): Algorithm Notes
+- [Ready-to-go LeetCode templates](https://tomli380576.github.io/algorithm-notes/lc-template.md): Returns -1 if target is not found
+- [Pseudocode Syntax Reference](https://tomli380576.github.io/algorithm-notes/pseudocode-syntax.md): Math operators are used the same as they are in formal mathematical writing.
+
+## Divide & Conquer
+
+- [Geometric Series Shortcuts](https://tomli380576.github.io/algorithm-notes/divide-conquer/geometric-series-shortcuts.md): For a constant r \in \R_{>0} and some upper bound k (k\in\Z is not required when we are dealing with big Os since we can bound it with \lceil k\rceil), we
+- [Masters Theorem (122A)](https://tomli380576.github.io/algorithm-notes/divide-conquer/masters-theorem.md): For a recurrence relation of the form:
+- [Max Sub-array (122A)](https://tomli380576.github.io/algorithm-notes/divide-conquer/max-sub-array.md): Question. Given a 1-dimensional array, find a contiguous sub-array with the largest sum
+- [Merge Sort (122A)](https://tomli380576.github.io/algorithm-notes/divide-conquer/merge-sort.md): Given A[1...n]: Listnumber, the idea of merge sort is:
+- [Quick Select (122B)](https://tomli380576.github.io/algorithm-notes/divide-conquer/quick-select.md): Question. Given an unsorted A[1...N]: Listnumber and a positive integer k, 1 = k = N, how do we find the k-th smallest element of A in O(n) time?
+- [Quick Sort (122A)](https://tomli380576.github.io/algorithm-notes/divide-conquer/quick-sort.md): The idea of quick sort is:
+- [Randomized Quick Select (122B)](https://tomli380576.github.io/algorithm-notes/divide-conquer/rand-qselect.md): Type of Divide & Conquer: Pivot
+- [Tower of Hanoi (36B)](https://tomli380576.github.io/algorithm-notes/divide-conquer/tower-hanoi.md): Question. Given 3 pegs and n disks, how can we move all the disks from src to dest such that larger disks cannot stack on top of smaller disks?
+
+## Dynamic Programming
+
+- [Introduction](https://tomli380576.github.io/algorithm-notes/dynamic-programming/dp-intro.md): Typically a DP problem involves searching for a sequence of decisions that arrives at a maximum or minimum value. Let's define:
+- [Rod Cutting (122A)](https://tomli380576.github.io/algorithm-notes/dynamic-programming/rod-cutting.md): Question. Given a rod with length n and an array of prices of each length p_i, how can we cut the rod to make the most amount of money?
+- [Longest Common Subsequence](https://tomli380576.github.io/algorithm-notes/dynamic-programming/lcs.md): Question. Given 2 strings X[1...m], Y[1...n], what is the longest common subsequence between them? A common sequence satisfies the following:
+- [Maximum Sum After Partitioning](https://tomli380576.github.io/algorithm-notes/dynamic-programming/max-sum-after-partition.md): Question. Given an array A[1...N] and a partition size k, 1 = k = N, partition the array into (contiguous) subarrays of length at most k. After partitioning, each subarray has their values changed to become the maximum value of that subarray.
+- [Pretty Printing](https://tomli380576.github.io/algorithm-notes/dynamic-programming/pretty-printing.md): Question. Given an array of N words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that any individual word can fit on one line.
+- [Levenshtein Edit Distance](https://tomli380576.github.io/algorithm-notes/dynamic-programming/edit-distance.md): Question. Given 2 strings A[1...n] and B[1...m], what is minimum number of edits to A required to make 2 strings identical? An edit could be 1 of the
+- [Optimal Binary Search Tree](https://tomli380576.github.io/algorithm-notes/dynamic-programming/optimal-bst.md): Given a sorted list of search items A[1...n] and a frequency list f[1...n], where f[i] is the number of times we will search for element A[i].
+- [Chain Matrix Multiplication](https://tomli380576.github.io/algorithm-notes/dynamic-programming/chain-multiply.md)
+- [Knapsack (Unique items)](https://tomli380576.github.io/algorithm-notes/dynamic-programming/knapsack-unique.md): Given a single backpack with capacity C, a list of N items (can only take each item once) with weight w_i and value v_i, what combination of items that fits in the backpack will maximize the total value?
+- [Knapsack (Unlimited supply)](https://tomli380576.github.io/algorithm-notes/dynamic-programming/knapsack-unlimited-supply.md): Given a single backpack with capacity C, a list of N items (they now have \infty supply) with weight w_i and value v_i, what combination of items that fits in the backpack will maximize the total value?
+
+## Graph Traversal
+
+- [The Only Graph Traversal Algorithm](https://tomli380576.github.io/algorithm-notes/graph-traversal/the-only-graph-algo.md): Question. How to visit every vertex exactly once in a graph?
+- [Breadth First Search (122A)](https://tomli380576.github.io/algorithm-notes/graph-traversal/bfs.md): We can implement BFS from whatever first search by using a Queue.
+- [Recursive Depth First Search (122A)](https://tomli380576.github.io/algorithm-notes/graph-traversal/dfs.md): Similar to whatever first search, we assign each vertex a STATUS.
+- [Finding Connected Components with DFS](https://tomli380576.github.io/algorithm-notes/graph-traversal/dfs-connectivity.md): Let's modify the DFS algorithm to label each connected component
+
+## Greedy Algorithms
+
+- [Huffman Encoding](https://tomli380576.github.io/algorithm-notes/greedy-algorithms/huffman-codes.md)
+- [Scheduling Classes / Activity Selection (122A)](https://tomli380576.github.io/algorithm-notes/greedy-algorithms/scheduling.md): Question. Given a list of class schedules consisting of start times S and end times F, what’s the maximum amount of classes we can take?
+- [Summary & Patterns](https://tomli380576.github.io/algorithm-notes/greedy-algorithms/summary.md): Find the local best choice first, and keep making these choices if they are compatible with the previous ones.
+
+## Linear Programming
+
+- [Duality](https://tomli380576.github.io/algorithm-notes/linear-programming/duality.md)
+- [Geometry](https://tomli380576.github.io/algorithm-notes/linear-programming/lp-geometry.md): A company makes 2 products, A and B, each unit of A makes $1 of profit and each unit of B makes $2. The demand is \leq 300 units of A and \leq 200 units of B.
+
+## Max Flow Min Cut
+
+- [Max-Flow Min Cut Theorem](https://tomli380576.github.io/algorithm-notes/max-flow-min-cut/max-flow-min-cut.md): Recall that FF stops when there's no path from s to t in the current residual graph G^f.
+- [Maximum Flow](https://tomli380576.github.io/algorithm-notes/max-flow-min-cut/max-flow.md): In a graph with flows G = (V, E, C), each edge e has a maximum flow capacity c_e, c_e > 0\,\forall e (think of the train network etc.). We want to find, for a starting vertex s and target vertex t, what's the maximum amount of flow we can achieve in this graph (e.g.
+
+## Minimum Spanning Trees
+
+- [Kruskal's](https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/kruskals.md): Scan E by increasing weight. If the current edge is safe, add it to T
+- [Minimum Spanning Tree](https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/the-only-mst-algo.md): For a weighted graph G = (V, E, W), how do we connect all the vertices in V while minimizing the sum of the edge weights?
+- [Prim's](https://tomli380576.github.io/algorithm-notes/minimum-spanning-trees/prims.md)
+
+## NP Theory
+
+- [Independent Set](https://tomli380576.github.io/algorithm-notes/np-theory/independent-set.md): For an undirected graph G = (V,E), an independent set S \sub V satisfies \forall u,v \in S, uv\notin E
+- [NP introduction](https://tomli380576.github.io/algorithm-notes/np-theory/definitions.md): P: problems that are solvable in polynomial time
+
+## Shortest Paths
+
+- [All Pairs Shortest Paths (APSP)](https://tomli380576.github.io/algorithm-notes/shortest-paths/all-pairs.md): Let dist[s, t] be the length of the shortest path from s to t. We want to find dist[s, t] for all s, t\in V.
+- [Single Source Shortest Paths (SSSP)](https://tomli380576.github.io/algorithm-notes/shortest-paths/single-source.md): We want to find the shortest distance from starting vertex s to all other vertices in G. The final output is an array dist[z], the distance from s to z.
