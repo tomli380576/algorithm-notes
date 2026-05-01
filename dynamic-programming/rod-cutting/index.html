@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.830952993963">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.5.3">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.830952993963" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.829892645867" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.830952993963" defer></script>
     <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
@@ -360,17 +360,17 @@ function CutRod(rodLen: int) -&gt; int:
 		return 0
 	if rodLen == 1:
 		return prices[1]
-	
+
 	/**
 	 * initial value.
 	 * start at 0 because we can't have negative profit,
 	 * but -Inifinity will also work
 	*/
-	best = 0 
-	
+	best = 0
+
 	// we can cut 1, 2, ..., rod_len. Can't cut more rod than we have
 	// in all the compatible cuts, which is the next optimal cut?
-	for cutLen = 1 to rodLen: 
+	for cutLen = 1 to rodLen:
 		// take the cut if it's better than the current decision
 		// then let the recursion take care of the rest by shrinking the input
 		cutProfit = CutRod(rodLen - cutLen) + prices[cutLen]
@@ -389,7 +389,7 @@ function CutRod(rodLen: int) -&gt; int:
         return 0
     if rodLen == 1:
         return prices[1]
-    
+
     best = 0
     for cutLen = 1 to rodLen:
         cutProfit = CutRod(rodLen - cutLen) + prices[cutLen]
@@ -427,7 +427,7 @@ function CutRod(rodLen: int) -&gt; int:
 <li>To make a choice, decrease the remaining length.</li>
 </ul>
 </li>
-<li><strong>Satisfy all the constraints</strong> -  We can’t cut more rod than we currently have.</li>
+<li><strong>Satisfy all the constraints</strong> - We can’t cut more rod than we currently have.</li>
 </ol>
         </div>
     </div>
@@ -468,11 +468,11 @@ function CutRod(rodLen):
 
 function DpCutRod(maxRodLen: int) -&gt; int:
 	dpTable = Array(shape=(maxRodLen)) // preallocate the space
-	
+
 	// pretend 0 is valid here
 	dpTable[0] = 0          // corresponds to CutRod(0)
 	dpTable[1] = prices[1]  // corresponds to CutRod(1)
-	
+
 	// ↓ the for loop that simulates recursive calls
 	for rodLen = 2 to maxRodLen:
 		best = 0
@@ -482,7 +482,7 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 			best = max(best, profit)
 		// recursive call location, store the result of CutRod(rodLen)
 		dpTable[rodLen] = best
-	
+
 	// initial call location
 	return dpTable[maxRodLen] // Corresponds to CutRod(maxRodLen)</code></pre>
 </doc-codeblock></div>
@@ -494,17 +494,17 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 
 function DpCutRod(maxRodLen: int) -&gt; int:
     dpTable = Array(shape=(maxRodLen))
-    
+
     dpTable[0] = 0
     dpTable[1] = prices[1]
-    
+
     for rodLen = 2 to maxRodLen:
         best = 0
         for cutLen = 1 to rodLen:
             profit = dpTable[rodLen - cutLen] + prices[cutLen]
             best = max(best, profit)
         dpTable[rodLen] = best
-    
+
     return dpTable[maxRodLen]</code></pre>
 </doc-codeblock></div>
 </doc-tab>
@@ -515,10 +515,10 @@ function DpCutRod(maxRodLen: int) -&gt; int:
 <pre translate="no" class="language-c" data-line="12-14,3"><code v-pre class="language-c">function DpCutRod(maxRodLen: int) -&gt; int, List&lt;int&gt;:
     dpTable = Array(shape=(maxRodLen))
     cuts = Array(shape=(maxRodLen))
-    
+
     dpTable[0] = 0
     dpTable[1] = prices[1]
-    
+
     for rodLen = 2 to maxRodLen:
         best = 0
         for cutLen = 1 to rodLen:
@@ -528,7 +528,7 @@ function DpCutRod(maxRodLen: int) -&gt; int:
                 cuts[rodLen] = cutLen
 
         dpTable[rodLen] = best
-    
+
     return dpTable[maxRodLen], elements of cuts that are not null
 </code></pre>
 </doc-codeblock></div>
@@ -569,7 +569,7 @@ function DpCutRod(maxRodLen: int) -&gt; int:
         </div>
         <div class="pr-5 ml-3 w-full">
             <h5>Hint</h5>
-<p>The key point is that the <em><strong>optimal solution to the subproblem is unique</strong></em>.</p>
+<p>The key point is that the <strong><em>optimal solution to the subproblem is unique</em></strong>.</p>
         </div>
     </div>
 </div>

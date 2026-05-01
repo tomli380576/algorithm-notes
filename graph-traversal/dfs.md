@@ -5,13 +5,13 @@
 Similar to whatever first search, we assign each vertex a `STATUS`.
 
 `NEW`
-: 	literally never seen before, all vertices start with this status
+: literally never seen before, all vertices start with this status
 
 `ACTIVE`
-:	seen before, but the adjacent vertices are not done processing yet
+: seen before, but the adjacent vertices are not done processing yet
 
 `FINISHED`
-:	the vertex is seen and all its children are done processing
+: the vertex is seen and all its children are done processing
 
 ## Pseudocode
 
@@ -29,11 +29,11 @@ function DfsSearch(G):
 function DfsVisit(u):
 	mark u as ACTIVE
 	// process when u is ACTIVE
-	Preprocess(u) 
-	
+	Preprocess(u)
+
 	for each adjacent vertex v:
-		if v is NEW: 
-			DfsVisit(v) 
+		if v is NEW:
+			DfsVisit(v)
 
 	mark u as FINISHED
 	// process when u is FINISHED
@@ -45,7 +45,7 @@ function DfsVisit(u):
 
 ```c
 // globals
-time = 0 
+time = 0
 DISCOVER_TIME = {}
 FINISH_TIME = {}
 
@@ -62,10 +62,10 @@ function DfsVisit(u):
 	time++
 	DISCOVER_TIME[u] = time
 	Preprocess(u)
-	
+
 	for each adjacent vertex v:
-		if v is NEW: 
-			DfsVisit(v) 
+		if v is NEW:
+			DfsVisit(v)
 
 	mark u as FINISHED
 	time++
@@ -82,6 +82,7 @@ function DfsVisit(u):
 ### Comparison with stack based Whatever First Search
 
 |||WFS with Stack
+
 ```c
 function WfsDepth(G: Graph):
 	for each vertex v in G:
@@ -89,7 +90,7 @@ function WfsDepth(G: Graph):
 	for each vertex v in G:
 		if v is NEW:
 			WfsVisit(G, v)
-			
+
 function WfsVisit(G: Graph, start: Vertex):
 	stack = Stack()
 	stack.put(start)
@@ -102,7 +103,9 @@ function WfsVisit(G: Graph, start: Vertex):
 			for each adjacent vertex v:
 				stack.put(v)
 ```
+
 |||Recursive
+
 ```c
 function DfsSearch(G: Graph):
 	for each vertex v in G:
@@ -114,14 +117,15 @@ function DfsSearch(G: Graph):
 function DfsVisit(u: Vertex):
 	mark u as ACTIVE
 	Preprocess(u)
-	
+
 	for each adjacent vertex v:
-		if v is NEW: 
-			DfsVisit(v) 
+		if v is NEW:
+			DfsVisit(v)
 
 	mark u as FINISHED
 	Postprocess(u)
 ```
+
 |||
 
 The recursive version replaces `stack.put(v)` with the recursive call `DfsVisit(v)`.
@@ -158,8 +162,7 @@ More specifically:
 
 ### Edge Interpretations
 
-- At least one back edge is found $\iff$ the graph has a cycle. So Directed Acyclic Graphs (Like a DP dependency graph) cannot have a back edge. 
-    
+- At least one back edge is found $\iff$ the graph has a cycle. So Directed Acyclic Graphs (Like a DP dependency graph) cannot have a back edge.
 - Found at least 1 cross or forward edge $\implies$ the graph is directed
 
 - Read more [here](https://courses.csail.mit.edu/6.006/spring11/rec/rec13.pdf)

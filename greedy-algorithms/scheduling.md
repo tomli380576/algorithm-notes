@@ -1,12 +1,12 @@
 # Scheduling Classes / Activity Selection (122A)
 
->  **Question.** Given a list of class schedules consisting of start times $S$ and end times $F$, what’s the maximum amount of classes we can take?
+> **Question.** Given a list of class schedules consisting of start times $S$ and end times $F$, what’s the maximum amount of classes we can take?
 
 `s: Map<String, Time>`
-:   a map of start times of classes, where the key is the class name and the value is the start time.
+: a map of start times of classes, where the key is the class name and the value is the start time.
 
 `f: Map<string, Time>`
-:   a map of finish times of classes, where the key is the class name and the value is the finish time.
+: a map of finish times of classes, where the key is the class name and the value is the finish time.
 
 Constraint: All the times `s[i]` and `f[i]` are both less than some maximum time $T$.
 
@@ -39,7 +39,7 @@ Convert to expressions:
 
 $$
 \text{Schedule}(curr, prev) = \begin{cases}
-0 & \text{if $s$ is empty}\\ 
+0 & \text{if $s$ is empty}\\
 \text{Schedule}(curr.\text{next}, prev) & \text{if $s[curr]> f[prev]$}
 \\
 \max\left.\begin{cases}

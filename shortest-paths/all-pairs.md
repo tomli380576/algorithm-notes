@@ -6,9 +6,9 @@ Let `dist[s, t]` be the length of the shortest path from $s$ to $t$. We want to 
 
 ### Basic Idea
 
-Try a "prefix" of the vertices of the graph. Arbitrarily label the vertices with $1\dots|V|$. We are going to try to use only the vertices $1\dots i$ in each subproblem. Do this for all possible combinations of $s$ and $t$ 
+Try a "prefix" of the vertices of the graph. Arbitrarily label the vertices with $1\dots|V|$. We are going to try to use only the vertices $1\dots i$ in each subproblem. Do this for all possible combinations of $s$ and $t$
 
-Let $D(i, s, t)$ be the length of the shortest path from $s$ to $t$ using a subset of vertices $\{1\dots i\}$. 
+Let $D(i, s, t)$ be the length of the shortest path from $s$ to $t$ using a subset of vertices $\{1\dots i\}$.
 
 ### Base Case
 
@@ -28,11 +28,12 @@ $$
    D(i-1, s, t)
    $$
 2. Use vertex $i$:
-   Recall that we are ONLY using vertices $1\dots i$, so the path looks like $s\to\text{something in }\{1, \dots i-1\} \to i\to \text{something in }\{1, \dots i-1\} \to t$ 
-   
+   Recall that we are ONLY using vertices $1\dots i$, so the path looks like $s\to\text{something in }\{1, \dots i-1\} \to i\to \text{something in }\{1, \dots i-1\} \to t$
+
    $s\to\text{something in }\{1, \dots i-1\} \to i$ is just $D(i-1, s, i)$. Similarly $i\to \text{something in }\{1, \dots i-1\} \to t$ is $D(i-1, i, t)$
 
    Therefore we add them together
+
    $$
    D(i-1, s, i) + D(i-1, i, t)
    $$

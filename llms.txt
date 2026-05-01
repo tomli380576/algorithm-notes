@@ -63,6 +63,7 @@
 
 - [Independent Set](https://tomli380576.github.io/algorithm-notes/np-theory/independent-set.md): For an undirected graph G = (V,E), an independent set S \sub V satisfies \forall u,v \in S, uv\notin E
 - [NP introduction](https://tomli380576.github.io/algorithm-notes/np-theory/definitions.md): P: problems that are solvable in polynomial time
+- [Reduction](https://tomli380576.github.io/algorithm-notes/np-theory/reductions.md): Example: Coloring \to SAT
 
 ## Shortest Paths
 

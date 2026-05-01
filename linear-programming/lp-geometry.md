@@ -2,7 +2,7 @@
 
 ## Simple Example
 
-A company makes 2 products, $A$ and $B$, each unit of A makes $1 of profit and each unit of B makes $2. The demand is $\leq 300$ units of A and $\leq 200$ units of B. Suppose the total number of work hours available is 700, and making each A takes 1 hour, making each B takes 3. 
+A company makes 2 products, $A$ and $B$, each unit of A makes $1 of profit and each unit of B makes $2. The demand is $\leq 300$ units of A and $\leq 200$ units of B. Suppose the total number of work hours available is 700, and making each A takes 1 hour, making each B takes 3.
 
 We can write this into a linear program that looks like
 
@@ -40,7 +40,7 @@ where $A$ is a $m\times n$ matrix. A and $\bold b$ together form the constraints
 
 ## Geometric view
 
-The feasible region is the intersection of halfspaces cut by the hyperplanes given by the constraints in $\R^n$. 
+The feasible region is the intersection of halfspaces cut by the hyperplanes given by the constraints in $\R^n$.
 
 There are at least ${n+m}\choose{n}$ vertices. For each vertex, it has $\leq nm$ neighbors.
 
@@ -49,6 +49,7 @@ There are at least ${n+m}\choose{n}$ vertices. For each vertex, it has $\leq nm$
 **Simplex algorithm** has worst case exponential time, but fast in practice.
 
 Basic idea:
+
 1. Start at $\bold x = \bold 0$
 2. Check all neighbor vertices with better objective value. Keep doing this
 3. If we can't find anything better in the neighborhood, then $\bold x$ is already the global best.

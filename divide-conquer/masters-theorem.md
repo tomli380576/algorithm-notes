@@ -9,7 +9,7 @@ $$
 T(n) &= aT\left(\left\lceil\dfrac nb\right\rceil\right) + O(n^d)\\
 
 a, b \in \Z&; a > 0, b> 1\\
-d\in\R&; d\geq 0    
+d\in\R&; d\geq 0
 \end{aligned}
 $$
 
@@ -23,7 +23,7 @@ T(n) = \begin{cases}
 \end{cases}
 $$
 
-!!!tip 
+!!!tip
 This is a shortcut because a lot of the times we get polynomial runtimes for the work at each level $O(n^d)$. For a more general Masters theorem, see the next section.
 !!!
 
@@ -42,6 +42,7 @@ where $a, b, n\in \Bbb N$ and they represent:
 - $f(n)$ : work at each level.
 
 !!!info Example
+
 $$
 T(n)=3T\left(\dfrac n4\right) + n^2\\
 $$
@@ -98,17 +99,17 @@ $$
 Then check if:
 
 1. There exists $\varepsilon > 0$ such that:
-    
-    $$
-    f(n)=\Omega \left(n^{(\log_ba)+\varepsilon}\right)
-    $$
-    
+
+   $$
+   f(n)=\Omega \left(n^{(\log_ba)+\varepsilon}\right)
+   $$
+
 2. **AND** if there exists positive $c<1$ such that:
-    
-    $$
-    a\cdot f\left(\frac nb\right)\le c\cdot f(n)
-    $$
-    
+
+   $$
+   a\cdot f\left(\frac nb\right)\le c\cdot f(n)
+   $$
+
 If both are satisfied, then:
 
 $$

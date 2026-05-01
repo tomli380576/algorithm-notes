@@ -7,6 +7,7 @@ Given a single backpack with capacity $C$, a list of $N$ items (they now have $\
 ## Base cases
 
 The same 2 base cases:
+
 1. No items: $\forall b, K(0, b) = 0$
 2. No capacity: $\forall i, K(i, 0) = 0$
 

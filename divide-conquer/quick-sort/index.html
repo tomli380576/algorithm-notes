@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.830952993963">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.5.3">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.830952993963" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.829892645867" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.830952993963" defer></script>
     <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
@@ -299,7 +299,7 @@
 	partitionLeft = from A select value where value &lt; pivot value
 	partitionMid = from A select value where value == pivot value
 	partitionRight = from A select value where value &gt; pivot value
-	
+
 	Recursively sort partitionLeft           // *Recursion Magic*
 	Recursively sort partitionRight          // *Recursion Magic*</code></pre>
 </doc-codeblock></div>
@@ -320,7 +320,7 @@
 	for i = 1 to n:
 		if A[i]	&lt; pivotValue:
 			push A[i] into left
-		else if A[i] == pivotValue: 
+		else if A[i] == pivotValue:
 			if not first time seeing pivotValue:
 				push A[i] into left
 		else:
@@ -342,7 +342,7 @@
 <h2 id="pseudocode">Pseudocode</h2>
 <div id="pseudocode-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-c"><code v-pre class="language-c">function QuickSort(A[1...n]) -&gt; Array:
-	if n &gt; 1: 
+	if n &gt; 1:
 		pivot_value = ChoosePivot()
 		left, right = Partition(A[1...n], pivot_value)
 		return flatten([QuickSort(left), [pivot_value], QuickSort(right)])
@@ -356,7 +356,7 @@ function Partition(A[1...n], pivot_value) -&gt; pair of Arrays:
 	for i = 1 to n:
 		if A[i]	&lt; pivot_value:
 			push A[i] into left
-		else if A[i] == pivot: 
+		else if A[i] == pivot:
 			if not first time seeing pivot:
 				push A[i] into left
 		else:

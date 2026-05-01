@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.830952993963">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.5.3">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.830952993963" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.829892645867" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.830952993963" defer></script>
     <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
@@ -335,7 +335,7 @@
 	while bag is not empty:
 		u = bag.popFirst()
 		if u is NEW:
-			process(u) 
+			process(u)
 			mark u as SEEN
 			for each v adjacent to u:
 				bag.put(v)</code></pre>
@@ -345,30 +345,28 @@
 <p>By changing the bag&#x27;s behavior of <code translate="no" v-pre>popFirst()</code> and <code translate="no" v-pre>put(element)</code>, we get the familiar search algorithms:</p>
 <dl>
 <dt id="stack">Stack</dt>
-<dd>
-<p><a href="../dfs/"><strong>Depth First Search</strong></a>. DFS is usually implemented with recursion allowing cycle detection.</p>
+<dd><a href="../dfs/"><strong>Depth First Search</strong></a>. DFS is usually implemented with recursion allowing cycle detection.</dd>
+</dl>
 <ul>
 <li><code translate="no" v-pre>put(element)</code> appends to the end</li>
 <li><code translate="no" v-pre>popFirst()</code> pops from the end</li>
 </ul>
-</dd>
+<dl>
 <dt id="queue">Queue</dt>
-<dd>
-<p><a href="../bfs/"><strong>Breadth First Search</strong></a></p>
+<dd><a href="../bfs/"><strong>Breadth First Search</strong></a></dd>
+</dl>
 <ul>
 <li><code translate="no" v-pre>put(element)</code> appends to the end</li>
 <li><code translate="no" v-pre>popFirst()</code> pops from the front</li>
 </ul>
-</dd>
+<dl>
 <dt id="priority-queue">Priority Queue</dt>
-<dd>
-<p><strong>Best First Search</strong></p>
+<dd><strong>Best First Search</strong></dd>
+</dl>
 <ul>
 <li><code translate="no" v-pre>put(element)</code> appends with a priority value in <span class="math">O(\log n)</span> time</li>
 <li><code translate="no" v-pre>popFirst()</code> pops the element with highest priority in <span class="math">O(\log n)</span> time.</li>
 </ul>
-</dd>
-</dl>
 <div class="flex mb-6">
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-success"></div>
     <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
@@ -405,7 +403,7 @@
 	while bag is not empty:
 		u = bag.popFirst()
 		if not seen_vertices.has(u):
-			process(u) 
+			process(u)
 			seen_vertices.add(u)
 			for each v adjacent to u:
 				bag.put(v)</code></pre>
@@ -449,7 +447,7 @@ function WhateverFirstSearch(G: Graph):
 	for each vertex v in G:
 		if v is NEW:
 			WhateverFirstVisit(G, v)
-			
+
 function WhateverFirstVisit(G: Graph, start: Vertex):
 	bag = Bag&lt;Vertex&gt;()
 	bag.put(start)

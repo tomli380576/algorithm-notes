@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.830952993963">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.5.3">
@@ -39,11 +39,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.830952993963" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
@@ -324,7 +324,7 @@
 <p>Let <span class="math">K(i, c)</span> be the maximum value we can get from using items <span class="math">1\dots N</span> with capacity <span class="math">c</span>. which means the final answer is <span class="math">K(N, C)</span>.</p>
 <h2 id="take-or-skip">Take or Skip</h2>
 <p>Now we have the subproblem, we want to <strong>try to take each item and see if it makes it better</strong>. Also don&#x27;t forget that we can only take the item if it fits: <span class="math">w_i \leq c</span></p>
-<p>To &quot;take&quot; an item  <span class="math">i</span>, we decrease the capacity by its weight and move to the next item -&gt; we will need the answer of <span class="math">K(i-1, c-w_i)</span>, then add the value of the item itself <span class="math">v_i</span></p>
+<p>To &quot;take&quot; an item <span class="math">i</span>, we decrease the capacity by its weight and move to the next item -&gt; we will need the answer of <span class="math">K(i-1, c-w_i)</span>, then add the value of the item itself <span class="math">v_i</span></p>
 <ul>
 <li>Note that we go to i-1 because we can only use <strong>up</strong> to item i, so we have to go to a lower index.</li>
 </ul>
@@ -335,7 +335,7 @@
 <div id="pseudocode-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-none"><code v-pre class="language-none">KnapsackUnique(w[1...N], v[1...N], C):
     K = [][] # do array init here
-    
+
     for i = 1...N:
         K[i][0] = 0
     for c = 0...C:

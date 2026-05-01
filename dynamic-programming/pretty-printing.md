@@ -3,24 +3,23 @@
 [!badge size="l" variant="warning" text="Leetcode (greedy ver.)" icon="../assets/leetcode.svg"](https://leetcode.com/problems/text-justification/description/)
 
 > **Question.** Given an array of `N` words and a maximum page width, what is the most optimal printing strategy that minimizes the total cost? Assume that any individual word can fit on one line.
-> 
 
 `words[1...N]: List<string>`
-:   the words we want to print neatly on a page
+: the words we want to print neatly on a page
 
 `page_width: int`
-:   the maximum number of characters on a single line
+: the maximum number of characters on a single line
 
 `cost: (spaces: int) -> int`
-:   a function that measures how "bad" a line is. The more empty spaces there are, the worse a line is. Let’s use $x^3$ here, where $x$ is the number of trailing spaces.
+: a function that measures how "bad" a line is. The more empty spaces there are, the worse a line is. Let’s use $x^3$ here, where $x$ is the number of trailing spaces.
 
 We want to find:
 
 `List<int>`
-:   a list of line break indices
+: a list of line break indices
 
 `int`
-:   the total cost after applying the line breaks
+: the total cost after applying the line breaks
 
 Depending on the variant of this question, sometimes the last line is free, which means we don’t calculate the cost of the final line.
 
@@ -96,7 +95,7 @@ $$
 \text{Extras}(i, j) =  \texttt{page\_width} -\underbrace{ (j-i)}_\text{space between words} - \underbrace{\sum_{k=i}^j \texttt{len(words[k])}}_\text{actual letters}
 $$
 
-where $i, j$ are the indices of the original words array. We can see that computing $\text{Extras}$ will take $O(n)$ time where $n$ is the number of words. 
+where $i, j$ are the indices of the original words array. We can see that computing $\text{Extras}$ will take $O(n)$ time where $n$ is the number of words.
 
 ```c
 const pageWidth = ...
@@ -108,7 +107,7 @@ function Extras(i: int, j: int) -> int:
 
 	for word in words:
 		numLetters += len(word)
-	
+
 	return pageWidth - numSpaces - numLetters
 ```
 
@@ -140,18 +139,17 @@ So $\text{LineCost}$ also runs in $O(n)$ time.
 This falls under the **Best Solution** case with the `FindNext` strategy, so we need:
 
 1. Choices
-    
-    - Every index before the current index is a choice. We can place a line break at any of them.
-    - The "valid" choice part is handled by the $\text{LineCost}$ function.
-    - If the choice is not valid, $\text{LineCost}$ will return $\infty$ and it’s definitely not going to be selected.
-    
-    <p></p>
+   - Every index before the current index is a choice. We can place a line break at any of them.
+   - The "valid" choice part is handled by the $\text{LineCost}$ function.
+   - If the choice is not valid, $\text{LineCost}$ will return $\infty$ and it’s definitely not going to be selected.
+
+   <p></p>
+
 2. How to make a choice
-    
-    To make a choice, we go to the "next" word we want to place.  We can either go from the end or go from the beginning.
-    
-    - If we go from the end $j=n$, the next one is $j-1$.
-    - If we go from the beginning $j=1$, the next one is $j+1$.
+
+   To make a choice, we go to the "next" word we want to place. We can either go from the end or go from the beginning.
+   - If we go from the end $j=n$, the next one is $j-1$.
+   - If we go from the beginning $j=1$, the next one is $j+1$.
 
 Since we want to minimize the total cost, we will also need a `min(...)` call
 
@@ -190,7 +188,7 @@ function Extras(i: int, j: int) -> int:
 
 	for word in words:
 		numLetters += len(word)
-	
+
 	return pageWidth - numSpaces - numLetters
 
 
@@ -206,12 +204,12 @@ function LineCost(i, j) -> int:
 function PrettyPrint(j) -> int:
 	if j == 0:
 		return 0
-	
+
 	best = Infinity
 	for i = 1 to j:
 		breakHereCost = PrettyPrint(i - 1) + LineCost(i, j)
 		best = min(breakHereCost, best)
-	
+
 	return best
 ```
 
@@ -270,23 +268,23 @@ function PrettyPrint_DP(words[1...N], page_width) -> int:
 	// Pretend 0 is a valid index here
 	// we can put it at the end or handle it separately
 	dpTable[0] = 0 // PrettyPrint(0) = 0
-	
-	// for loop for simulating recursive calls, iterate through: 
-	// PrettyPrint(0), PrettyPrint(1), PrettyPrint(2), PrettyPrint(3) 
+
+	// for loop for simulating recursive calls, iterate through:
+	// PrettyPrint(0), PrettyPrint(1), PrettyPrint(2), PrettyPrint(3)
 	for j = 1 to N:
 		best = Infinity
 		// for loop from the backtracking solution
 		for i = 1 to j:
 			// PrettyPrint(i - 1) + LineCost(i, j)
-			breakHereCost = dpTable[i - 1] + LineCost(i, j) 
+			breakHereCost = dpTable[i - 1] + LineCost(i, j)
 			best = min(breakHereCost, best)
 		dpTable[j] = best
 
 	return dpTable[N] // PrettyPrint(N)
 ```
-    
+
 +++ No comment version
-    
+
 ```c
 function PrettyPrint_DP(words[1...N], page_width) -> int:
     dpTable = Array(shape=(N + 1))
@@ -295,7 +293,7 @@ function PrettyPrint_DP(words[1...N], page_width) -> int:
     for j = 1 to N:
         best = Infinity
         for i = 1 to j:
-            breakHereCost = dpTable[i - 1] + LineCost(i, j) 
+            breakHereCost = dpTable[i - 1] + LineCost(i, j)
             best = min(breakHereCost, best)
         dpTable[j] = best
 
@@ -308,11 +306,13 @@ Time complexity is $O(n^3)$ and space complexity is $O(n)$.
 
 !!!success Implementation Tip
 If handling special indices like 0, -1 feels cumbersome, we can use a map.
+
 <p style="margin-top: 1.5rem"></p>
 
 ```py
 dpTable = {-1: 0}
 ```
+
 !!!
 
 ## ❖ 3. Memoizing `LineCost` and `Extras`
@@ -387,12 +387,13 @@ $$
 $$
 
 +++ Pseudocode
+
 ```c
 function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
 	totalCost = Array(shape=(N + 1))
 	// base case: PrettyPrint(0) = 0
-	totalCost[0] = 0 
-	
+	totalCost[0] = 0
+
 	// Memoizing Extras(i, j)
 	extras = Array(shape=(N, N))
 	for i = 1 to N:
@@ -401,7 +402,7 @@ function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
 				extras[i, j] = pageWidth - words[i].length
 			else:
 				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
-	
+
 	// Memoizing the main recurrence
 	for j = 1 to N: // PrettyPrint(1), PrettyPrint(2) ... PrettyPrint(N)
 		bestCost = Infinity
@@ -410,29 +411,30 @@ function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
 			// simulate LineCost(i, j)
 			lineCost = Infinity // default to inf for emptySpaces < 0
 			emptySpaces = extras[i, j]
-			
+
             if emptySpaces >= 0:
 				if j == N:
 					lineCost = 0 // last line is free
 				else:
 					lineCost = pow(emptySpaces, 3)
-			
+
             // Simulate PrettyPrint(i - 1) + LineCost(i, j)
 			breakCost = totalCost[i - 1] + lineCost
-			bestCost = min(bestCost, breakCost) 
+			bestCost = min(bestCost, breakCost)
 
 		totalCost[j] = bestCost // the result of PrettyPrint(j)
-	
+
 	// Initial call: PrettyPrint(N)
 	return totalCost[N]
-```    
+```
+
 +++ No Comment Version
 
 ```c
 function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
 	totalCost = Array(shape=(N + 1))
-	totalCost[0] = 0 
-	
+	totalCost[0] = 0
+
 	extras = Array(shape=(N, N))
 	for i = 1 to N:
 		for j = i to N:
@@ -440,25 +442,25 @@ function PrettyPrintDpFull(words[1...N], pageWidth: int) -> int:
 				extras[i, j] = pageWidth - words[i].length
 			else:
 				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
-	
+
 	for j = 1 to N:
 		bestCost = Infinity
 
 		for i = 1 to j:
 			lineCost = Infinity
 			emptySpaces = extras[i, j]
-			
+
             if emptySpaces >= 0:
 				if j == N:
 					lineCost = 0
 				else:
 					lineCost = pow(emptySpaces, 3)
-			
+
 			breakCost = totalCost[i - 1] + lineCost
-			bestCost = min(bestCost, breakCost) 
+			bestCost = min(bestCost, breakCost)
 
 		totalCost[j] = bestCost
-	
+
 	return totalCost[N]
 ```
 

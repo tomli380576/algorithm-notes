@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.830952993963">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.5.3">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.830952993963" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.829892645867" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.830952993963" defer></script>
     <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
@@ -397,7 +397,7 @@ function Extras(i: int, j: int) -&gt; int:
 
 	for word in words:
 		numLetters += len(word)
-	
+
 	return pageWidth - numSpaces - numLetters</code></pre>
 </doc-codeblock></div>
 <p>Now we can translate <span class="math">\text{LineCost}</span> into expressions:</p>
@@ -427,11 +427,11 @@ function Extras(i: int, j: int) -&gt; int:
 <li>The &quot;valid&quot; choice part is handled by the <span class="math">\text{LineCost}</span> function.</li>
 <li>If the choice is not valid, <span class="math">\text{LineCost}</span> will return <span class="math">\infty</span> and it’s definitely not going to be selected.</li>
 </ul>
- <p></p>
+<p></p>
 </li>
 <li>
 <p>How to make a choice</p>
-<p>To make a choice, we go to the &quot;next&quot; word we want to place.  We can either go from the end or go from the beginning.</p>
+<p>To make a choice, we go to the &quot;next&quot; word we want to place. We can either go from the end or go from the beginning.</p>
 <ul>
 <li>If we go from the end <span class="math">j=n</span>, the next one is <span class="math">j-1</span>.</li>
 <li>If we go from the beginning <span class="math">j=1</span>, the next one is <span class="math">j+1</span>.</li>
@@ -464,7 +464,7 @@ function Extras(i: int, j: int) -&gt; int:
 
 	for word in words:
 		numLetters += len(word)
-	
+
 	return pageWidth - numSpaces - numLetters
 
 
@@ -480,12 +480,12 @@ function LineCost(i, j) -&gt; int:
 function PrettyPrint(j) -&gt; int:
 	if j == 0:
 		return 0
-	
+
 	best = Infinity
 	for i = 1 to j:
 		breakHereCost = PrettyPrint(i - 1) + LineCost(i, j)
 		best = min(breakHereCost, best)
-	
+
 	return best</code></pre>
 </doc-codeblock></div>
 <p>Don’t forget <span class="math">i\red{-1}</span> in the recursive call, otherwise we will call <code translate="no" v-pre>PrettyPrint(j)</code> again when <code translate="no" v-pre>i == j</code>, which leads to infinite recursion.</p>
@@ -543,15 +543,15 @@ function PrettyPrint(j) -&gt; int:
 	// Pretend 0 is a valid index here
 	// we can put it at the end or handle it separately
 	dpTable[0] = 0 // PrettyPrint(0) = 0
-	
-	// for loop for simulating recursive calls, iterate through: 
-	// PrettyPrint(0), PrettyPrint(1), PrettyPrint(2), PrettyPrint(3) 
+
+	// for loop for simulating recursive calls, iterate through:
+	// PrettyPrint(0), PrettyPrint(1), PrettyPrint(2), PrettyPrint(3)
 	for j = 1 to N:
 		best = Infinity
 		// for loop from the backtracking solution
 		for i = 1 to j:
 			// PrettyPrint(i - 1) + LineCost(i, j)
-			breakHereCost = dpTable[i - 1] + LineCost(i, j) 
+			breakHereCost = dpTable[i - 1] + LineCost(i, j)
 			best = min(breakHereCost, best)
 		dpTable[j] = best
 
@@ -568,7 +568,7 @@ function PrettyPrint(j) -&gt; int:
     for j = 1 to N:
         best = Infinity
         for i = 1 to j:
-            breakHereCost = dpTable[i - 1] + LineCost(i, j) 
+            breakHereCost = dpTable[i - 1] + LineCost(i, j)
             best = min(breakHereCost, best)
         dpTable[j] = best
 
@@ -652,8 +652,8 @@ for i = 1 to N:
 <pre translate="no" class="language-c"><code v-pre class="language-c">function PrettyPrintDpFull(words[1...N], pageWidth: int) -&gt; int:
 	totalCost = Array(shape=(N + 1))
 	// base case: PrettyPrint(0) = 0
-	totalCost[0] = 0 
-	
+	totalCost[0] = 0
+
 	// Memoizing Extras(i, j)
 	extras = Array(shape=(N, N))
 	for i = 1 to N:
@@ -662,7 +662,7 @@ for i = 1 to N:
 				extras[i, j] = pageWidth - words[i].length
 			else:
 				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
-	
+
 	// Memoizing the main recurrence
 	for j = 1 to N: // PrettyPrint(1), PrettyPrint(2) ... PrettyPrint(N)
 		bestCost = Infinity
@@ -671,19 +671,19 @@ for i = 1 to N:
 			// simulate LineCost(i, j)
 			lineCost = Infinity // default to inf for emptySpaces &lt; 0
 			emptySpaces = extras[i, j]
-			
+
             if emptySpaces &gt;= 0:
 				if j == N:
 					lineCost = 0 // last line is free
 				else:
 					lineCost = pow(emptySpaces, 3)
-			
+
             // Simulate PrettyPrint(i - 1) + LineCost(i, j)
 			breakCost = totalCost[i - 1] + lineCost
-			bestCost = min(bestCost, breakCost) 
+			bestCost = min(bestCost, breakCost)
 
 		totalCost[j] = bestCost // the result of PrettyPrint(j)
-	
+
 	// Initial call: PrettyPrint(N)
 	return totalCost[N]</code></pre>
 </doc-codeblock></div>
@@ -693,8 +693,8 @@ for i = 1 to N:
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-c"><code v-pre class="language-c">function PrettyPrintDpFull(words[1...N], pageWidth: int) -&gt; int:
 	totalCost = Array(shape=(N + 1))
-	totalCost[0] = 0 
-	
+	totalCost[0] = 0
+
 	extras = Array(shape=(N, N))
 	for i = 1 to N:
 		for j = i to N:
@@ -702,25 +702,25 @@ for i = 1 to N:
 				extras[i, j] = pageWidth - words[i].length
 			else:
 				extras[i, j] = extras[i, j - 1] - 1 - words[j].length
-	
+
 	for j = 1 to N:
 		bestCost = Infinity
 
 		for i = 1 to j:
 			lineCost = Infinity
 			emptySpaces = extras[i, j]
-			
+
             if emptySpaces &gt;= 0:
 				if j == N:
 					lineCost = 0
 				else:
 					lineCost = pow(emptySpaces, 3)
-			
+
 			breakCost = totalCost[i - 1] + lineCost
-			bestCost = min(bestCost, breakCost) 
+			bestCost = min(bestCost, breakCost)
 
 		totalCost[j] = bestCost
-	
+
 	return totalCost[N]</code></pre>
 </doc-codeblock></div>
 </doc-tab>

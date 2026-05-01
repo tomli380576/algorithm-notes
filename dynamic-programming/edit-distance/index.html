@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/algorithm-notes">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.829892645867">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.830952993963">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.5.3">
@@ -39,11 +39,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../assets/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.829892645867" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.5.3.830952993963" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.829892645867" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.830952993963" data-turbo-eval="false" defer></script>
     <link href="../../resources/css/katex.css?v=4.5.3" rel="stylesheet">
     <script id="katex-js" data-cfasync="false" src="../../resources/js/katex.js?v=4.5.3" defer></script>
 
@@ -295,7 +295,7 @@
     <span>Leetcode</span>
 </a></p>
 <blockquote>
-<p><strong>Question.</strong> Given 2 strings <code translate="no" v-pre>A[1...n]</code> and <code translate="no" v-pre>B[1...m]</code>, what is minimum number of edits to <span class="math">A</span>  required to make 2 strings identical? An edit could be 1 of the following:</p>
+<p><strong>Question.</strong> Given 2 strings <code translate="no" v-pre>A[1...n]</code> and <code translate="no" v-pre>B[1...m]</code>, what is minimum number of edits to <span class="math">A</span> required to make 2 strings identical? An edit could be 1 of the following:</p>
 <ul>
 <li>Insert a character</li>
 <li>Delete a character</li>
@@ -352,34 +352,34 @@
 <li>
 <p>Let’s consider what it really means to “insert”.</p>
 <p><code translate="no" v-pre>@EX</code> <span class="math">A=\texttt{&quot;FOOD&quot;}, B=\texttt{&quot;MONEY&quot;}</span></p>
-<div class="math"><pre translate="no"> \begin{matrix}
- &amp;&amp;&amp;&amp;&amp;\Downarrow\\
- A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{D}&amp;\texttt{\red?}\\
- B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{\red Y} 
- \end{matrix}</pre></div>
+<div class="math"><pre translate="no">\begin{matrix}
+&amp;&amp;&amp;&amp;&amp;\Downarrow\\
+A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{D}&amp;\texttt{\red?}\\
+B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{\red Y}
+\end{matrix}</pre></div>
 <p>If we insert a <span class="math">\tt Y</span> at the questions mark, we have an aligned column. Then we can move to the &quot;next&quot; by considering the column to the left.</p>
 <p>Maybe we can do this by <code translate="no" v-pre>i -= 1, j -= 1</code>, now we are here:</p>
-<div class="math"><pre translate="no"> \begin{matrix}
- &amp;&amp;&amp;&amp;\Downarrow\\
- A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\tt{\green Y}\\
- B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{\red E} &amp;\tt{\green Y} 
- \end{matrix}</pre></div>
+<div class="math"><pre translate="no">\begin{matrix}
+&amp;&amp;&amp;&amp;\Downarrow\\
+A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\tt{\green Y}\\
+B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{\red E} &amp;\tt{\green Y}
+\end{matrix}</pre></div>
 <p>But notice that the question mark technically doesn’t exist because <span class="math">A</span> is shorter.</p>
-<div class="math"><pre translate="no"> \begin{matrix}
- &amp;&amp;&amp;&amp;\overset{i}{\Downarrow}\\
- A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\\
- B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{\red Y} \\
- &amp;&amp;&amp;&amp;&amp;\underset{j}{\Uparrow}\\
- \end{matrix}</pre></div>
+<div class="math"><pre translate="no">\begin{matrix}
+&amp;&amp;&amp;&amp;\overset{i}{\Downarrow}\\
+A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\\
+B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{\red Y} \\
+&amp;&amp;&amp;&amp;&amp;\underset{j}{\Uparrow}\\
+\end{matrix}</pre></div>
 <p>So <span class="math">i</span> is already at the position after insertion. All we need to do is move <span class="math">j</span> to <span class="math">j-1</span>.</p>
-<div class="math"><pre translate="no"> \begin{matrix}
- &amp;&amp;&amp;&amp;\overset{i}{\Downarrow}\\
- A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\tt{\green Y}\\
- B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{\red E} &amp;\tt{\green Y} \\
- &amp;&amp;&amp;&amp;\underset{j}{\Uparrow}\\
- \end{matrix}</pre></div>
+<div class="math"><pre translate="no">\begin{matrix}
+&amp;&amp;&amp;&amp;\overset{i}{\Downarrow}\\
+A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\tt{\green Y}\\
+B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{\red E} &amp;\tt{\green Y} \\
+&amp;&amp;&amp;&amp;\underset{j}{\Uparrow}\\
+\end{matrix}</pre></div>
 <p>Therefore the recursive call for insert is:</p>
-<div class="math"><pre translate="no"> \text{EditDist}(i, j-1) + 1</pre></div>
+<div class="math"><pre translate="no">\text{EditDist}(i, j-1) + 1</pre></div>
 <p>+1 for the cost of insertion</p>
 </li>
 <li>
@@ -387,43 +387,43 @@
 <p>Delete is more straightforward. We simply don’t consider the <span class="math">i</span>–th character in <span class="math">A</span>.</p>
 <p>We can do this by moving <span class="math">i</span> to <span class="math">i - 1</span>.</p>
 <p>Therefore the recursive call for delete is:</p>
-<div class="math"><pre translate="no"> \text{EditDist}(i-1, j) + 1</pre></div>
+<div class="math"><pre translate="no">\text{EditDist}(i-1, j) + 1</pre></div>
 <p>+1 for the cost of deletion</p>
 </li>
 <li>
 <p>Replace</p>
 <p>To replace a character, we move both <span class="math">i</span> and <span class="math">j</span>.</p>
 <p><code translate="no" v-pre>@EX</code> <span class="math">A=\texttt{&quot;FOOD&quot;}, B=\texttt{&quot;MONEY&quot;}</span></p>
-<div class="math"><pre translate="no"> \begin{array}{c:}
- \text{\blue {Index}}&amp;\blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\
- &amp;&amp;&amp;&amp;\Downarrow\\
- A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\tt{Y}\\
- B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{\red E} &amp;\tt{Y} 
- \end{array}\hspace{1em}\xrightarrow{\text{replace(cost 1) at index 4}}\hspace{1em}\begin{matrix}
- \blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\
- &amp;&amp;\Downarrow\\
- \tt{F} &amp; \tt{O}&amp;\tt{\red O}&amp;\tt{\green E}&amp;\tt{Y}\\
- \tt{M} &amp; \tt{O}&amp;\tt{\red N}&amp;\tt{\green E} &amp;\tt{Y} 
- \end{matrix}</pre></div>
-<div class="math"><pre translate="no"> \begin{array}{c:}
- \text{\blue {Index}}&amp;\blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\
- &amp;&amp;\Downarrow\\
- A:&amp;\tt{F} &amp; \tt{\purple O}&amp;\tt{N}&amp;\tt{E}&amp;\tt{Y}\\
- B:&amp;\tt{M} &amp; \tt{\purple O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{Y} 
- \end{array}\hspace{1em}\xrightarrow{\text{replace(free) at index 2}}\hspace{1em}\begin{matrix}
- \blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\\Downarrow\\
- \tt{\red F} &amp; \tt{\green O}&amp;\tt{ N}&amp;\tt{E}&amp;\tt{Y}\\
- \tt{\red M} &amp; \tt{\green O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{Y} 
- \end{matrix}</pre></div>
+<div class="math"><pre translate="no">\begin{array}{c:}
+\text{\blue {Index}}&amp;\blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\
+&amp;&amp;&amp;&amp;\Downarrow\\
+A:&amp;\tt{F} &amp; \tt{O}&amp;\tt{O}&amp;\tt{\red D}&amp;\tt{Y}\\
+B:&amp;\tt{M} &amp; \tt{O}&amp;\tt{N}&amp;\tt{\red E} &amp;\tt{Y}
+\end{array}\hspace{1em}\xrightarrow{\text{replace(cost 1) at index 4}}\hspace{1em}\begin{matrix}
+\blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\
+&amp;&amp;\Downarrow\\
+\tt{F} &amp; \tt{O}&amp;\tt{\red O}&amp;\tt{\green E}&amp;\tt{Y}\\
+\tt{M} &amp; \tt{O}&amp;\tt{\red N}&amp;\tt{\green E} &amp;\tt{Y}
+\end{matrix}</pre></div>
+<div class="math"><pre translate="no">\begin{array}{c:}
+\text{\blue {Index}}&amp;\blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\
+&amp;&amp;\Downarrow\\
+A:&amp;\tt{F} &amp; \tt{\purple O}&amp;\tt{N}&amp;\tt{E}&amp;\tt{Y}\\
+B:&amp;\tt{M} &amp; \tt{\purple O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{Y}
+\end{array}\hspace{1em}\xrightarrow{\text{replace(free) at index 2}}\hspace{1em}\begin{matrix}
+\blue1 &amp; \blue2 &amp; \blue 3 &amp; \blue4  &amp; \blue 5 \\\Downarrow\\
+\tt{\red F} &amp; \tt{\green O}&amp;\tt{ N}&amp;\tt{E}&amp;\tt{Y}\\
+\tt{\red M} &amp; \tt{\green O}&amp;\tt{N}&amp;\tt{E} &amp;\tt{Y}
+\end{matrix}</pre></div>
 <p>To find the cost, we check if the characters <span class="math">A[i]</span> and <span class="math">B[j]</span> are the same.</p>
 <ol>
 <li>If <span class="math">A[i] = B[j]</span> then the replacement is free</li>
 <li>If <span class="math">A[i] \ne B[j]</span> then the cost is <span class="math">1</span></li>
 </ol>
 <p>Therefore the recursive call for replace is:</p>
-<div class="math"><pre translate="no"> \text{EditDist}(i-1, j-1) + \begin{cases}1 &amp; \text{if }A[i]\ne B[j]\\
- 0 &amp; \text{if }A[i]= B[j]
- \end{cases}</pre></div>
+<div class="math"><pre translate="no">\text{EditDist}(i-1, j-1) + \begin{cases}1 &amp; \text{if }A[i]\ne B[j]\\
+0 &amp; \text{if }A[i]= B[j]
+\end{cases}</pre></div>
 </li>
 </ol>
 <p>Since we want the shortest distance, this falls under the <a href="https://www.notion.so/Recursive-Backtracking-Summary-03fc781b681940b290ae3733330dcfde?pvs=21">best solution</a> case and we will need a <code translate="no" v-pre>min(…)</code> call.</p>

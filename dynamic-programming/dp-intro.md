@@ -5,19 +5,19 @@
 Typically a DP problem involves searching for a sequence of decisions that arrives at a maximum or minimum value. Let's define:
 
 $t = 1...N$
-:   A "stage" of the problem. When $t=N$, we have reached the end of the problem. This is usually the variable representing time / planning horizon, but not necessarily
+: A "stage" of the problem. When $t=N$, we have reached the end of the problem. This is usually the variable representing time / planning horizon, but not necessarily
 
 $s_t\in S$  
-:   State at stage $t$; $S$ is the space of all possible states
+: State at stage $t$; $S$ is the space of all possible states
 
 $a_t\in A$  
-:   Action at stage $t$; $A$ is the space of all possible actions
+: Action at stage $t$; $A$ is the space of all possible actions
 
 $r_t(s_t, a_t)$  
-:   Reward function if we take action $a_t$ at state $s_t$
+: Reward function if we take action $a_t$ at state $s_t$
 
 $R(s_N)$
-:   Reward if we end on state $s_N$. This is the cost/reward of our base case, a subproblem that we can immediately solve without recursion. If we reach $s_N$, we have no possible actions.
+: Reward if we end on state $s_N$. This is the cost/reward of our base case, a subproblem that we can immediately solve without recursion. If we reach $s_N$, we have no possible actions.
 
 Now the **optimality equation** / **value function** / **objective recurrence** is:
 
@@ -48,19 +48,19 @@ The rest of the variables are straightforward to find: the revenue of a cut is t
 Let's list each component:
 
 $t = 1...N$
-:   Stage is the "time" elapsed or the total number of cuts we have made
+: Stage is the "time" elapsed or the total number of cuts we have made
 
 $s_t\in S$  
-:   State is the length of the remaining rod
+: State is the length of the remaining rod
 
 $a_t\in A$  
-:   Action the the possible cuts we can make. Ranges from 1 to $s_t$
+: Action the the possible cuts we can make. Ranges from 1 to $s_t$
 
 $r_t(s_t, a_t)$  
-:   Reward is the revenue of the cut
+: Reward is the revenue of the cut
 
 $R(s_N)$
-:   Base cases, $s_N = 0$ or $s_N = 1$ which means $R(0) = 0, R(1) = p_1$
+: Base cases, $s_N = 0$ or $s_N = 1$ which means $R(0) = 0, R(1) = p_1$
 
 optimality equation is:
 

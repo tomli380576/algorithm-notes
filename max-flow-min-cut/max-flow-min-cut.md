@@ -2,7 +2,7 @@
 
 ## When did Ford-Fulkerson Stop
 
-Recall that FF stops when there's no path from $s$ to $t$ in the current residual graph $G^f$. 
+Recall that FF stops when there's no path from $s$ to $t$ in the current residual graph $G^f$.
 
 ## Cut, st-Cut
 

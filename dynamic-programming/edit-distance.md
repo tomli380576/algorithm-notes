@@ -2,7 +2,8 @@
 
 [!badge size="l" variant="warning" text="Leetcode" icon="../assets/leetcode.svg"](https://leetcode.com/problems/edit-distance/description/)
 
-> **Question.** Given 2 strings `A[1...n]` and `B[1...m]`, what is minimum number of edits to $A$  required to make 2 strings identical? An edit could be 1 of the following:
+> **Question.** Given 2 strings `A[1...n]` and `B[1...m]`, what is minimum number of edits to $A$ required to make 2 strings identical? An edit could be 1 of the following:
+>
 > - Insert a character
 > - Delete a character
 > - Replace a character
@@ -64,119 +65,118 @@ Here we used 0 to indicate that an index is going out of bounds. In actual code 
 If both strings are not empty, we will try to **insert**, **delete**, or **replace**. These are the 3 possible choices. To make a choice:
 
 1. Let’s consider what it really means to “insert”.
-    
-    `@EX` $A=\texttt{"FOOD"}, B=\texttt{"MONEY"}$
-    
-    $$
-    \begin{matrix}
-    &&&&&\Downarrow\\
-    A:&\tt{F} & \tt{O}&\tt{O}&\tt{D}&\texttt{\red?}\\
-    B:&\tt{M} & \tt{O}&\tt{N}&\tt{E} &\tt{\red Y} 
-    \end{matrix}
-    $$
-    
-    If we insert a $\tt Y$ at the questions mark, we have an aligned column. Then we can move to the "next" by considering the column to the left. 
-    
-    Maybe we can do this by `i -= 1, j -= 1`, now we are here:
-    
-    $$
-    \begin{matrix}
-    &&&&\Downarrow\\
-    A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\tt{\green Y}\\
-    B:&\tt{M} & \tt{O}&\tt{N}&\tt{\red E} &\tt{\green Y} 
-    \end{matrix}
-    $$
-    
-    But notice that the question mark technically doesn’t exist because $A$ is shorter. 
-    
-    $$
-    \begin{matrix}
-    &&&&\overset{i}{\Downarrow}\\
-    A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\\
-    B:&\tt{M} & \tt{O}&\tt{N}&\tt{E} &\tt{\red Y} \\
-    &&&&&\underset{j}{\Uparrow}\\
-    \end{matrix}
-    $$
-    
-    So $i$ is already at the position after insertion. All we need to do is move $j$ to $j-1$.
-    
-    $$
-    \begin{matrix}
-    &&&&\overset{i}{\Downarrow}\\
-    A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\tt{\green Y}\\
-    B:&\tt{M} & \tt{O}&\tt{N}&\tt{\red E} &\tt{\green Y} \\
-    &&&&\underset{j}{\Uparrow}\\
-    \end{matrix}
-    $$
-    
-    Therefore the recursive call for insert is:
-    
-    $$
-    \text{EditDist}(i, j-1) + 1
-    $$
-    
-    +1 for the cost of insertion
-    
+
+   `@EX` $A=\texttt{"FOOD"}, B=\texttt{"MONEY"}$
+
+   $$
+   \begin{matrix}
+   &&&&&\Downarrow\\
+   A:&\tt{F} & \tt{O}&\tt{O}&\tt{D}&\texttt{\red?}\\
+   B:&\tt{M} & \tt{O}&\tt{N}&\tt{E} &\tt{\red Y}
+   \end{matrix}
+   $$
+
+   If we insert a $\tt Y$ at the questions mark, we have an aligned column. Then we can move to the "next" by considering the column to the left.
+
+   Maybe we can do this by `i -= 1, j -= 1`, now we are here:
+
+   $$
+   \begin{matrix}
+   &&&&\Downarrow\\
+   A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\tt{\green Y}\\
+   B:&\tt{M} & \tt{O}&\tt{N}&\tt{\red E} &\tt{\green Y}
+   \end{matrix}
+   $$
+
+   But notice that the question mark technically doesn’t exist because $A$ is shorter.
+
+   $$
+   \begin{matrix}
+   &&&&\overset{i}{\Downarrow}\\
+   A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\\
+   B:&\tt{M} & \tt{O}&\tt{N}&\tt{E} &\tt{\red Y} \\
+   &&&&&\underset{j}{\Uparrow}\\
+   \end{matrix}
+   $$
+
+   So $i$ is already at the position after insertion. All we need to do is move $j$ to $j-1$.
+
+   $$
+   \begin{matrix}
+   &&&&\overset{i}{\Downarrow}\\
+   A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\tt{\green Y}\\
+   B:&\tt{M} & \tt{O}&\tt{N}&\tt{\red E} &\tt{\green Y} \\
+   &&&&\underset{j}{\Uparrow}\\
+   \end{matrix}
+   $$
+
+   Therefore the recursive call for insert is:
+
+   $$
+   \text{EditDist}(i, j-1) + 1
+   $$
+
+   +1 for the cost of insertion
+
 2. Delete
-    
-    Delete is more straightforward. We simply don’t consider the $i$–th character in $A$. 
-    
-    We can do this by moving $i$ to $i - 1$.
-    
-    Therefore the recursive call for delete is:
-    
-    $$
-    \text{EditDist}(i-1, j) + 1
-    $$
-    
-    +1 for the cost of deletion
-    
+
+   Delete is more straightforward. We simply don’t consider the $i$–th character in $A$.
+
+   We can do this by moving $i$ to $i - 1$.
+
+   Therefore the recursive call for delete is:
+
+   $$
+   \text{EditDist}(i-1, j) + 1
+   $$
+
+   +1 for the cost of deletion
+
 3. Replace
-    
-    To replace a character, we move both $i$ and $j$.
-    
-    `@EX` $A=\texttt{"FOOD"}, B=\texttt{"MONEY"}$
-    
-    $$
-    \begin{array}{c:}
-    \text{\blue {Index}}&\blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\
-    &&&&\Downarrow\\
-    A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\tt{Y}\\
-    B:&\tt{M} & \tt{O}&\tt{N}&\tt{\red E} &\tt{Y} 
-    \end{array}\hspace{1em}\xrightarrow{\text{replace(cost 1) at index 4}}\hspace{1em}\begin{matrix}
-    \blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\
-    &&\Downarrow\\
-    \tt{F} & \tt{O}&\tt{\red O}&\tt{\green E}&\tt{Y}\\
-    \tt{M} & \tt{O}&\tt{\red N}&\tt{\green E} &\tt{Y} 
-    \end{matrix}
-    $$
-    
-    $$
-    \begin{array}{c:}
-    \text{\blue {Index}}&\blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\
-    &&\Downarrow\\
-    A:&\tt{F} & \tt{\purple O}&\tt{N}&\tt{E}&\tt{Y}\\
-    B:&\tt{M} & \tt{\purple O}&\tt{N}&\tt{E} &\tt{Y} 
-    \end{array}\hspace{1em}\xrightarrow{\text{replace(free) at index 2}}\hspace{1em}\begin{matrix}
-    \blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\\Downarrow\\
-    \tt{\red F} & \tt{\green O}&\tt{ N}&\tt{E}&\tt{Y}\\
-    \tt{\red M} & \tt{\green O}&\tt{N}&\tt{E} &\tt{Y} 
-    \end{matrix}
-    $$
-    
-    To find the cost, we check if the characters $A[i]$ and $B[j]$ are the same.
-    
-    1. If $A[i] = B[j]$ then the replacement is free
-    2. If $A[i] \ne B[j]$ then the cost is $1$
-    
-    Therefore the recursive call for replace is:
-    
-    $$
-    \text{EditDist}(i-1, j-1) + \begin{cases}1 & \text{if }A[i]\ne B[j]\\
-    0 & \text{if }A[i]= B[j]
-    \end{cases}
-    $$
-    
+
+   To replace a character, we move both $i$ and $j$.
+
+   `@EX` $A=\texttt{"FOOD"}, B=\texttt{"MONEY"}$
+
+   $$
+   \begin{array}{c:}
+   \text{\blue {Index}}&\blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\
+   &&&&\Downarrow\\
+   A:&\tt{F} & \tt{O}&\tt{O}&\tt{\red D}&\tt{Y}\\
+   B:&\tt{M} & \tt{O}&\tt{N}&\tt{\red E} &\tt{Y}
+   \end{array}\hspace{1em}\xrightarrow{\text{replace(cost 1) at index 4}}\hspace{1em}\begin{matrix}
+   \blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\
+   &&\Downarrow\\
+   \tt{F} & \tt{O}&\tt{\red O}&\tt{\green E}&\tt{Y}\\
+   \tt{M} & \tt{O}&\tt{\red N}&\tt{\green E} &\tt{Y}
+   \end{matrix}
+   $$
+
+   $$
+   \begin{array}{c:}
+   \text{\blue {Index}}&\blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\
+   &&\Downarrow\\
+   A:&\tt{F} & \tt{\purple O}&\tt{N}&\tt{E}&\tt{Y}\\
+   B:&\tt{M} & \tt{\purple O}&\tt{N}&\tt{E} &\tt{Y}
+   \end{array}\hspace{1em}\xrightarrow{\text{replace(free) at index 2}}\hspace{1em}\begin{matrix}
+   \blue1 & \blue2 & \blue 3 & \blue4  & \blue 5 \\\Downarrow\\
+   \tt{\red F} & \tt{\green O}&\tt{ N}&\tt{E}&\tt{Y}\\
+   \tt{\red M} & \tt{\green O}&\tt{N}&\tt{E} &\tt{Y}
+   \end{matrix}
+   $$
+
+   To find the cost, we check if the characters $A[i]$ and $B[j]$ are the same.
+   1. If $A[i] = B[j]$ then the replacement is free
+   2. If $A[i] \ne B[j]$ then the cost is $1$
+
+   Therefore the recursive call for replace is:
+
+   $$
+   \text{EditDist}(i-1, j-1) + \begin{cases}1 & \text{if }A[i]\ne B[j]\\
+   0 & \text{if }A[i]= B[j]
+   \end{cases}
+   $$
+
 Since we want the shortest distance, this falls under the [best solution](https://www.notion.so/Recursive-Backtracking-Summary-03fc781b681940b290ae3733330dcfde?pvs=21) case and we will need a `min(…)` call.
 
 ### 2.4 Forming the recurrence
@@ -220,9 +220,9 @@ Implements the above recurrence. [!badge variant="dark" size='l' icon="mark-gith
 !!! **Sanity Check**
 
 1. We still make only 1 choice at each recursion level, the choices are:
-    1. Insert
-    2. Delete
-    3. Replace
+   1. Insert
+   2. Delete
+   3. Replace
 2. All choices are valid when the 2 strings are not empty, so we try all 3 of them and see which one is the best.
 3. Cost is always 1 for both insert and delete, 0 for replace if the characters are the same.
 
@@ -250,7 +250,7 @@ $\text{EditDist}(i, j)$ needs:
 - $\text{EditDist}(i-1, j)$
 - $\text{EditDist}(i-1, j-1)$
 
-So both the loop for $i$ and $j$ need to go in **ascending** order. 
+So both the loop for $i$ and $j$ need to go in **ascending** order.
 
 !!!info
 Similar to LCS, if we scan the 2 strings backwards, then the order of evaluation will also be flipped. In that case $i$ and $j$ goes in descending order. The final call will be in `EditDist[1, 1]`

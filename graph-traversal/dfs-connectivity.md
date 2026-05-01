@@ -6,7 +6,7 @@ Let's modify the DFS algorithm to label each connected component
 
 ```
 // map from vertex to its connected component number
-cc_num: map[Vertex, int] = {} 
+cc_num: map[Vertex, int] = {}
 prev: map[Vertex, Vertex] = {}
 seen: map[Vertex, bool] = {}
 
@@ -70,17 +70,18 @@ function Explore(z: Vertex):
 ## Edge Classification
 
 For an edge $z\to w$:
+
 - Tree edge: `post[z] > post[w]`
 - Back edge: `post[z] < post[w]`
 - Forward edge: `post[z] > post[w]`
   - Forward edges can jump multiple levels down the tree
-  - Tree edges go down 1 at a time (new discoveries) 
+  - Tree edges go down 1 at a time (new discoveries)
 - Cross edge: `post[z] > post[w]`
   - These edges happen across nodes that don't share ancestors
 
 ## Cycles
 
-**$G$ has a cycle *iff* the DFS tree has a back edge.**
+**$G$ has a cycle _iff_ the DFS tree has a back edge.**
 
 ## Topological Sort
 
@@ -105,7 +106,7 @@ A strongly connected component is the maximal set of strongly connected vertices
 
 ### Metagraph
 
-Treat each SCC as a single vertex. If there's any edge in $E$ that connects 2 SCCs, then there's an metagraph edge between them. 
+Treat each SCC as a single vertex. If there's any edge in $E$ that connects 2 SCCs, then there's an metagraph edge between them.
 
 **The metagraph of SCCs is always a DAG.** If there's a cycle between 2 SCCs $S$ and $S'$, then they are just subgraphs of the same SCC $S\cup S'$.
 
@@ -117,10 +118,11 @@ Treat each SCC as a single vertex. If there's any edge in $E$ that connects 2 SC
 
 Observe that the metagraph must have a sink and a source. This allows us to use [alternative topological sort](#alternative-topological-sort), but on SCCs.
 
-1. Find a sink SCC, remove 
+1. Find a sink SCC, remove
 2. Repeat (1) until G is empty
 
 In this case we want to use **sink** because we can easily find it as long as we have a sink vertex `z` from the original graph. Run `Explore(z)` from it, then collecting everything reachable from `z` gives us the sink SCC.
+
 - Source won't work like this because all vertices in the source SCC can reach all other SCCs, then we have no way to know when did we leave the source SCC.
 
 ### Guaranteed sink?
