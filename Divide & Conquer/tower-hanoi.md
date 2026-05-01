@@ -3,12 +3,12 @@
 > **Question.** Given 3 pegs and $n$ disks, how can we move all the disks from `src` to `dest` such that larger disks cannot stack on top of smaller disks?
 
 `n: int`
-:	number of disks. This implies we have disk from radius 1 to $n$
+: number of disks. This implies we have disk from radius 1 to $n$
 
 `src, dest, temp: List<int>`
-:	3 pegs that we can puts disks on.
-  `src` initially has the disks $[1\dots n]$ on it.
-  `dest, temp` will be empty initially.
+: 3 pegs that we can puts disks on.
+`src` initially has the disks $[1\dots n]$ on it.
+`dest, temp` will be empty initially.
 
 ## Reducing the problem
 

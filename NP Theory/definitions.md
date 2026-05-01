@@ -1,6 +1,6 @@
 # NP introduction
 
-## P vs. NP 
+## P vs. NP
 
 P: problems that are solvable in polynomial time
 
@@ -29,16 +29,16 @@ $$
 To show SAT is NP, we show that the answer can be checked in poly time. The actual running time of the solution doesn't matter because even if it's in P, it's still in NP.
 
 For a solution of $x_1\dots x_n$ for $m$ clauses, the running time to verify the solution is $O(nm)$
+
 - Each clause takes $O(n)$, we have $m$ clauses, so worst case $O(nm)$
 
-
-### Ex.2 $k$-Coloring 
+### Ex.2 $k$-Coloring
 
 Input: undirected $G=(V,E)$ and $k\in \N$
 
 Output: Assign each vertex a color in $1\dots k$ such that adjacent vertices get different colors. Return NO if there's no such coloring.
 
-A solution can be checked by going through every edge, check each edge has 2 colors, i.e. 
+A solution can be checked by going through every edge, check each edge has 2 colors, i.e.
 
 $$
 \forall uv\in E, color(u) \neq color(v)
@@ -60,8 +60,9 @@ Both the repeated version and unique item versions are NP
 
 ### Ex.5 NP variant of Knapsack
 
-Input: 
-- $n$ objects with weights $w_1\dots w_n$ 
+Input:
+
+- $n$ objects with weights $w_1\dots w_n$
 - values $v_1\dots v_n$
 - capacity $B$
 - goal $g$
@@ -80,6 +81,6 @@ If $P\neq NP$, there will be a set of intractable problems known as NP-complete.
 ### SAT is NP complete
 
 If SAT is NP complete:
+
 - SAT is NP
 - If we can solve SAT in poly time, then we can solve every NP problem in poly time
-

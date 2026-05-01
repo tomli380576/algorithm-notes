@@ -7,9 +7,9 @@ Given a single backpack with capacity $C$, a list of $N$ items (they now have $\
 ## Base cases
 
 The same 2 base cases:
+
 1. No items: $\forall b, K(0, b) = 0$
 2. No capacity: $\forall i, K(i, 0) = 0$
-
 
 ## Basic DP solution
 
@@ -38,7 +38,3 @@ Since the "skip" subproblem is just moving $i$ to $i-1$, we can actually just ke
 $$
 K(c) = \max_{1\leq i\leq N}\{v_i + K(c-w_i): w_i \leq c\}
 $$
-
-
-
-

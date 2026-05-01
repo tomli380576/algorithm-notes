@@ -21,8 +21,7 @@ $$
 
 When $r=1$, it's just $k$. Since we are conveniently allowing non-integer $k$ values, the bound is $O(k)$ instead of just $k$.
 
-Similarly when $r <1$, the first term dominates since the rest is just powers of $0<r<1$. 
-
+Similarly when $r <1$, the first term dominates since the rest is just powers of $0<r<1$.
 
 ## Examples
 

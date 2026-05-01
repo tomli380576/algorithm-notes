@@ -9,7 +9,7 @@ function QuickSort(A[1...n]):
 	partitionLeft = from A select value where value < pivot value
 	partitionMid = from A select value where value == pivot value
 	partitionRight = from A select value where value > pivot value
-	
+
 	Recursively sort partitionLeft           // *Recursion Magic*
 	Recursively sort partitionRight          // *Recursion Magic*
 ```
@@ -24,7 +24,7 @@ When $A$ has 1 or 0 elements, we do nothing.
 partitionLeft = from A select value where value < pivot value
 ```
 
-↑ This partitioning step is doing most of the work. 
+↑ This partitioning step is doing most of the work.
 
 Unlike merge sort, after left & right partitions are sorted, the merging step is already done.
 
@@ -38,7 +38,7 @@ function Partition(A[1...n], pivotValue) -> (List, List):
 	for i = 1 to n:
 		if A[i]	< pivotValue:
 			push A[i] into left
-		else if A[i] == pivotValue: 
+		else if A[i] == pivotValue:
 			if not first time seeing pivotValue:
 				push A[i] into left
 		else:
@@ -50,7 +50,6 @@ function Partition(A[1...n], pivotValue) -> (List, List):
 (Change $ < $ to other predicates depending on the sorting order)
 
 This is also a linear scan, so the runtime is $O(n)$.
-
 
 ## Choosing the Pivot
 
@@ -67,7 +66,7 @@ There are a lot of ways for choosing pivots:
 
 ```c
 function QuickSort(A[1...n]) -> Array:
-	if n > 1: 
+	if n > 1:
 		pivot_value = ChoosePivot()
 		left, right = Partition(A[1...n], pivot_value)
 		return flatten([QuickSort(left), [pivot_value], QuickSort(right)])
@@ -81,7 +80,7 @@ function Partition(A[1...n], pivot_value) -> pair of Arrays:
 	for i = 1 to n:
 		if A[i]	< pivot_value:
 			push A[i] into left
-		else if A[i] == pivot: 
+		else if A[i] == pivot:
 			if not first time seeing pivot:
 				push A[i] into left
 		else:
@@ -94,6 +93,6 @@ function ChoosePivot() -> int:
 	return pivot
 ```
 
-##  :icon-code: Python
+## :icon-code: Python
 
 [!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/quick-sort.py)

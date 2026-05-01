@@ -9,11 +9,11 @@ Find $f_e$ for all $e\in E$ such that:
 
 1. Capacity constraint: $\forall f_e, 0\leq f_e\leq c_e$
 2. Conservation of Flow: for anything that's not $s$ and $t$, what comes in must come out:
-$$
-\forall v\in V- \{s, t\}\\
-\sum_{wv\in E}f_{wv} = \sum_{vz\in E}f_{vz}
-$$
-!!!
+   $$
+   \forall v\in V- \{s, t\}\\
+   \sum_{wv\in E}f_{wv} = \sum_{vz\in E}f_{vz}
+   $$
+   !!!
 
 ## Residual Network
 
@@ -24,7 +24,7 @@ For a flow network $G=(V, E, C)$ and flow $f_e$ for each $e\in E$, the residual 
 
 ## Ford-Fulkerson
 
-1. Init flow graph $f$ with $f_e= 0$ for all $e\in E$. 
+1. Init flow graph $f$ with $f_e= 0$ for all $e\in E$.
 2. Make $G^f$ for current flow $f$
 3. Check if there's any path from $s$ to $t$ in $G^f$, call it $\cal P$, in $G^f$. If not, return $f$.
 4. In $\cal P$, let $c(\cal P)$ be the minimum capacity along $\cal P$ in $G^f$
@@ -36,7 +36,8 @@ A big assumption here is that all capacities are **integers**. If we have this, 
 
 Let $f^*$ be the maximum flow, then we have at most $f^*$ rounds.
 
-The time per round is the sum of 
+The time per round is the sum of
+
 1. Time to built the residual network: O(V), just copy the vertexes
 2. Check st-path: O(V+E) from DFS and BFS
 3. Find min capacity: O(V) because worst case scenario we visit every vertex -> V-1 edges

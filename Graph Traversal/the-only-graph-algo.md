@@ -15,6 +15,7 @@ To keep track of which vertices we have seen, we use 2 `STATUS` values:
 
 - `NEW`: Never seen before.
 - `SEEN`: Processed exactly once.
+
 !!!
 
 Let `T` be the generic type name. We will make up an imaginary data structure called a `Bag<T>`. It has 3 methods:
@@ -36,7 +37,7 @@ function WhateverFirstSearch(G: Graph, start: Vertex):
 	while bag is not empty:
 		u = bag.popFirst()
 		if u is NEW:
-			process(u) 
+			process(u)
 			mark u as SEEN
 			for each v adjacent to u:
 				bag.put(v)
@@ -49,30 +50,35 @@ Here `process(u)` is just a blackbox subroutine. We can do anything inside `proc
 By changing the bag's behavior of `popFirst()` and `put(element)`, we get the familiar search algorithms:
 
 Stack
-:	[**Depth First Search**](./dfs.md). DFS is usually implemented with recursion allowing cycle detection. 
+: [**Depth First Search**](./dfs.md). DFS is usually implemented with recursion allowing cycle detection.
+
 - `put(element)` appends to the end
 - `popFirst()` pops from the end
 
 Queue
-:	[**Breadth First Search**](./bfs.md)
+: [**Breadth First Search**](./bfs.md)
+
 - `put(element)` appends to the end
 - `popFirst()` pops from the front
 
 Priority Queue
-:	**Best First Search**
+: **Best First Search**
+
 - `put(element)` appends with a priority value in $O(\log n)$ time
-- `popFirst()` pops the element with highest priority in $O(\log n)$ time. 
+- `popFirst()` pops the element with highest priority in $O(\log n)$ time.
 
 !!!success Implementation Tip
 In python, we can easily swap between DFS and BFS by using [`collections.deque`](https://docs.python.org/3/library/collections.html#collections.deque).
+
 - `<deque>.popleft()` gives us BFS
 - `<deque>.pop()` gives us DFS
-  
+
 C++ also has [`std::deque<T>`](https://cplusplus.com/reference/deque/deque/)
 
 ---
 
 For priority queue we could use [`heapq`](https://docs.python.org/3/library/heapq.html#module-heapq) on a regular list `[]`.
+
 - Use `heappush` and `heappop` to append and pop from the priority queue. See its use in [Dijkstra's Algorithm](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/5a7df2b8860fca70fa0f15713fa7d25610accb74/Implementations/SSSP-Dijkstras.py#L31-L50).
 
 ---
@@ -89,11 +95,12 @@ function WhateverFirstSearch(G: Graph, start: Vertex):
 	while bag is not empty:
 		u = bag.popFirst()
 		if not seen_vertices.has(u):
-			process(u) 
+			process(u)
 			seen_vertices.add(u)
 			for each v adjacent to u:
 				bag.put(v)
 ```
+
 !!!
 
 ### :icon-code: Python
@@ -109,7 +116,6 @@ To handle [disconnected graphs](https://mathworld.wolfram.com/DisconnectedGraph.
 ## Whatever First Search–All
 
 > For each vertex in $G$, if we’ve never visited this vertex before, visit everything that we can reach from this vertex.
-> 
 
 We will make a small wrapper.
 
@@ -121,7 +127,7 @@ function WhateverFirstSearch(G: Graph):
 	for each vertex v in G:
 		if v is NEW:
 			WhateverFirstVisit(G, v)
-			
+
 function WhateverFirstVisit(G: Graph, start: Vertex):
 	bag = Bag<Vertex>()
 	bag.put(start)
@@ -139,5 +145,5 @@ Changing the bag's behavior on `popFirst()` will result in the same [variants](#
 
 ### :icon-code: Python
 
-The `WhateverFirstSearch_All` function implements this. 
+The `WhateverFirstSearch_All` function implements this.
 [!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/whateverFirstSearch.py)

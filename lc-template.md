@@ -214,7 +214,7 @@ def dfsGrid(grid: list[list[int]], start: tuple[int, int]):
             nc = c + dc  # new c
             if nr >= 0 and nr < R and nc >= 0 and nc < C:
                 dfsVisit(grid, (nr, nc))
-        
+
         # post-process curr
 
     dfsVisit(grid, start)  # optional, enforce starting position
@@ -227,6 +227,7 @@ def dfsGrid(grid: list[list[int]], start: tuple[int, int]):
 ```
 
 +++ Best First
+
 ```py
 import heapq
 from typing import Callable
@@ -261,4 +262,5 @@ def bestFirstGrid(
                 # priorityFn call signature could be different
                 heapq.heappush(queue, (priority(grid, nr, nc), nr, nc))
 ```
+
 +++

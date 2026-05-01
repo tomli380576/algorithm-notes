@@ -2,7 +2,6 @@
 order: 97
 ---
 
-
 # Maximum Sum After Partitioning
 
 [!badge size="l" variant="warning" text="Leetcode" icon="../assets/leetcode.svg"](https://leetcode.com/problems/partition-array-for-maximum-sum/)

@@ -97,19 +97,20 @@ function Merge2SortedArrays(L[1...n], R[1...m]) -> List<number>:
 	return output
 ```
 
-The 2nd and 3rd `while` loops are safe because at most 1 of them will run, and the loop that runs corresponds to the array that has all its remaining elements $\geqslant$ the last element in `output`. 
+The 2nd and 3rd `while` loops are safe because at most 1 of them will run, and the loop that runs corresponds to the array that has all its remaining elements $\geqslant$ the last element in `output`.
 
 We can also see that this is a linear scan, so the runtime is $O(n)$.
 
 ### Implementation Detail
 
-In actual implementation, don’t actually slice the main array into $L$ and $R$ because passing arrays on the stack is expensive. Instead, pass in an extra parameter `mid` to indicate where the left half ends, then merge with the same 2 pointer approach. 
+In actual implementation, don’t actually slice the main array into $L$ and $R$ because passing arrays on the stack is expensive. Instead, pass in an extra parameter `mid` to indicate where the left half ends, then merge with the same 2 pointer approach.
 
 At the end, instead of returning output, replace all elements in the parameter array with `output`. This requires the main array to be passed as a reference so it may be different depending on the language.
 
 ## Code
 
 +++ Pseudocode
+
 ```c
 //pseudocode
 function MergeSort(A[1...n]):
@@ -119,6 +120,7 @@ function MergeSort(A[1...n]):
 		MergeSort(A[mid + 1...n])
 		Merge(A, mid)
 ```
+
 +++ Python
 [!badge variant="dark" size='l' icon="mark-github" target="blank" text="Github"](https://github.com/tomli380576/ECS122A-Algorithms-python-implementation/blob/main/Implementations/merge-sort.py#L27-L66)
 +++

@@ -8,6 +8,7 @@ order: 98
 
 > **Question.** Given 2 strings `X[1...m], Y[1...n]`, what is the longest common subsequence between them?
 > A common sequence satisfies the following:
+>
 > - They appear in the same order as they do in the original sequence
 > - Doesn't need to be contiguous
 
@@ -163,7 +164,8 @@ The return value is the length of the longest common subsequence.
 1. If either string is empty, then their common subsequence is the empty string with 0 length.
 2. If either `i` or `j` goes out of bounds, common subsequence is nothing $\implies$ length is also 0.
 
-Therefore: 
+Therefore:
+
 $$
 \begin{aligned}\text{LCS}&(i, \red {n + 1}) &= 0\\
 \text{LCS}&(\red {m + 1}, j) &= 0
@@ -176,8 +178,8 @@ Let’s first consider what a choice is. **A choice is whether to take or skip a
 
 There are only 2 valid choices at a time:
 
-1. If the current character matches, then we definitely *take* from both
-2. If the current character doesn’t match, then we must *skip* either $i$ or $j$.
+1. If the current character matches, then we definitely _take_ from both
+2. If the current character doesn’t match, then we must _skip_ either $i$ or $j$.
 
 Now we consider how to **make a choice**. From 1.1 we observed that:
 
@@ -271,7 +273,8 @@ Since $i + 1 > i$ and $j + 1 > j$, both $i$ and $j$ needs to go from **high valu
 
 In pseudocode:
 
-+++ With Comments 
++++ With Comments
+
 ```c
 function LCS_length_DP(X[1...m], Y[1...n]) -> int:
 	dpTable = Array(shape=(m + 1, n + 1))
@@ -319,11 +322,13 @@ function LCS_length_DP(X[1...m], Y[1...n]) -> int:
 
 	return dpTable[1, 1]
 ```
+
 +++
 
 #### For 122A students
 
 Note that if we do the check direction **backwards** (last character to first), then the order of evaluation is reversed. This reversed order yields the original pseudocode from 122A.
+
 - Basically flip the scan line in this [graph](#11-function-signature).
 
 The backwards recurrence is:

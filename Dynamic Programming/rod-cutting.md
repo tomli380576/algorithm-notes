@@ -7,18 +7,17 @@ order: 99
 > **Question.** Given a rod with length $n$ and an array of prices of each length $p_i$, how can we cut the rod to make the most amount of money?
 
 `n: int`
-:   Length of the rod
+: Length of the rod
 
 `p[1...n]: List<int>`
-:   List of prices for rod length from `i=1` to `i=n`. For example: $p_1 = 1, p_2 = 3, p_3 = 5, \dots$
-    
+: List of prices for rod length from `i=1` to `i=n`. For example: $p_1 = 1, p_2 = 3, p_3 = 5, \dots$
 
 We want to find:
 
 - `revenue: int`, the max revenue possible from rod of length $n$
 - `cuts: List<int>`, cut strategy to make the max revenue. Element at index $i$ represents the length to cut at step $i$.
 
-Let's call this function `CutRod(n)`. Since the price array `p` is fixed, we will omit `p` from the call signature from now on. 
+Let's call this function `CutRod(n)`. Since the price array `p` is fixed, we will omit `p` from the call signature from now on.
 
 ---
 
@@ -28,16 +27,14 @@ Let's call this function `CutRod(n)`. Since the price array `p` is fixed, we wil
 
 Recall from basic recursion that the bases cases are the sub-problems that we can immediately solve. We know how to solve:
 
-1. $n = 0$, we have no rod, so we make no money. 
+1. $n = 0$, we have no rod, so we make no money.
    :::center
-    `CutRod(0) = 0`
+   `CutRod(0) = 0`
    :::
-    
-2. $n = 1$, we have the shortest rod that we can possibly sell, so the profit is exactly $p_1$. 
+2. $n = 1$, we have the shortest rod that we can possibly sell, so the profit is exactly $p_1$.
    :::center
-    `CutRod(1) = p[1]`
+   `CutRod(1) = p[1]`
    :::
-    
 
 ### Recursive Cases
 
@@ -87,17 +84,17 @@ function CutRod(rodLen: int) -> int:
 		return 0
 	if rodLen == 1:
 		return prices[1]
-	
+
 	/**
 	 * initial value.
 	 * start at 0 because we can't have negative profit,
 	 * but -Inifinity will also work
 	*/
-	best = 0 
-	
+	best = 0
+
 	// we can cut 1, 2, ..., rod_len. Can't cut more rod than we have
 	// in all the compatible cuts, which is the next optimal cut?
-	for cutLen = 1 to rodLen: 
+	for cutLen = 1 to rodLen:
 		// take the cut if it's better than the current decision
 		// then let the recursion take care of the rest by shrinking the input
 		cutProfit = CutRod(rodLen - cutLen) + prices[cutLen]
@@ -107,7 +104,7 @@ function CutRod(rodLen: int) -> int:
 ```
 
 +++ No Comment Version
-    
+
 ```java
 const prices = [...]
 
@@ -116,7 +113,7 @@ function CutRod(rodLen: int) -> int:
         return 0
     if rodLen == 1:
         return prices[1]
-    
+
     best = 0
     for cutLen = 1 to rodLen:
         cutProfit = CutRod(rodLen - cutLen) + prices[cutLen]
@@ -124,6 +121,7 @@ function CutRod(rodLen: int) -> int:
 
     return best
 ```
+
 +++
 
 ### :icon-code: Backtracking Implementation
@@ -135,10 +133,10 @@ In short, the components of this [recursive backtracking problem](https://www.no
 
 1. **Sequence of decisions** - We need to make a sequence of cuts.
 2. **Make 1 decision at a time** - We make 1 cut at every recursive call.
-    - A choice here is the length to cut. All lengths from 1 to the remaining length is valid
-    - To make a choice, decrease the remaining length.
-3. **Satisfy all the constraints** -  We can’t cut more rod than we currently have.
-!!!
+   - A choice here is the length to cut. All lengths from 1 to the remaining length is valid
+   - To make a choice, decrease the remaining length.
+3. **Satisfy all the constraints** - We can’t cut more rod than we currently have.
+   !!!
 
 Make sure you are comfortable with the brute force approach before moving to DP conversion.
 
@@ -180,7 +178,7 @@ $$
 \Big\}
 $$
 
-So we need to evaluate all of $\{\text{CutRod}(n-i)\}_{1\leqslant i \leqslant n}$ first before we can know the result of `CutRod(n)`. Since $n-i < n$, the first thing that goes into the table is `CutRod(0)` and we evaluate in ascending order. 
+So we need to evaluate all of $\{\text{CutRod}(n-i)\}_{1\leqslant i \leqslant n}$ first before we can know the result of `CutRod(n)`. Since $n-i < n$, the first thing that goes into the table is `CutRod(0)` and we evaluate in ascending order.
 
 ### Build the DP Table
 
@@ -191,11 +189,11 @@ const prices = [...] // given
 
 function DpCutRod(maxRodLen: int) -> int:
 	dpTable = Array(shape=(maxRodLen)) // preallocate the space
-	
+
 	// pretend 0 is valid here
 	dpTable[0] = 0          // corresponds to CutRod(0)
 	dpTable[1] = prices[1]  // corresponds to CutRod(1)
-	
+
 	// ↓ the for loop that simulates recursive calls
 	for rodLen = 2 to maxRodLen:
 		best = 0
@@ -205,31 +203,32 @@ function DpCutRod(maxRodLen: int) -> int:
 			best = max(best, profit)
 		// recursive call location, store the result of CutRod(rodLen)
 		dpTable[rodLen] = best
-	
+
 	// initial call location
 	return dpTable[maxRodLen] // Corresponds to CutRod(maxRodLen)
 ```
 
 +++ No Comment Version
-    
+
 ```java
 const prices = [...]
 
 function DpCutRod(maxRodLen: int) -> int:
     dpTable = Array(shape=(maxRodLen))
-    
+
     dpTable[0] = 0
     dpTable[1] = prices[1]
-    
+
     for rodLen = 2 to maxRodLen:
         best = 0
         for cutLen = 1 to rodLen:
             profit = dpTable[rodLen - cutLen] + prices[cutLen]
             best = max(best, profit)
         dpTable[rodLen] = best
-    
+
     return dpTable[maxRodLen]
 ```
+
 +++
 
 ### Reconstructing the Solution
@@ -240,10 +239,10 @@ The pseudocode above only finds the optimal profit, but it doesn't tell us how t
 function DpCutRod(maxRodLen: int) -> int, List<int>:
     dpTable = Array(shape=(maxRodLen))
     cuts = Array(shape=(maxRodLen))
-    
+
     dpTable[0] = 0
     dpTable[1] = prices[1]
-    
+
     for rodLen = 2 to maxRodLen:
         best = 0
         for cutLen = 1 to rodLen:
@@ -253,11 +252,10 @@ function DpCutRod(maxRodLen: int) -> int, List<int>:
                 cuts[rodLen] = cutLen
 
         dpTable[rodLen] = best
-    
+
     return dpTable[maxRodLen], elements of cuts that are not null
 
 ```
-
 
 ### :icon-code: DP Implementation
 
@@ -283,7 +281,7 @@ Given $\text{OPT}(n)$ for rod of length $n$ with first cut $i$, we have $\text{O
 
 We want to prove that $a$ is the optimal solution for rod of length $n-i$, or $a = \text{OPT}(n-i)$.
 
-Assume $a$ is not optimal for rod of length $n-i$. Let $rev(t)$ denote the revenue from strategy $t$, then there exists another strategy $b$ such that $rev(b) > rev(a)$. 
+Assume $a$ is not optimal for rod of length $n-i$. Let $rev(t)$ denote the revenue from strategy $t$, then there exists another strategy $b$ such that $rev(b) > rev(a)$.
 
 $$
 \begin{aligned}
@@ -296,6 +294,5 @@ $$
 We already assumed OPT is the best solution, then a better one cannot exist. Therefore we found a contradiction with given; $a$ is optimal for $n-i$.
 
 !!!success Hint
-The key point is that the ***optimal solution to the subproblem is unique***.
+The key point is that the **_optimal solution to the subproblem is unique_**.
 !!!
-

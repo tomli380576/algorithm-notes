@@ -13,7 +13,7 @@ The idea is similar to quick sort. Partition `A` by some pivot, then recursively
 ```c
 function quickSelect(A: [1...N], k: int) -> int:
     pivot_value = selectPivot(A) // black box subroutine
-    
+
     small, large = [], []
 
     for a in A:
@@ -56,7 +56,6 @@ Neither 2 < 0 nor 2 > 3 - 0, so we hit the else case
 return 1
 
 ```
-
 
 ## Decide which half to search
 

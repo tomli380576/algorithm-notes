@@ -5,7 +5,7 @@
 > **Question.** Given a 1-dimensional array, find a **contiguous** sub-array with the largest sum
 
 `A[1...N]: List<number>`
-:   the array we select from
+: the array we select from
 
 ## Dividing the problem
 
@@ -47,69 +47,66 @@ The name is kinda misleading, but we want to consider this:
 So we check both ways. **Take the element if it keeps the array contiguous AND increases the sum.**
 
 1. Check from `mid - 1` to `low`
-    
-    ```c
-    // Inside MaxMiddleSum
-    
-    // Increases only when currLeftSum is better
-    bestLeftSum = -Infinity
-    // Always increases bc the sub-array need to be contiguous
-    currLeftSum = 0  
-    
-    // for loop must go this direction
-    // because the max middle sum could contain both left and right
-    for i = mid - 1 to low:
-    	currLeftSum += A[i]
-    	if currLeftSum > bestLeftSum:
-    		bestLeftSum = currLeftSum
-    ```
-    
-    **Example.** Left Half
-    
-    ||| Selecting...
-    ![](../assets/recursoin/subarr-1.png)
 
-    ||| Done selecting, `sum = 4`
-    
-    ![](../assets/recursoin/subarr-2.png)
-    
-    |||
+   ```c
+   // Inside MaxMiddleSum
 
-    
+   // Increases only when currLeftSum is better
+   bestLeftSum = -Infinity
+   // Always increases bc the sub-array need to be contiguous
+   currLeftSum = 0
+
+   // for loop must go this direction
+   // because the max middle sum could contain both left and right
+   for i = mid - 1 to low:
+   	currLeftSum += A[i]
+   	if currLeftSum > bestLeftSum:
+   		bestLeftSum = currLeftSum
+   ```
+
+   **Example.** Left Half
+
+   ||| Selecting...
+   ![](../assets/recursoin/subarr-1.png)
+
+   ||| Done selecting, `sum = 4`
+
+   ![](../assets/recursoin/subarr-2.png)
+
+   |||
+
 2. Then check from `mid` to `high`
-    
-    ```c
-    // Inside MaxMiddleSum
-    bestRightSum = -Infinity
-    currRightSum = 0
-    
-    for i = mid to high:
-    	currRightSum += A[i]
-    	if currRightSum > bestRightSum:
-    		bestRightSum = currRightSum
-    ```
-    
-    **Example.** Right Half
-    
-    ||| Selecting...
-    ![](../assets/recursoin/subarr-r-1.png)
 
-    ||| Done selecting, `sum = 3`
-    
-    ![](../assets/recursoin/subarr-r-2.png)
-    
-    |||
-    
-    
+   ```c
+   // Inside MaxMiddleSum
+   bestRightSum = -Infinity
+   currRightSum = 0
+
+   for i = mid to high:
+   	currRightSum += A[i]
+   	if currRightSum > bestRightSum:
+   		bestRightSum = currRightSum
+   ```
+
+   **Example.** Right Half
+
+   ||| Selecting...
+   ![](../assets/recursoin/subarr-r-1.png)
+
+   ||| Done selecting, `sum = 3`
+
+   ![](../assets/recursoin/subarr-r-2.png)
+
+   |||
+
 3. The best middle sum could also involve both the left and right half, for example if all elements are positive. So we take the `max(...)` of all:
-    
-    ```c
-    // Inside MaxMiddleSum
-    return max(bestLeftSum + bestRightSum, 
-               bestLeftSum,
-               bestRightSum)
-    ```
-    
+
+   ```c
+   // Inside MaxMiddleSum
+   return max(bestLeftSum + bestRightSum,
+              bestLeftSum,
+              bestRightSum)
+   ```
 
 ## Combining the Results
 
@@ -126,29 +123,29 @@ return max(leftSum, rightRum, middleSum)
 function MaxMiddleSum(A[low...high], mid) -> number:
 	bestLeftSum = -Infinity
 	currLeftSum = 0
-	
+
 	for i = mid - 1 to low:
 		currLeftSum += A[i]
 		if currLeftSum > bestLeftSum:
 			bestLeftSum = currSum
-	
+
 	bestRightSum = -Infinity
 	currRightSum = 0
-	
+
 	for i = mid to high:
 		currRightSum += A[i]
 		if currRightSum > bestRightSum:
 			bestRightSum = currRightSum
 
 	return max(
-		bestLeftSum + bestRightSum, 
+		bestLeftSum + bestRightSum,
         bestLeftSum,
         bestRightSum
 	)
 
 function MaxSubarray(A[low...high]) -> number:
 	if A is empty:
-		return 0 
+		return 0
 
 	if low == high:
 		return A[1]
